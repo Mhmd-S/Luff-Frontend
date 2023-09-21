@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 // Pages
 import ErrorPage from './pages/ErrorPage';
 import Root from './pages/Root';
-import Registration from './components/registration/Registration';
+import RegistrationPage from './pages/RegistrationPage';
 
 // Components
 
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
   // },
   {
     path: '/registration',
-    element: <Registration />,
+    element: <RegistrationPage />,
     errorElement: <ErrorPage />,
   },
   // {
