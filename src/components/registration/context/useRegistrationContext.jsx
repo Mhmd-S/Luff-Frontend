@@ -4,6 +4,7 @@ const RegistrationContext = createContext();
 
 export const RegistrationProvider = ({ children }) => { // I also included general error handling here hehehe
     const [ registrationStage, setRegistrationStage ] = useState(1);
+    const [ userEmail, setUserEmail ] = useState('');
     const [ isLoading, setIsLoading ] = useState(false);
 
     const goNextStage = () => {
@@ -21,6 +22,7 @@ export const RegistrationProvider = ({ children }) => { // I also included gener
   const memoValue = useMemo(()=>({
     registrationStage,
     isLoading,
+    setUserEmail,
     goNextStage,
     goPrevStage,
   }),[registrationStage, isLoading]);

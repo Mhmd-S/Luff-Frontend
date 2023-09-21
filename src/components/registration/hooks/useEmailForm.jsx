@@ -4,27 +4,33 @@ import useRegistrationContext from '../context/useRegistrationContext';
 
 export const useEmailForm = () => {
     const [ emailInput, setEmailInput ] = useState('');
-    const { goNextStage } = useRegistrationContext();
+    const [ errorMessage, setErrorMessage ] = useState('');
+    const { goNextStage, setUserEmail } = useRegistrationContext();
 
     const verifyEmail = async() => {
-        axios.post('http://127.0.0.1:3000/user/verify-email', {
-            email: emailInput
-        })
-        .then(function (response) {
-          console.log(response.data.status);
-          if (response.data.status === "success") {
-            goNextStage();
-          }
-        })
-        .catch(function (error) {
-          console.log(error.response.data.message);
-        });
+
+      setErrorMessage('');
+      
+      axios.post('http://127.0.0.1:3000/user/verify-email', {
+          email: emailInput
+      })
+      .then(function (response) {
+        console.log(response.data.status);
+        if (response.data.status === "success") {
+          goNextStage();
+        }
+      })
+      .catch(function (error) {
+        setErrorMessage(error.response.data.message);
+        console.log(error.response.data.message);
+      });
     }
 
     const handleEmailChange = (e) => {
       const value = e.target.value;
       setEmailInput(value);
+      setUserEmail(value);
     }
 
-    return { emailInput, handleEmailChange, verifyEmail };
+    return { emailInput, handleEmailChange, verifyEmail, errorMessage };
 }
