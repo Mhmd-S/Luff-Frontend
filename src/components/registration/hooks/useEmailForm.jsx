@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { userAPI } from '../../../api/useAPI';
 import { useState } from 'react';
 import useRegistrationContext from '../context/useRegistrationContext';
 
@@ -10,20 +10,14 @@ export const useEmailForm = () => {
     const verifyEmail = async() => {
 
       setErrorMessage('');
-      
-      axios.post('http://127.0.0.1:3000/user/verify-email', {
-          email: emailInput
-      })
-      .then(function (response) {
-        console.log(response.data.status);
-        if (response.data.status === "success") {
-          goNextStage();
-        }
-      })
-      .catch(function (error) {
-        setErrorMessage(error.response.data.message);
-        console.log(error.response.data.message);
-      });
+
+      const response = userAPI.sendVerificationCode(emailInput);
+
+      if (response.status === "success") {
+        goNextStage();
+      } else {
+        setErrorMessage(response.message);
+      }
     }
 
     const handleEmailChange = (e) => {

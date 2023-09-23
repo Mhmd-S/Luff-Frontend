@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import axios from 'axios';
+import { userAPI } from '../../../api/useAPI';
 import useRegistrationContext from '../context/useRegistrationContext';
-import { verifyCode } from '../../../api/useAPI';
 
 const useVerifyEmail = () => {
 
@@ -15,15 +14,18 @@ const useVerifyEmail = () => {
         setCodeInput(value);
     }
 
-    const handleVerifyCode = () => {
+    const handleVerifyCode = async() => {
+
+        setErrorMessage('');
+
+        const response = await userAPI.verifyCode(userEmail, codeInput);
         
-        verifyCode(userEmail, codeInput)
-            .then(res => {
-                if (res.status === "success") {
-                    goNextStage();
-                }
-            });
-    
+        if (response.status === "success") {
+            goNextStage();
+        } else {
+            setErrorMessage(response.message);
+        }
+
     }
 
     return { codeInput, handleCodeChange, handleVerifyCode, errorMessage };

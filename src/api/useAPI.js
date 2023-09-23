@@ -1,25 +1,25 @@
-import { api } from '../configs/axiosConfigs'
+import { api } from './configs/axiosConfigs'
 
 export const userAPI = {
     sendVerificationCode: async (email) => {
-        const reponse = await api.request({
-            method: 'POST',
-            url: '/verify-email',
-            data: {
-                email: email,
-            }
-        })
-        return reponse.data.status;
+            const req = await api.request({
+                method: 'POST',
+                url: '/user/verify-email',
+                data: {
+                    email: email,
+                }
+            })
+            return req.response.data;
     },
     verifyCode: async (email, code) => {
-        const reponse = await api.request({
+        const response = await api.request({
             method: 'POST',
-            url: '/verify-code',
+            url: '/user/verify-code',
             data: {
                 email: email,
                 code: code,
             }
         })
-        return reponse.data.status;
+        return response;
     }
 }

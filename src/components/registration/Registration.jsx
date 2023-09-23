@@ -2,7 +2,7 @@ import React from 'react'
 
 import useRegistration from './hooks/useRegistration'
 
-import Step1Email from './Step1Email'
+
 
 const Registration = () => {
 

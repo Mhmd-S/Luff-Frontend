@@ -1,4 +1,5 @@
 import useRegistrationContext from '../context/useRegistrationContext';
+import { useToastContext } from '../../context/useToastContext';
 import Step1Email from '../Step1Email';
 import Step2EmailVerification from '../Step2EmailVerification';
 import Step3PersonalInfo from '../Step3PersonalInfo';
