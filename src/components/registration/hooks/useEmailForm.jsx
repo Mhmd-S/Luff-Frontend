@@ -1,29 +1,49 @@
-import { userAPI } from '../../../api/useAPI';
-import { useState } from 'react';
+import { userAPI } from '../../../api/userAPI';
+import { useEffect, useState } from 'react';
+import { validateEmail } from '../utils/Step1Validation';
 import useRegistrationContext from '../context/useRegistrationContext';
 
 export const useEmailForm = () => {
+  
+    const { goNextStage, userEmail, setUserEmail } = useRegistrationContext();
     const [ emailInput, setEmailInput ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
-    const { goNextStage, setUserEmail } = useRegistrationContext();
+
+
+    useEffect(() => {
+      if (userEmail) {
+        setEmailInput(userEmail);
+      }
+    }, [])
 
     const verifyEmail = async() => {
 
       setErrorMessage('');
 
-      const response = userAPI.sendVerificationCode(emailInput);
+      // Client Validation
+      if (!validateEmail(emailInput)) {
+        setErrorMessage('Please enter a TP email');
+        return;
+      }
 
-      if (response.status === "success") {
+      const response = await userAPI.sendVerificationCode(emailInput);
+
+      if (response.data.status === 'success') {
+        setUserEmail(emailInput);
         goNextStage();
       } else {
-        setErrorMessage(response.message);
+        // If the user has already provided an email, we can skip displaying the error and take him to insert his code
+        if (userEmail) {
+          goNextStage();
+        }
+        // Checking if it is a validation error
+        response.data.message?.msg ? setErrorMessage(response.data.message.msg) : setErrorMessage(response.data.message);
       }
     }
 
     const handleEmailChange = (e) => {
       const value = e.target.value;
       setEmailInput(value);
-      setUserEmail(value);
     }
 
     return { emailInput, handleEmailChange, verifyEmail, errorMessage };

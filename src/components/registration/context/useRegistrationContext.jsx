@@ -22,10 +22,11 @@ export const RegistrationProvider = ({ children }) => { // I also included gener
   const memoValue = useMemo(()=>({
     registrationStage,
     isLoading,
+    userEmail,
     setUserEmail,
     goNextStage,
     goPrevStage,
-  }),[registrationStage, isLoading]);
+  }),[registrationStage, isLoading, userEmail]);
 
   return (
     <RegistrationContext.Provider value={memoValue}>

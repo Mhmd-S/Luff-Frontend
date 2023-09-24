@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useToastContext } from '../../contexts/ToastContext';
 
 export const api = axios.create({
     baseURL: 'http://127.0.0.1:3000',
@@ -8,23 +7,19 @@ export const api = axios.create({
 // defining a custom error handler for all APIs
 const errorHandler = (error) => {
 
-    const { addToast } = useToastContext();
-
     const statusCode = error.response?.status
-    console.log(error);
-    addToast(error.message);
+
     if (error.code === "ERR_BAD_REQUEST") {
         if (error.response && error.response.data) {
             // If the server returned an error response, return it
-            return error.response.data;
+            return error.response;
         } else {
             // If there was no response or the error was not from the server, return a generic error message
-            return { status: 'fail', message: 'An error occurred while sending the verification code.' };
+            return {data: { status: 'fail', message: 'An error occurred while sending the verification code.' }};
         }
     }
 
     if (error.code == "ERR_NETWORK_ERROR") {
-        addToast(error.message);
         return Promise.resolve();
     }
 
@@ -33,7 +28,7 @@ const errorHandler = (error) => {
         console.error(error)
     }
 
-    return Promise.reject(error)
+    return Promise.reject(error);
 }
 
 // registering the custom error handler to the

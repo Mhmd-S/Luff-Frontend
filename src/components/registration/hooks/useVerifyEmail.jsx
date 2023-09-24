@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { userAPI } from '../../../api/useAPI';
+import { userAPI } from '../../../api/userAPI';
 import useRegistrationContext from '../context/useRegistrationContext';
 
 const useVerifyEmail = () => {
@@ -20,10 +20,10 @@ const useVerifyEmail = () => {
 
         const response = await userAPI.verifyCode(userEmail, codeInput);
         
-        if (response.status === "success") {
+        if (response.data.status === "success") {
             goNextStage();
         } else {
-            setErrorMessage(response.message);
+            response.data.message.msg ? setErrorMessage(response.data.message.msg) : setErrorMessage(response.data.message);
         }
 
     }
