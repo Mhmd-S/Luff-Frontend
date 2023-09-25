@@ -1,9 +1,9 @@
 import React from 'react'
 
-const RegistrationComplete = () => {
+const Step3RegistrationComplete = () => {
   return (
     <div>Registration Complete</div>
   )
 }
 
-export default RegistrationComplete
+export default Step3RegistrationComplete;

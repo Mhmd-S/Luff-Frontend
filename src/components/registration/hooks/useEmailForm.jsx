@@ -12,38 +12,28 @@ export const useEmailForm = () => {
 
     const { 
             goNextStage, 
-            userEmail, 
-            setUserEmail 
+            setUserInfo 
           } = useRegistrationContext();
 
     const watchPassword = watch('password', '');
 
-    // If an email is already found in context, we will use it as a default value
-    // This is useful when the user is going back and forth between steps
-    // useEffect(() => {
-    //   if (userEmail) {
-    //     setEmailInput(userEmail);
-    //   }
-    // }, [])
+    const onSubmit = (data) => {
+      verifyEmail(data);
+    }
 
     const verifyEmail = async(data) => {
 
       const response = await userAPI.sendVerificationCode(data.email);
 
       if (response.data.status === 'success') {
-        setUserEmail(data.email);
-        goNextStage();
-      } else {
-        // If the user has already provided an email, we can skip displaying the error and take him to insert his code
-        if (userEmail) {
-          goNextStage();
+        const userObj = {
+          email: data.email,
+          password: data.password
         }
+        setUserInfo(userObj);
+        goNextStage();
       }
-    }
 
-    const onSubmit = (data) => {
-      console.log(data);
-      verifyEmail(data);
     }
 
     return { 

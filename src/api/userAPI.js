@@ -21,5 +21,16 @@ export const userAPI = {
             }
         })
         return response;
+    },
+    registerUser: async (email, password) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/register',
+            data: {
+                email: email,
+                password: password,
+            }
+        })
+        return response;
     }
 }

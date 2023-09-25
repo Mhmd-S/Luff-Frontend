@@ -1,34 +1,39 @@
-import { useState } from 'react'
 import { userAPI } from '../../../api/userAPI';
 import useRegistrationContext from '../context/useRegistrationContext';
+import { useForm  } from 'react-hook-form';
 
 const useVerifyEmail = () => {
 
-    const [ codeInput, setCodeInput ] = useState('');
-    const [ errorMessage, setErrorMessage ] = useState('');
-    const { goNextStage, userEmail } = useRegistrationContext();
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors } 
+      } = useForm();
 
+    const { goNextStage, userInfo } = useRegistrationContext();
 
-    const handleCodeChange = (e) => {
-        const value = e.target.value;
-        setCodeInput(value);
+    const onSubmit = (data) => {
+        handleVerifyCode(data);
     }
 
-    const handleVerifyCode = async() => {
+    const handleVerifyCode = async(data) => {
 
-        setErrorMessage('');
-
-        const response = await userAPI.verifyCode(userEmail, codeInput);
+        const response = await userAPI.verifyCode(userInfo.email, data.code);
         
         if (response.data.status === "success") {
-            goNextStage();
-        } else {
-            response.data.message.msg ? setErrorMessage(response.data.message.msg) : setErrorMessage(response.data.message);
+            userAPI.registerUser(userInfo.email, userInfo.password)
+            .then(()=> {
+                goNextStage();
+            });
         }
-
     }
 
-    return { codeInput, handleCodeChange, handleVerifyCode, errorMessage };
+    return { 
+            onSubmit, 
+            handleSubmit, 
+            register, 
+            errors 
+        };
 }
 
 export default useVerifyEmail

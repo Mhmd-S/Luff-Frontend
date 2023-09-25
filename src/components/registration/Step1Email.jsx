@@ -28,7 +28,7 @@ const Step1Email = () => {
         validationRules={{
           required: 'TP email is required',
           pattern: {
-            value: /^TP[0-9]{5}@mail.apu.edu.my$/,
+            value: /^TP[0-9]{6}@mail.apu.edu.my$/,
             message: 'Invalid TP email',
           },
         }}
@@ -58,8 +58,9 @@ const Step1Email = () => {
         errors={errors}
         validationRules={{
           required: 'Confirm Password is required',
-          validate: (value) =>
-            validatePasswords(value, watchPassword.current) || 'Passwords do not match',
+          validate: (value) => {
+            validatePasswords(value, watchPassword.current) || 'Passwords do not match'
+          }
         }}
       />
 

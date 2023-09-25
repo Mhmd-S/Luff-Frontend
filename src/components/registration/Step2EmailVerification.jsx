@@ -1,40 +1,43 @@
 import useVerifyEmail from './hooks/useVerifyEmail';
-import useRegistrationContext from './context/useRegistrationContext';
+import FormField from '../common/FormField';
 
 const Step2EmailVerification = () => {
 
-  const { goPrevStage } = useRegistrationContext();
-  const { codeInput, handleCodeChange, handleVerifyCode, errorMessage } = useVerifyEmail();
+  const { 
+    onSubmit, 
+    handleSubmit, 
+    register, 
+    errors
+   } = useVerifyEmail();
 
   return (
-    <div className='flex flex-col w-1/3'>
+    <form 
+      className='flex flex-col w-1/3'
+      onSubmit={handleSubmit(onSubmit)}
+      >
       
       <h1>Please enter the 6 digit code we sent you</h1>
-      
-      <label htmlFor='code' >Code</label>
         
-        <input 
-            type='code'
-            name='text'
-            onChange={(e)=>handleCodeChange(e)}
-            value={codeInput}
-        />
+      <FormField
+        label='Code'
+        name='code'
+        type='text'
+        register={register}
+        errors={errors}
+        validationRules={{
+          required: 'Code is required',
+          pattern: {
+            value: /^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$/,
+            message: 'Invalid code format',
+          },
+        }}
+      />
 
-        { errorMessage && <p>{errorMessage}</p> }
+      <button>
+        Verify Code
+      </button>
 
-        <button onClick={goPrevStage}>
-          Back
-        </button>
-
-        <button onClick={handleVerifyCode}>
-          Verify Code
-        </button>
-
-        <button>
-          Send Code Again
-        </button>
-
-    </div>
+    </form>
   )
 }
 
