@@ -1,28 +1,72 @@
 import { useEmailForm } from './hooks/useEmailForm';
+import FormField from '../common/FormField';
+import { validatePasswords } from './utils/Step1Validation';
 
 const Step1Email = () => {
 
-  const { verifyEmail, emailInput, handleEmailChange, errorMessage} = useEmailForm();
+  const { 
+          emailInput, 
+          register, 
+          handleSubmit, 
+          onSubmit, 
+          watchPassword, 
+          errors
+        } = useEmailForm();
 
   return (
-    <div className='flex flex-col w-1/3'>
-        
-        <label htmlFor='email' >TP email</label>
-        
-        <input 
-            type='email'
-            name='email'
-            onChange={(e)=>handleEmailChange(e)}
-            value={emailInput}
-        />
+    <form  
+      onSubmit={handleSubmit(onSubmit)}
+      className='flex flex-col w-1/3'
+      >
 
-        {errorMessage && <p>{errorMessage}</p>}
+      <FormField
+        label='TP email'
+        name='email'
+        type='email'
+        register={register}
+        errors={errors}
+        validationRules={{
+          required: 'TP email is required',
+          pattern: {
+            value: /^TP[0-9]{5}@mail.apu.edu.my$/,
+            message: 'Invalid TP email',
+          },
+        }}
+        defaultValue={emailInput}
+      />
 
-        <button onClick={verifyEmail}>
-          Verify Email
-        </button>
-    
-    </div>
+      <FormField
+        label='Password'
+        name='password'
+        type='password'
+        register={register}
+        errors={errors}
+        validationRules={{
+          required: 'Password is required',
+          pattern: {
+            value: /^[A-Za-z\d@$!%*?&]{8,15}$/,
+            message: 'Password must be 8-15 characters long',
+          },
+        }}
+      />
+
+      <FormField
+        label='Confirm Password'
+        name='confirmPassword'
+        type='password'
+        register={register}
+        errors={errors}
+        validationRules={{
+          required: 'Confirm Password is required',
+          validate: (value) =>
+            validatePasswords(value, watchPassword.current) || 'Passwords do not match',
+        }}
+      />
+
+      <button>
+        Verify Email
+      </button>
+    </form>
   )
 }
 
