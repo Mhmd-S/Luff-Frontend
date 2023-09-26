@@ -2,6 +2,7 @@ import { useEmailForm } from './hooks/useEmailForm';
 import FormField from '../common/FormField';
 import { validatePasswords } from './utils/Step1Validation';
 import FormButton from '../common/FormButton';
+import FormGeneralError from '../common/FormGeneralError';
 
 const Step1Email = () => {
 
@@ -11,6 +12,8 @@ const Step1Email = () => {
           handleSubmit, 
           onSubmit, 
           watchPassword, 
+          generalError,
+          loading,
           errors
         } = useEmailForm();
 
@@ -24,12 +27,15 @@ const Step1Email = () => {
           Please enter your <span className='text-sky-500'>TP Email</span> and <span className='text-sky-500'>Password</span> to get started.
         </h3>
 
+        { generalError && <FormGeneralError message={generalError} /> }
+
         <FormField
           label='TP email'
           name='email'
           type='email'
           register={register}
           errors={errors}
+          placeholder='ex. TP012345@mail.apu.edu.my'
           validationRules={{
             required: 'TP email is required',
             pattern: {
@@ -44,6 +50,7 @@ const Step1Email = () => {
           label='Password'
           name='password'
           type='password'
+          placeholder='Do not use your APU password'
           register={register}
           errors={errors}
           validationRules={{
@@ -69,7 +76,7 @@ const Step1Email = () => {
           }}
         />
 
-        <FormButton text='Verify Email'/> 
+        <FormButton text='Verify Email' loading={loading}/> 
       </form>
   )
 }

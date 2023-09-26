@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { userAPI } from '../../../api/userAPI';
 import { useForm } from 'react-hook-form';
 import useRegistrationContext from '../context/useRegistrationContext';
 
 export const useEmailForm = () => {
+
+    const  [generalError, setGeneralError] = useState('');
+
     const { 
             register, 
             handleSubmit, 
@@ -12,7 +16,8 @@ export const useEmailForm = () => {
 
     const { 
             goNextStage, 
-            setUserInfo 
+            setUserInfo,
+            setLoading, 
           } = useRegistrationContext();
 
     const watchPassword = watch('password', '');
@@ -23,7 +28,9 @@ export const useEmailForm = () => {
 
     const verifyEmail = async(data) => {
 
+      setLoading(true);
       const response = await userAPI.sendVerificationCode(data.email);
+      setLoading(false);
 
       if (response.data.status === 'success') {
         const userObj = {
@@ -32,14 +39,16 @@ export const useEmailForm = () => {
         }
         setUserInfo(userObj);
         goNextStage();
+      } else {
+        setGeneralError(response.data.message);
       }
-
     }
 
     return { 
             register, 
             onSubmit, 
             handleSubmit, 
+            generalError,
             watchPassword, 
             errors 
           };

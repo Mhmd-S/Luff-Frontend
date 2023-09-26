@@ -10,7 +10,11 @@ const useVerifyEmail = () => {
         formState: { errors } 
       } = useForm();
 
-    const { goNextStage, userInfo } = useRegistrationContext();
+    const { 
+        goNextStage, 
+        userInfo, 
+        setLoading,
+        } = useRegistrationContext();
 
     const onSubmit = (data) => {
         handleVerifyCode(data);
@@ -18,8 +22,10 @@ const useVerifyEmail = () => {
 
     const handleVerifyCode = async(data) => {
 
+        setLoading(true);
         const response = await userAPI.verifyCode(userInfo.email, data.code);
-        
+        setLoading(false);
+
         if (response.data.status === "success") {
             userAPI.registerUser(userInfo.email, userInfo.password)
             .then(()=> {

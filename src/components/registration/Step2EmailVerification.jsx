@@ -8,6 +8,7 @@ const Step2EmailVerification = () => {
     onSubmit, 
     handleSubmit, 
     register, 
+    loading,
     errors
    } = useVerifyEmail();
 
@@ -40,7 +41,7 @@ const Step2EmailVerification = () => {
         }}
       />
 
-      <FormButton text='Verify Code' />
+      <FormButton text='Verify Code' loading={loading} />
 
     </form>
   )

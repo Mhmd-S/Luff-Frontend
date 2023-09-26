@@ -3,9 +3,9 @@ import { useContext, createContext, useState, useMemo } from "react";
 const RegistrationContext = createContext();
 
 export const RegistrationProvider = ({ children }) => { // I also included general error handling here hehehe
-    const [ registrationStage, setRegistrationStage ] = useState(1);
+    const [ registrationStage, setRegistrationStage ] = useState(0);
     const [ userInfo, setUserInfo ] = useState('');
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
 
     const goNextStage = () => {
         if (registrationStage < 3) {
@@ -21,12 +21,13 @@ export const RegistrationProvider = ({ children }) => { // I also included gener
 
   const memoValue = useMemo(()=>({
     registrationStage,
-    isLoading,
+    loading,
     userInfo,
+    setLoading,
     setUserInfo,
     goNextStage,
     goPrevStage,
-  }),[registrationStage, isLoading, userInfo]);
+  }),[registrationStage, loading, userInfo]);
 
   return (
     <RegistrationContext.Provider value={memoValue}>
