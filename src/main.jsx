@@ -1,16 +1,12 @@
-import './styles/global.css';
+import './styles/globals.css';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 // import { AuthProvider } from './authentication/useAuth';
-
 
 // Pages
 import ErrorPage from './pages/ErrorPage';
 import Root from './pages/Root';
 import RegistrationPage from './pages/RegistrationPage';
-
-// Components
-import { ToastContainer } from 'react-toastify';
 
 // Loaders
 

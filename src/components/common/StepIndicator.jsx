@@ -1,8 +1,12 @@
 import React from 'react'
+import useRegistrationContext from '../registration/context/useRegistrationContext'
 
 const stepIndicator = () => {
+
   return (
-    <div>stepIndicator</div>
+    <ul>
+      
+    </ul>
   )
 }
 

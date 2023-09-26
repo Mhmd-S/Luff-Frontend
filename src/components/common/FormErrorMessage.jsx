@@ -5,9 +5,9 @@ const FormErrorMessage = ({ errors, name }) => {
     const errorMessage = errors[name]?.message;
 
     return (
-      <div>
-          {errorMessage && <p>{errorMessage}</p>}
-      </div>
+      <span className='w-full'>
+          {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
+      </span>
     )
 }
 

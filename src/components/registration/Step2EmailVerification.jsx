@@ -1,5 +1,6 @@
 import useVerifyEmail from './hooks/useVerifyEmail';
 import FormField from '../common/FormField';
+import FormButton from '../common/FormButton';
 
 const Step2EmailVerification = () => {
 
@@ -12,11 +13,17 @@ const Step2EmailVerification = () => {
 
   return (
     <form 
-      className='flex flex-col w-1/3'
+      className='w-full h-full flex flex-col items-center justify-evenly'
       onSubmit={handleSubmit(onSubmit)}
       >
-      
-      <h1>Please enter the 6 digit code we sent you</h1>
+      <div className='h-1/6'>
+        <h2 className='pb-4 font-bold text-2xl text-center text-sky-500'>
+          Code Sent!
+        </h2>  
+        <h3 className='w-full text-center'>
+          Please enter the 6 digit code we sent you!
+        </h3>
+      </div>
         
       <FormField
         label='Code'
@@ -33,9 +40,7 @@ const Step2EmailVerification = () => {
         }}
       />
 
-      <button>
-        Verify Code
-      </button>
+      <FormButton text='Verify Code' />
 
     </form>
   )
