@@ -33,14 +33,19 @@ export const useEmailForm = () => {
       setLoading(false);
 
       if (response.data.status === 'success') {
+
         const userObj = {
           email: data.email,
           password: data.password
         }
+
         setUserInfo(userObj);
         goNextStage();
+
       } else {
+
         setGeneralError(response.data.message);
+
       }
     }
 

@@ -32,5 +32,30 @@ export const userAPI = {
             }
         })
         return response;
+    },
+    loginUser: async (email, password) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/login',
+            data: {
+                email: email,
+                password: password,
+            }
+        })
+        return response;
+    },
+    logoutUser: async () => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/logout',
+        })
+        return response;
+    },
+    checkAuthStatus: async () => {
+        const response = await api.request({
+            method: 'GET',
+            url: '/user/check-auth',
+        })
+        return response;
     }
 }

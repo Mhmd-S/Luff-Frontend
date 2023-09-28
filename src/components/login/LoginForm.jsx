@@ -1,28 +1,26 @@
-import { useEmailForm } from './hooks/useEmailForm';
 import FormField from '../common/FormField';
-import { validatePasswords } from './utils/Step1Validation';
 import FormButton from '../common/FormButton';
 import FormGeneralError from '../common/FormGeneralError';
+import useLogin from './hooks/useLogin';
 import InitialForm from '../common/InitialForm';
 
-const Step1Email = () => {
+const LoginForm = () => {
 
   const { 
           emailInput, 
           register, 
           handleSubmit, 
           onSubmit, 
-          watchPassword, 
           generalError,
           loading,
           errors
-        } = useEmailForm();
+        } = useLogin();
 
   return (
-      <InitialForm onSubmit={handleSubmit(onSubmit)} >  
+      <InitialForm onSubmit={handleSubmit(onSubmit)} >
         
         <h3 className='w-full text-center'>
-          Please enter your <span className='text-sky-500'>TP Email</span> and <span className='text-sky-500'>Password</span> to get started.
+          Please enter your <span className='text-sky-500'>TP Email</span> and <span className='text-sky-500'>Password</span> to log in.
         </h3>
 
         { generalError && <FormGeneralError message={generalError} /> }
@@ -60,23 +58,10 @@ const Step1Email = () => {
           }}
         />
 
-        <FormField
-          label='Confirm Password'
-          name='confirmPassword'
-          type='password'
-          register={register}
-          errors={errors}
-          validationRules={{
-            required: 'Confirm Password is required',
-            validate: (value) => {
-              validatePasswords(value, watchPassword.current) || 'Passwords do not match'
-            }
-          }}
-        />
-
         <FormButton text='Verify Email' loading={loading}/> 
+        
       </InitialForm>
   )
 }
 
-export default Step1Email
+export default LoginForm

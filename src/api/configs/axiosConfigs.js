@@ -4,19 +4,6 @@ export const api = axios.create({
     baseURL: 'http://127.0.0.1:3000',
 })
 
-
-// REMOVEEE later
-const sleep = (ms = 2000) => {
-    console.log('Kindly remember to remove `sleep`');
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
-api.interceptors.response.use(async (response) => {
-    // add artificial delay for dev env
-      await sleep();
-    return response.data;
-  });
-
 // defining a custom error handler for all APIs
 const errorHandler = (error) => {
 

@@ -1,6 +1,7 @@
 import useVerifyEmail from './hooks/useVerifyEmail';
 import FormField from '../common/FormField';
 import FormButton from '../common/FormButton';
+import InitialForm from '../common/InitialForm';
 
 const Step2EmailVerification = () => {
 
@@ -13,10 +14,8 @@ const Step2EmailVerification = () => {
    } = useVerifyEmail();
 
   return (
-    <form 
-      className='w-full h-full flex flex-col items-center justify-evenly'
-      onSubmit={handleSubmit(onSubmit)}
-      >
+    <InitialForm onSubmit={handleSubmit(onSubmit)} >
+
       <div className='h-1/6'>
         <h2 className='pb-4 font-bold text-2xl text-center text-sky-500'>
           Code Sent!
@@ -43,7 +42,7 @@ const Step2EmailVerification = () => {
 
       <FormButton text='Verify Code' loading={loading} />
 
-    </form>
+    </InitialForm>
   )
 }
 

@@ -8,7 +8,7 @@ const Root = () => {
         <Link to='registration'>
             Join Us
         </Link>
-        <Link to='sign-in'>
+        <Link to='login'>
             Sign In
         </Link>
     </div>

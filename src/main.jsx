@@ -1,12 +1,13 @@
 import './styles/globals.css';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
-// import { AuthProvider } from './authentication/useAuth';
+import { AuthProvider } from './contexts/useAuthContext';
 
 // Pages
 import ErrorPage from './pages/ErrorPage';
 import Root from './pages/Root';
 import RegistrationPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
 
 // Loaders
 
@@ -50,11 +51,11 @@ const router = createBrowserRouter([
       // }
     ]
   },
-  // {
-  //   path: '/login',
-  //   element: <Login />,
-  //   errorElement: <ErrorPage />,
-  // },
+  {
+    path: '/login',
+    element: <LoginPage />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: '/registration',
     element: <RegistrationPage />,
@@ -68,5 +69,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
 );
