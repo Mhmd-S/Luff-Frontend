@@ -4,6 +4,7 @@ import { validatePasswords } from './utils/Step1Validation';
 import FormButton from '../common/FormButton';
 import FormGeneralError from '../common/FormGeneralError';
 import InitialForm from '../common/InitialForm';
+import { Link } from 'react-router-dom';
 
 const Step1Email = () => {
 
@@ -75,6 +76,11 @@ const Step1Email = () => {
         />
 
         <FormButton text='Verify Email' loading={loading}/> 
+
+        <div className='w-full text-center pt-2'>
+          <span>Already have an account? </span> 
+          <Link to='/login' className='text-center text-sky-500 hover:text-sky-600'>Login here</Link>
+        </div>
       </InitialForm>
   )
 }

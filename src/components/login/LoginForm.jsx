@@ -3,11 +3,11 @@ import FormButton from '../common/FormButton';
 import FormGeneralError from '../common/FormGeneralError';
 import useLogin from './hooks/useLogin';
 import InitialForm from '../common/InitialForm';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
 
   const { 
-          emailInput, 
           register, 
           handleSubmit, 
           onSubmit, 
@@ -39,14 +39,12 @@ const LoginForm = () => {
               message: 'Invalid TP email',
             },
           }}
-          defaultValue={emailInput}
         />
 
         <FormField
           label='Password'
           name='password'
           type='password'
-          placeholder='Do not use your APU password'
           register={register}
           errors={errors}
           validationRules={{
@@ -59,7 +57,12 @@ const LoginForm = () => {
         />
 
         <FormButton text='Verify Email' loading={loading}/> 
-        
+
+        <div className='w-full text-center pt-2'>
+          <span>Don't have an account? </span> 
+          <Link to='/registration' className='text-center text-sky-500 hover:text-sky-600'>Register here</Link>
+        </div>
+
       </InitialForm>
   )
 }

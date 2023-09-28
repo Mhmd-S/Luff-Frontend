@@ -1,9 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { userAPI } from '../../../api/userAPI';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../../contexts/useAuthContext'
+import { useNavigate } from 'react-router-dom';
 
 const useLogin = () => {
-  const  [generalError, setGeneralError] = useState('');
+  const [ loading, setLoading ] = useState(false);
+  const [ generalError, setGeneralError ] = useState('');
+  const { user, setUser } = useAuth();
+
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+    if (user) {
+      navigate('/dashboard');
+      return;
+    }
+  })
 
   const { 
           register, 
@@ -12,15 +25,18 @@ const useLogin = () => {
         } = useForm();
 
   const login = async(email, password) => {
-      
-      const response = await userAPI.loginUser({email, password});
-  
-      if (response.data.status === 'success') {
-        return response.data;
-      } else {
-        setGeneralError(response.data.message);
-      }
-      
+
+    setLoading(true);  
+    const response = await userAPI.loginUser(email, password);  
+    setLoading(false);
+    
+    if (response.data.status === 'success') {
+      setUser(response.data.user);
+      navigate('/dashboard');
+    } else {
+      console.log(response.data.message);
+      setGeneralError(response.data.message);
+    }
   }
 
   const onSubmit = (data) => {
@@ -31,6 +47,7 @@ const useLogin = () => {
           register, 
           handleSubmit, 
           onSubmit, 
+          loading,
           generalError,
           errors
   }

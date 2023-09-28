@@ -37,6 +37,6 @@ export const AuthProvider = ({ children }) => { // I also included general error
 }
 
 // Expor the hook instead of the context iteself
-export default function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext);
 }
