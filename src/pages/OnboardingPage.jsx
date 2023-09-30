@@ -4,8 +4,8 @@ import Onboarding from '../components/onboarding/Onboarding'
 const OnboardingPage = () => {
 
   return (
-    <div>
-       <Onboarding /> 
+    <div className='w-screen h-screen flex flex-col justify-center items-center'>
+      <Onboarding />
     </div>
   )
 }

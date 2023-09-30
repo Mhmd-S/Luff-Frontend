@@ -57,5 +57,6 @@ export const userAPI = {
             url: '/user/check-auth',
         })
         return response;
-    }
+    },
+    
 }

@@ -17,9 +17,17 @@ const Step2 = () => {
 
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)}>
-        <h1>Step 2</h1>
         
-        <div className='w-full h-full grid grid-cols-2 grid-rows-3 justify-evenly items-center place-items-center gap-6'>
+        <h1 className='text-3xl font-bold text-grey-900'>
+            Add Photos
+        </h1>
+        
+        <h3 className='text-slate-500'>
+            Add at least 3 photos
+        </h3>
+        
+        <div className='w-full h-[80%] p-2 grid grid-cols-[40%_40%] grid-rows-3 justify-center items-center place-items-center gap-6 md:w-3/5 md:grid-cols-[20%_20%_20%] md:grid-rows-2'>
+            
             <FileUploadField 
                 type='file' 
                 name='profilePicture1' 
@@ -34,10 +42,11 @@ const Step2 = () => {
 
             <FileUploadField 
                 type='file' 
-                name='profilePicture1' 
+                name='profilePicture2' 
                 label='Profile Picture'
                 register={register}
                 errors={errors}
+                resetField={resetField}
                 validationRules={{
                     required: 'Profile Picture is required',
                 }}
@@ -45,10 +54,11 @@ const Step2 = () => {
 
             <FileUploadField 
                 type='file' 
-                name='profilePicture1' 
+                name='profilePicture3' 
                 label='Profile Picture'
                 register={register}
                 errors={errors}
+                resetField={resetField}
                 validationRules={{
                     required: 'Profile Picture is required',
                 }}
@@ -56,39 +66,33 @@ const Step2 = () => {
 
             <FileUploadField 
                 type='file' 
-                name='profilePicture1' 
+                name='profilePicture4' 
                 label='Profile Picture'
                 register={register}
+                resetField={resetField}
                 errors={errors}
-                validationRules={{
-                    required: 'Profile Picture is required',
-                }}
                 />
 
             <FileUploadField 
                 type='file' 
-                name='profilePicture1' 
+                name='profilePicture5' 
                 label='Profile Picture'
                 register={register}
+                resetField={resetField}
                 errors={errors}
-                validationRules={{
-                    required: 'Profile Picture is required',
-                }}
                 />
 
             <FileUploadField 
                 type='file' 
-                name='profilePicture1' 
+                name='profilePicture6' 
                 label='Profile Picture'
                 register={register}
                 errors={errors}
-                validationRules={{
-                    required: 'Profile Picture is required',
-                }}
+                resetField={resetField}
                 />
         </div>
 
-        <FormButton loading={loading} text='Next' />
+        <FormButton loading={loading} text='Complete Profile' />
 
     </InitialForm>
   )

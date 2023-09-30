@@ -15,7 +15,17 @@ const Step1 = () => {
     // I was think about mobile, but maybe it still works on mobile? I don't know, I'll test it later
 
   return (
-    <InitialForm onSubmit={handleSubmit(onSubmit)}>
+    <div className='h-3/5'>
+      <InitialForm onSubmit={handleSubmit(onSubmit)}>
+
+        <h1 className='text-3xl font-bold text-grey-900'>
+          Complete Your Profile
+        </h1>
+
+        <h3 className='text-slate-500'>
+          Tell us more about yourself!
+        </h3>
+
         <FormField
             label='Name'
             name='name'
@@ -69,8 +79,9 @@ const Step1 = () => {
                 },
             }}/>
 
-        <FormButton text='Next' loading={loading} />
-    </InitialForm>
+        <FormButton text='Next Step' loading={loading} />
+      </InitialForm>
+    </div>
   )
 }
 

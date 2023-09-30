@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const useStep1 = ({ nextStep }) => {
+const useStep1 = (nextStep) => {
 
     const [ generalError, setGeneralError ] = useState('');
 

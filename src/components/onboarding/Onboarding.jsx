@@ -6,7 +6,7 @@ const Onboarding = () => {
   const { renderStep } = useOnboarding()
 
   return (
-    <div>
+    <div  className='w-full h-full p-4 flex justify-center items-center'>
       {renderStep()}
     </div>
   )
