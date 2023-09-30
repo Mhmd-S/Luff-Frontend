@@ -5,7 +5,7 @@ const InitialForm = ({ children, onSubmit }) => {
     <form  
         onSubmit={onSubmit}
         className='w-full h-full flex flex-col items-center justify-evenly'
-    >
+      >
         {children}
     </form>
   )

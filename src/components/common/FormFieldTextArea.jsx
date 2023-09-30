@@ -1,12 +1,11 @@
 import React from 'react';
 import FormFieldError from './FormFieldError';
 
-const FormField = ({
+const FormFieldTextArea = ({
+  errors,
   label,
   name,
-  type,
   register,
-  errors,
   validationRules,
   defaultValue,
   placeholder,
@@ -19,14 +18,13 @@ const FormField = ({
         {label}
       </label>
       
-      <input
-        type={type}
+      <textarea
         name={name}
         defaultValue={defaultValue}
         placeholder={placeholder}
         {...register(name, validationRules)}
         {...inputProps}
-        className={`block w-full rounded-md p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-sm sm:leading-6' ${errors[name] && 'border-2 border-red-500'}`}
+        className={`block w-full resize-none rounded-md p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-sm sm:leading-6' ${errors[name] && 'border-2 border-red-500'}`}
       />
 
       <FormFieldError name={name} errors={errors} />
@@ -35,4 +33,4 @@ const FormField = ({
   );
 };
 
-export default FormField;
+export default FormFieldTextArea;
