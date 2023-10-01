@@ -9,6 +9,7 @@ import Root from './pages/Root';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
+import DashboardPage from './pages/DashboardPage';
 
 // Loaders
 
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
     path: '/onboarding',
     element: <OnboardingPage />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/dashboard',
+    element: <DashboardPage />,
+    errorElement: <ErrorPage />,
   }
   // {
   //   path: '*', 
@@ -44,5 +50,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>
     <RouterProvider router={router} />
-    </AuthProvider>
+  </AuthProvider>
 );

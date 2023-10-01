@@ -5,16 +5,17 @@ import { userAPI } from '../api/userAPI';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => { // I also included general error handling here hehehe
-  const [user, setUser] = useState(null);
+  
+  const [ user, setUser ] = useState(null);
 
 // Remove user login from here and add it to the useLogin.jsx hook
 
-  // Check if user already has a session, if so, set the user state and finaly set the initail loading to false.
+  // Check if user already has a session, if so, set the user state
   useEffect(()=>{
     userAPI.checkAuthStatus()
-      .then(data => setUser(data.user))
+      .then(data => {setUser(data.data.data); console.log(data.data.data)})
       .catch(err => {}) // Do nothing because there is no user session
-    },[])
+    },[]) 
 
   // Make a request to the API to log the user out and then set the user state to null.
   const logout = () => {

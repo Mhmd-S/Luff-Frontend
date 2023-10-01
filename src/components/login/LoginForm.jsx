@@ -56,7 +56,7 @@ const LoginForm = () => {
           }}
         />
 
-        <FormButton text='Verify Email' loading={loading}/> 
+        <FormButton text='Log In' loading={loading}/> 
 
         <div className='w-full text-center pt-2'>
           <span>Don't have an account? </span> 

@@ -4,10 +4,11 @@ import FormField from '../common/FormField'
 import useStep1 from './hooks/useStep1'
 import FormButton from '../common/FormButton'
 import FormFieldTextArea from '../common/FormFieldTextArea'
+import FormGeneralError from '../common/FormGeneralError'
 
 const Step1 = () => {
 
-    const { register, handleSubmit, onSubmit, loading, errors } = useStep1()
+    const { register, handleSubmit, onSubmit, loading, errors, generalError } = useStep1()
 
     // I was thinking to make the onboarding two steps, but I think it's better to make it one step
     // My original plan was to make it two steps, one for personal info and one for the profile picture
@@ -25,6 +26,8 @@ const Step1 = () => {
         <h3 className='text-slate-500'>
           Tell us more about yourself!
         </h3>
+
+        <FormGeneralError message={generalError} />
 
         <FormField
             label='Name'
@@ -80,6 +83,7 @@ const Step1 = () => {
             }}/>
 
         <FormButton text='Next Step' loading={loading} />
+
       </InitialForm>
     </div>
   )

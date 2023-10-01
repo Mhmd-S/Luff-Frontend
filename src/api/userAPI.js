@@ -58,5 +58,34 @@ export const userAPI = {
         })
         return response;
     },
-    
+    updateName: async (name) => {
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/update-name',
+            data: {
+                name: name,
+            }
+        })
+        return response;
+    },
+    updateDob: async (dob) => {
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/update-dob',
+            data: {
+                dob: dob,
+            }
+        })
+        return response;
+    },
+    updateBio: async (bio) => {
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/update-bio',
+            data: {
+                bio: bio,
+            }
+        })
+        return response;
+    },
 }

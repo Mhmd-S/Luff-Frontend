@@ -16,7 +16,7 @@ const useLogin = () => {
       navigate('/dashboard');
       return;
     }
-  })
+  },[])
 
   const { 
           register, 
@@ -34,7 +34,6 @@ const useLogin = () => {
       setUser(response.data.user);
       navigate('/dashboard');
     } else {
-      console.log(response.data.message);
       setGeneralError(response.data.message);
     }
   }

@@ -1,10 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Step1 from '../Step1'
 import Step2 from '../Step2'
+import { useAuth } from '../../../contexts/useAuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const useOnboarding = () => {
 
-    const [ step, setStep ] = useState(1);
+    const navigate = useNavigate();
+
+    const [ step, setStep ] = useState(0);
+
+    const { user } = useAuth();
+
+    useEffect(()=>{
+        if (!user) {
+            navigate('/login');
+        }
+
+        if (user && user.onboardStep == 2) {
+            navigate('/dashboard');
+        }
+
+        setStep(user.onboardStep);
+    },[])
 
     const nextStep = () => {
         setStep(step + 1);
