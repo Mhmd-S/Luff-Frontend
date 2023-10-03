@@ -2,6 +2,7 @@ import './styles/globals.css';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { AuthProvider } from './contexts/useAuthContext';
+import { StrictMode } from 'react';
 
 // Pages
 import ErrorPage from './pages/ErrorPage';

@@ -1,41 +1,50 @@
 import { createContext, useState, useMemo, useEffect, useContext } from 'react';
 
 import { userAPI } from '../api/userAPI';
+import CheckCircle from '../components/common/CheckCircle';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => { // I also included general error handling here hehehe
-  
-  const [ user, setUser ] = useState(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
-// Remove user login from here and add it to the useLogin.jsx hook
+  useEffect(() => {
+    userAPI
+      .checkAuthStatus()
+      .then((data) => {
+        setUser(data.data.data);
+        setLoading(false); // Set loading to false when the user data is available
+      })
+      .catch((err) => {
+        setLoading(false); // Set loading to false on error as well
+      });
+  }, []); // Remove 'user' from the dependency array
 
-  // Check if user already has a session, if so, set the user state
-  useEffect(()=>{
-    userAPI.checkAuthStatus()
-      .then(data => {setUser(data.data.data); console.log(data.data.data)})
-      .catch(err => {}) // Do nothing because there is no user session
-    },[]) 
-
-  // Make a request to the API to log the user out and then set the user state to null.
   const logout = () => {
-    userAPI.logout().then(()=>setUser(null));
+    userAPI.logout().then(() => setUser(null));
   };
 
-  // We are using useMemo here to avoid re-rendering the context provider when the user state changes.
-  // We are going only to re-render the context provider when the user, loading or error state changes.
-  const memoValue = useMemo(()=>({
-    user,
-    setUser,
-    logout
-  }),[user]);
+  const memoValue = useMemo(
+    () => ({
+      user,
+      setUser,
+      logout,
+    }),
+    [user, logout]
+  );
+
+  if (loading) {
+    return <CheckCircle/>
+  }
 
   return (
     <AuthContext.Provider value={memoValue}>
       {children}
     </AuthContext.Provider>
-  )  
-}
+  );
+};
+
 
 // Expor the hook instead of the context iteself
 export const useAuth = () => {

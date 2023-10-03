@@ -88,4 +88,17 @@ export const userAPI = {
         })
         return response;
     },
+    uploadProfilePicture: async (file) => {
+
+        const formData = new FormData();
+
+        formData.append('profilePicture', file);
+
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/add-profile-pic',
+            data: formData,
+        })
+        return response;
+    }
 }

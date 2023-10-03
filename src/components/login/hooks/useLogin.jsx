@@ -12,11 +12,12 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   useEffect(()=> {
+    console.log('useEffectLogin: ', user);
     if (user) {
       navigate('/dashboard');
       return;
     }
-  },[])
+  },[user])
 
   const { 
           register, 

@@ -1,13 +1,18 @@
 import React from 'react'
 import useOnboarding from './hooks/useOnboarding'
+import LoadingIcon from '../common/LoadingIcon'
 
 const Onboarding = () => {
 
-  const { renderStep } = useOnboarding()
+  const { renderStep, loading } = useOnboarding()
 
   return (
     <div  className='w-full h-full p-4 flex justify-center items-center'>
-      {renderStep()}
+      { loading ?
+        <LoadingIcon />
+        : 
+        renderStep()
+        }
     </div>
   )
 }

@@ -39,17 +39,22 @@ const useStep1 = (nextStep) => {
         }
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
         
         setGeneralError('');
 
-        Promise.all([submitName(data.name), submitDob(data.dob), submitBio(data.bio)])
-            .then(() => {
-                if (!generalError) {
-                    nextStep();
-                }
-            })
-            .finally(() => setLoading(false));
+        setLoading(true);
+
+        // Submit the data to the API
+        await submitName(data.name);
+        await submitDob(data.dob);
+        await submitBio(data.bio);
+
+        if (generalError === '') {
+            nextStep();
+        }
+
+        setLoading(false);    
     }
 
     return { 

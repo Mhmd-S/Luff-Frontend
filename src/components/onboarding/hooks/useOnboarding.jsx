@@ -8,21 +8,23 @@ const useOnboarding = () => {
 
     const navigate = useNavigate();
 
-    const [ step, setStep ] = useState(0);
+    const [ step, setStep ] = useState(1);
 
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!user) {
+            // User is not authenticated, redirect to login
             navigate('/login');
-        }
-
-        if (user && user.onboardStep == 2) {
+        } else if (user.onboardStep === 2) {
+            // User is already on step 2, redirect to dashboard
             navigate('/dashboard');
+        } else {
+            // Set the step to user's onboardStep
+            setStep(1);
         }
-
-        setStep(user.onboardStep);
-    },[])
+    }, [user, loading]);
+    
 
     const nextStep = () => {
         setStep(step + 1);
@@ -45,7 +47,7 @@ const useOnboarding = () => {
         }
     }
 
-    return { step, nextStep, prevStep, renderStep };
+    return { step, loading, nextStep, prevStep, renderStep };
 
 }
 

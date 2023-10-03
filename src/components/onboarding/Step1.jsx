@@ -6,9 +6,9 @@ import FormButton from '../common/FormButton'
 import FormFieldTextArea from '../common/FormFieldTextArea'
 import FormGeneralError from '../common/FormGeneralError'
 
-const Step1 = () => {
+const Step1 = ({ nextStep }) => {
 
-    const { register, handleSubmit, onSubmit, loading, errors, generalError } = useStep1()
+    const { register, handleSubmit, onSubmit, loading, errors, generalError } = useStep1(nextStep)
 
     // I was thinking to make the onboarding two steps, but I think it's better to make it one step
     // My original plan was to make it two steps, one for personal info and one for the profile picture
@@ -39,7 +39,7 @@ const Step1 = () => {
             validationRules={{
               required: 'Name is required',
                 pattern: {
-                    value: /^[a-zA-Z]{15} [a-zA-Z]{15}$/,
+                    value: /^[a-zA-Z]{1,15} [a-zA-Z]{1,15}$/,
                     message: 'Name must only contain letters, a space, and must be less than 30 characters long',
                 },
             }}
@@ -73,12 +73,12 @@ const Step1 = () => {
             validationRules={{
               required: 'Bio is required',
                 minLength: {
-                    value: 10,
-                    message: 'Bio must be at least 10 characters long',
+                    value: 25,
+                    message: 'Bio must be at least 25 characters long',
                 },
                 maxLength: {
-                    value: 200,
-                    message: 'Bio must be less than 200 characters long',
+                    value: 500,
+                    message: 'Bio must be less than 500 characters long',
                 },
             }}/>
 
