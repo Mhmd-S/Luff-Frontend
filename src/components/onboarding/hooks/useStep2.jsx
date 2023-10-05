@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { userAPI } from '../../../api/userAPI'
 
-const useStep2 = () => {
+const useStep2 = ( nextStep ) => {
 
     const [ generalError, setGeneralError ] = useState('');
 
@@ -10,12 +10,13 @@ const useStep2 = () => {
         register, 
         handleSubmit, 
         resetField,
-        formState:{errors} 
+        setError,
+        formState: { errors } 
     } = useForm()
 
     const onSubmit = async(data) => {
         const pics = Object.values(data);
-        console.log(pics);
+
         // Upload pics through API
         try {
             let picsPromises = pics.map(async(pic) => {
@@ -23,7 +24,9 @@ const useStep2 = () => {
                 console.log(pic[0]);
                 return await userAPI.uploadProfilePicture(pic[0]);
             });
-            await Promise.all(picsPromises);
+            const result = await Promise.all(picsPromises);
+            console.log(result);
+            nextStep();
         } catch(err) {
             setGeneralError(err.message);
             return;
@@ -37,6 +40,7 @@ const useStep2 = () => {
         handleSubmit, 
         onSubmit,
         resetField,
+        setError,
         generalError, 
         errors 
     }

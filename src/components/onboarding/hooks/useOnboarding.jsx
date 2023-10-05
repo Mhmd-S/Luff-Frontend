@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Step1 from '../Step1'
 import Step2 from '../Step2'
+import Step3 from '../Step3'
 import { useAuth } from '../../../contexts/useAuthContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,7 +9,7 @@ const useOnboarding = () => {
 
     const navigate = useNavigate();
 
-    const [ step, setStep ] = useState(1);
+    const [ step, setStep ] = useState(0);
 
     const { user, loading } = useAuth();
 
@@ -16,12 +17,12 @@ const useOnboarding = () => {
         if (!user) {
             // User is not authenticated, redirect to login
             navigate('/login');
-        } else if (user.onboardStep === 2) {
-            // User is already on step 2, redirect to dashboard
+        } else if (user.onboardStep == 2) {
+            // User is already on step 2, onboarding completed, redirect to dashboard
             navigate('/dashboard');
         } else {
-            // Set the step to user's onboardStep
-            setStep(1);
+            // Set the step to user's onboardStep, 0 is default.
+            setStep(2);
         }
     }, [user, loading]);
     
@@ -37,11 +38,11 @@ const useOnboarding = () => {
     const renderStep = () => {
         switch(step) {
             case 0:
-                return <Step1 nextStep={nextStep} prevStep={prevStep} />
+                return <Step1 nextStep={nextStep} />
             case 1:
-                return <Step2 />
-            // case 2:
-            //     return <Step3 />
+                return <Step2 nextStep={nextStep} />
+            case 2:
+                return <Step3 />
             default:
                 return <Step1 />
         }

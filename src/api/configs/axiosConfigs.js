@@ -20,6 +20,16 @@ const errorHandler = (error) => {
         }
     }
 
+    if (error.code === "ERR_BAD_REQUEST") {
+        if (error.response && error.response.data) {
+            // If the server returned an error response, return it
+            return error.response;  
+        } else {
+            // If there was no response or the error was not from the server, return a generic error message
+            return {data: { status: 'fail', message: 'An error occurred while verifying the code.' }};
+        }
+    }
+
     if (error.code == "ERR_NETWORK_ERROR") {
         return Promise.resolve();
     }

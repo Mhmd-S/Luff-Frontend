@@ -1,21 +1,23 @@
-import React from 'react'
 import InitialForm from '../common/InitialForm'
 import FileUploadField from '../common/FileUploadField'
 import useStep2 from './hooks/useStep2'
 import FormButton from '../common/FormButton'
 import FormGeneralError from '../common/FormGeneralError'
 
-const Step2 = () => {
+// The validation is not working properly.
+
+const Step2 = ({ nextStep }) => {
 
     const { 
         register, 
         handleSubmit, 
         onSubmit, 
         resetField,
+        setError,
         generalError,
         loading, 
         errors 
-    } = useStep2();
+    } = useStep2( nextStep );
 
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)}>
@@ -39,6 +41,7 @@ const Step2 = () => {
                 register={register}
                 errors={errors}
                 resetField={resetField}
+                setError={setError}
                 validationRules={{
                     required: 'Profile Picture is required',
                 }}
@@ -51,6 +54,7 @@ const Step2 = () => {
                 register={register}
                 errors={errors}
                 resetField={resetField}
+                setError={setError}
                 validationRules={{
                     required: 'Profile Picture is required',
                 }}
@@ -63,6 +67,7 @@ const Step2 = () => {
                 register={register}
                 errors={errors}
                 resetField={resetField}
+                setError={setError}
                 validationRules={{
                     required: 'Profile Picture is required',
                 }}
@@ -74,6 +79,7 @@ const Step2 = () => {
                 label='Profile Picture'
                 register={register}
                 resetField={resetField}
+                setError={setError}
                 errors={errors}
                 />
 
@@ -83,6 +89,7 @@ const Step2 = () => {
                 label='Profile Picture'
                 register={register}
                 resetField={resetField}
+                setError={setError}
                 errors={errors}
                 />
 
@@ -93,6 +100,7 @@ const Step2 = () => {
                 register={register}
                 errors={errors}
                 resetField={resetField}
+                setError={setError}
                 />
         </div>
 

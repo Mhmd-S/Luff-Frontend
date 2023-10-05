@@ -1,4 +1,5 @@
 import { api } from './configs/axiosConfigs'
+import axios from 'axios';
 
 export const userAPI = {
     sendVerificationCode: async (email) => {
@@ -94,11 +95,16 @@ export const userAPI = {
 
         formData.append('profilePicture', file);
 
+        // Send the form data to the API endpoint
         const response = await api.request({
             method: 'PUT',
             url: '/user/add-profile-pic',
             data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
         })
+
         return response;
     }
 }
