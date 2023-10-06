@@ -89,6 +89,16 @@ export const userAPI = {
         })
         return response;
     },
+    updateGender: async(gender) => {
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/update-gender',
+            data: {
+                gender: gender,
+            }
+        })
+        return response;
+    },
     uploadProfilePicture: async (file) => {
 
         const formData = new FormData();

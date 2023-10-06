@@ -47,7 +47,7 @@ const FileUploadField = ({
 
 
   return (
-    <div className={`h-full w-full relative flex justify-center items-center border-2 rounded-sm bg-slate-100  ${errors[name] && 'border-2 border-red-500'}`}>
+    <div className={`h-full w-full relative flex justify-center items-center border-2 rounded-sm bg-slate-100  ${errors[name] && 'border-2 border-pink-600'}`}>
 
       { isLoading ? <LoadingIcon /> : null }
 

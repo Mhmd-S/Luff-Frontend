@@ -24,7 +24,7 @@ const FormFieldTextArea = ({
         placeholder={placeholder}
         {...register(name, validationRules)}
         {...inputProps}
-        className={`block w-full resize-none rounded-md p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-sm sm:leading-6' ${errors[name] && 'border-2 border-red-500'}`}
+        className={`block w-full h-24 resize-none rounded-md p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-sm sm:leading-6' ${errors[name] && 'border-2 border-pink-600'}`}
       />
 
       <FormFieldError name={name} errors={errors} />

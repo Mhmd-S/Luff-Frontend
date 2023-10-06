@@ -15,7 +15,7 @@ const Step2 = ({ nextStep }) => {
         resetField,
         setError,
         generalError,
-        loading, 
+        loading,
         errors 
     } = useStep2( nextStep );
 

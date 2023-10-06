@@ -5,6 +5,7 @@ import { userAPI } from '../../../api/userAPI'
 const useStep2 = ( nextStep ) => {
 
     const [ generalError, setGeneralError ] = useState('');
+    const [ loading, setLoading ] = useState(false);
 
     const { 
         register, 
@@ -19,20 +20,22 @@ const useStep2 = ( nextStep ) => {
 
         // Upload pics through API
         try {
+            setLoading(true);
+
             let picsPromises = pics.map(async(pic) => {
                 if ( pic.length === 0) return;
                 console.log(pic[0]);
                 return await userAPI.uploadProfilePicture(pic[0]);
             });
+            
             const result = await Promise.all(picsPromises);
             console.log(result);
+            
             nextStep();
         } catch(err) {
             setGeneralError(err.message);
-            return;
         }
-
-        console.log('Pics uploaded');
+        setLoading(false);
     }
 
     return { 
@@ -41,6 +44,7 @@ const useStep2 = ( nextStep ) => {
         onSubmit,
         resetField,
         setError,
+        loading,
         generalError, 
         errors 
     }

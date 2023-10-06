@@ -22,7 +22,7 @@ const useOnboarding = () => {
             navigate('/dashboard');
         } else {
             // Set the step to user's onboardStep, 0 is default.
-            setStep(2);
+            setStep(0);
         }
     }, [user, loading]);
     

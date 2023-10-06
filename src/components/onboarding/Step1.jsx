@@ -5,18 +5,21 @@ import useStep1 from './hooks/useStep1'
 import FormButton from '../common/FormButton'
 import FormFieldTextArea from '../common/FormFieldTextArea'
 import FormGeneralError from '../common/FormGeneralError'
+import RadioGroup from '../common/RadioGroup'
 
 const Step1 = ({ nextStep }) => {
 
-    const { register, handleSubmit, onSubmit, loading, errors, generalError } = useStep1(nextStep)
-
-    // I was thinking to make the onboarding two steps, but I think it's better to make it one step
-    // My original plan was to make it two steps, one for personal info and one for the profile picture
-    // IDK what do you think future self?
-    // I was think about mobile, but maybe it still works on mobile? I don't know, I'll test it later
+  const { 
+    register, 
+    handleSubmit, 
+    onSubmit, 
+    loading, 
+    errors, 
+    generalError 
+  } = useStep1(nextStep);
 
   return (
-    <div className='h-3/5'>
+    <div className='h-4/5'>
       <InitialForm onSubmit={handleSubmit(onSubmit)}>
 
         <h1 className='text-3xl font-bold text-grey-900'>
@@ -81,6 +84,15 @@ const Step1 = ({ nextStep }) => {
                     message: 'Bio must be less than 500 characters long',
                 },
             }}/>
+            
+          <RadioGroup 
+            name='gender' 
+            errors={errors}
+            register={register}
+            options={[
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' },
+            ]} />
 
         <FormButton text='Next Step' loading={loading} />
 
