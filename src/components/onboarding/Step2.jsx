@@ -26,7 +26,7 @@ const Step2 = ({ nextStep }) => {
             Add Photos
         </h1>
         
-        <h3 className='text-slate-500'>
+        <h3 className='text-sky-500 underline'>
             Add at least 3 photos
         </h3>
 

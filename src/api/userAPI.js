@@ -99,6 +99,16 @@ export const userAPI = {
         })
         return response;
     },
+    updateOrientation: async(orientation) => {
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/update-orientation',
+            data: {
+                orientaion: orientation
+            }
+        })
+        return response;
+    },
     uploadProfilePicture: async (file) => {
 
         const formData = new FormData();
@@ -115,6 +125,13 @@ export const userAPI = {
             },
         })
 
+        return response;
+    },
+    onboardNext: async () => {
+        const response = await api.request({
+            method: 'PUT',
+            url: '/user/onboard-next',
+        })
         return response;
     }
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import InitialForm from '../common/InitialForm'
 import FormField from '../common/FormField'
 import useStep1 from './hooks/useStep1'
@@ -18,15 +17,21 @@ const Step1 = ({ nextStep }) => {
     generalError 
   } = useStep1(nextStep);
 
+  const genderOptions = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+  ];
+
+
   return (
-    <div className='h-4/5'>
+    <div className='h-4/5 md:h-full'>
       <InitialForm onSubmit={handleSubmit(onSubmit)}>
 
         <h1 className='text-3xl font-bold text-grey-900'>
           Complete Your Profile
         </h1>
 
-        <h3 className='text-slate-500'>
+        <h3 className='text-sky-500 underline'>
           Tell us more about yourself!
         </h3>
 
@@ -86,13 +91,18 @@ const Step1 = ({ nextStep }) => {
             }}/>
             
           <RadioGroup 
-            name='gender' 
+            label='Your gender' 
+            name='gender'
             errors={errors}
             register={register}
-            options={[
-              { value: 'male', label: 'Male' },
-              { value: 'female', label: 'Female' },
-            ]} />
+            options={genderOptions} />
+{/* 
+          <RadioGroup 
+            label='Personal Orientaion' 
+            name='orientation'
+            errors={errors}
+            register={register}
+            options={genderOptions} /> */}
 
         <FormButton text='Next Step' loading={loading} />
 

@@ -23,14 +23,16 @@ const useStep2 = ( nextStep ) => {
             setLoading(true);
 
             let picsPromises = pics.map(async(pic) => {
+                
                 if ( pic.length === 0) return;
-                console.log(pic[0]);
+
                 return await userAPI.uploadProfilePicture(pic[0]);
             });
             
-            const result = await Promise.all(picsPromises);
-            console.log(result);
-            
+            await Promise.all(picsPromises);
+
+            await userAPI.onboardNext();
+        
             nextStep();
         } catch(err) {
             setGeneralError(err.message);

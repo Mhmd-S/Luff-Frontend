@@ -10,7 +10,7 @@
       box-sizing: border-box;
     }
     html {
-      font-family: 'Inter ', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
     ::-webkit-scrollbar {
       width: 10px;

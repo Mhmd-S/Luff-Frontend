@@ -25,8 +25,12 @@ const useStep1 = (nextStep) => {
             await userAPI.updateDob(data.dob);
             await userAPI.updateBio(data.bio);
             await userAPI.updateGender(data.gender);
+            // await userAPI.updateOrientation(data.orientation);
+            await userAPI.onboardNext();
         } catch(err) {
             setGeneralError(err.response.data.message);
+            setLoading(false);
+            return;
         }
 
         if (generalError === '') {
