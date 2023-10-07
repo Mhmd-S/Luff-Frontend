@@ -1,6 +1,6 @@
 import React from 'react'
 import useOnboarding from './hooks/useOnboarding'
-import LoadingIcon from '../common/LoadingIcon'
+import LoadingIcon from '../icons/LoadingIcon'
 
 const Onboarding = () => {
 

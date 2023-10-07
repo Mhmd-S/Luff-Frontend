@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import CheckCircle from '../common/CheckCircle';
+import CheckCircle from '../icons/CheckCircle';
 
 const Step3RegistrationComplete = () => {
   return (

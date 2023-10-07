@@ -1,7 +1,7 @@
 import { createContext, useState, useMemo, useEffect, useContext } from 'react';
 
 import { userAPI } from '../api/userAPI';
-import CheckCircle from '../components/common/CheckCircle';
+import CheckCircle from '../components/icons/CheckCircle';
 
 const AuthContext = createContext();
 

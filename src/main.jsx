@@ -2,15 +2,15 @@ import './styles/globals.css';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { AuthProvider } from './contexts/useAuthContext';
-import { StrictMode } from 'react';
 
 // Pages
 import ErrorPage from './pages/ErrorPage';
-import Root from './pages/Root';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
-import DashboardPage from './pages/DashboardPage';
+import HomePage from './pages/HomePage';
+import Root from './pages/Root';
+import SettingsPage from './pages/SettingsPage';
 
 // Loaders
 
@@ -20,6 +20,22 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'home',
+        element: <HomePage />,
+      },
+      // {
+      //   path: 'messages',
+      //   element: <SettingsPage />,
+      //   errorElement: <ErrorPage />,
+      // },
+      // {
+      //   path: 'discover',
+      //   element: <DiscoverPage />,
+      //   errorElement: <ErrorPage />,
+      // },
+    ]
   },
   {
     path: '/login',
@@ -37,10 +53,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/dashboard',
-    element: <DashboardPage />,
+    path: '/settings',
+    element: <SettingsPage />,
     errorElement: <ErrorPage />,
-  }
+  },
+   // {
+   //   path: 'profile',
+   //   element: <ProfilesPage />,
+   //   errorElement: <ErrorPage />,
+   // },
   // {
   //   path: '*', 
   //   element: <ErrorPage />,

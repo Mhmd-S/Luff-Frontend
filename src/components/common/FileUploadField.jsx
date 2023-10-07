@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import FormFieldError from './FormFieldError';
-import AddIcon from './AddIcon';
-import RemoveIcon from './RemoveIcon';
-import LoadingIcon from './LoadingIcon';
+import AddIcon from '../icons/AddIcon';
+import RemoveIcon from '../icons/RemoveIcon';
+import LoadingIcon from '../icons/LoadingIcon';
 import { validateImage } from '../../utils/ImageValidation';
 
 const FileUploadField = ({
