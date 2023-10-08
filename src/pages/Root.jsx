@@ -10,13 +10,8 @@ const Root = () => {
 
         <ul className='w-full px-4 h-max flex flex-row justify-between items-center'>
             <li>
-                <img 
-                    src='https://via.placeholder.com/50' 
-                    alt='logo'
-                    className='w-10 h-10 rounded-full'
-                    />
+                Logo
             </li>
-            <li>Logo</li>
             <li>
                 <SettingsIcon/>
             </li>
@@ -29,13 +24,20 @@ const Root = () => {
                 <HomeIcon/>
             </li>
             <li>
+                <DiscoverIcon/>
+            </li>
+            <li>
                 <ChatIcon/>
             </li>
             <li>
-                <DiscoverIcon/>
+                <img 
+                    src='https://via.placeholder.com/50' 
+                    alt='logo'
+                    className='w-10 h-10 rounded-full'
+                    />
             </li>
         </ul>
-    
+
     </div>
   )
 }

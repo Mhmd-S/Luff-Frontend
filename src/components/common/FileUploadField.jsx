@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
 import FormFieldError from './FormFieldError';
 import AddIcon from '../icons/AddIcon';
 import RemoveIcon from '../icons/RemoveIcon';
 import LoadingIcon from '../icons/LoadingIcon';
-import { validateImage } from '../../utils/ImageValidation';
+import useFileUploadField from './hooks/useFileUploadField';
 
 const FileUploadField = ({
-  label,
   name,
   register,
   errors,
@@ -18,33 +16,7 @@ const FileUploadField = ({
   ...inputProps
 }) => {
 
-    const [imageFile, setImageFile] = useState(null);
-    const [ isLoading, setIsLoading ] = useState(false);
-
-    const handleFileChange = async (event) => {
-      setIsLoading(true);
-      const selectedFile = event.target.files[0];
-
-      if (selectedFile) {
-
-        const result = await validateImage(selectedFile, 3000000); // 3MB
-        
-        if (!result.valid) {
-          setError(`${name}`, { type: 'manual', message: result.message });
-          setIsLoading(false);
-          return;
-        }
-
-        setImageFile(selectedFile);
-      }
-      setIsLoading(false);
-    };
-  
-      const handleRemoveImage = () => {
-        resetField(`${name}`);
-        setImageFile(null);
-      };
-
+  const { imageFile, isLoading, handleFileChange, handleRemoveImage } = useFileUploadField({ name, setError, resetField, ...inputProps });
 
   return (
     <div className={`h-full w-full relative flex justify-center items-center border-2 rounded-sm bg-slate-100  ${errors[name] && 'border-2 border-pink-600'}`}>

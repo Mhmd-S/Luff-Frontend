@@ -1,9 +1,9 @@
-import React from 'react'
+import Settings from '../components/settings/Settings'
 
 const SettingsPage = () => {
   return (
-    <div className='w-full h-full'>
-        
+    <div className='w-screen h-screen'>
+        <Settings />
     </div>
   )
 }

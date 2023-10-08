@@ -37,7 +37,6 @@ const Step2 = ({ nextStep }) => {
             <FileUploadField 
                 type='file' 
                 name='profilePicture1' 
-                label='Profile Picture'
                 register={register}
                 errors={errors}
                 resetField={resetField}
@@ -50,7 +49,6 @@ const Step2 = ({ nextStep }) => {
             <FileUploadField 
                 type='file' 
                 name='profilePicture2' 
-                label='Profile Picture'
                 register={register}
                 errors={errors}
                 resetField={resetField}
@@ -63,7 +61,6 @@ const Step2 = ({ nextStep }) => {
             <FileUploadField 
                 type='file' 
                 name='profilePicture3' 
-                label='Profile Picture'
                 register={register}
                 errors={errors}
                 resetField={resetField}
@@ -76,7 +73,6 @@ const Step2 = ({ nextStep }) => {
             <FileUploadField 
                 type='file' 
                 name='profilePicture4' 
-                label='Profile Picture'
                 register={register}
                 resetField={resetField}
                 setError={setError}
@@ -86,7 +82,6 @@ const Step2 = ({ nextStep }) => {
             <FileUploadField 
                 type='file' 
                 name='profilePicture5' 
-                label='Profile Picture'
                 register={register}
                 resetField={resetField}
                 setError={setError}
@@ -96,7 +91,6 @@ const Step2 = ({ nextStep }) => {
             <FileUploadField 
                 type='file' 
                 name='profilePicture6' 
-                label='Profile Picture'
                 register={register}
                 errors={errors}
                 resetField={resetField}
