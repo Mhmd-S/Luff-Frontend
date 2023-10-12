@@ -4,7 +4,10 @@ import useSettings from './hooks/useSettings'
 
 const Settings = () => {
 
-  const { settingsPage, handleClick, displaySettingsPage } = useSettings();
+  const { settingsPage, 
+          handleClick, 
+          displaySettingsPage, 
+        } = useSettings();
 
   return (
     <div className="w-full h-full flex flex-col items-center">

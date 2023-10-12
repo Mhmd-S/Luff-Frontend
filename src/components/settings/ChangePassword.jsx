@@ -5,7 +5,7 @@ import useChangePassword from './hooks/useChangePassword';
 import FormGeneralError from '../common/FormGeneralError';
 import FormButton from '../common/FormButton';
 
-const ChangePassword = () => {
+const ChangePassword = ({ goToMenu }) => {
 
     const { 
         register, 
@@ -19,10 +19,9 @@ const ChangePassword = () => {
   return (
     <InitalForm onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="w-full grid grid-row-1 grid-cols-[30%_70%]">
-            <span className="w-fit">Go Back</span>
-            <h1 className="text-xl">Change Password</h1>
-        </div>
+        <span className="self-start" onClick={goToMenu}>Go Back</span>
+        
+        <h1 className="text-2xl">Change Password</h1>
 
         <FormGeneralError message={generalError} />
 

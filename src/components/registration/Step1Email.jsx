@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 const Step1Email = () => {
 
   const { 
-          emailInput, 
           register, 
           handleSubmit, 
           onSubmit, 
@@ -42,7 +41,6 @@ const Step1Email = () => {
               message: 'Invalid TP email',
             },
           }}
-          defaultValue={emailInput}
         />
 
         <FormField

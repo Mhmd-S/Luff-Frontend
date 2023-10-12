@@ -9,9 +9,13 @@ const useSettings = () => {
         setSettingsPage(settingsName);
     }
 
+    const goToMenu = () => {
+        setSettingsPage('');
+    }
+
     const displaySettingsPage = () => {
         if (settingsPage == 'ChangePassword') {
-            return <ChangePassword />
+            return <ChangePassword goToMenu={goToMenu} />
         }
         // } else if (settingsPage == 'ChangeProfilePicture') {
         //     return <ChangeProfilePicture />
@@ -29,7 +33,8 @@ const useSettings = () => {
     return {
         settingsPage,
         handleClick,
-        displaySettingsPage
+        displaySettingsPage,
+        goToMenu
     }
 }
 

@@ -133,5 +133,29 @@ export const userAPI = {
             url: '/user/onboard-next',
         })
         return response;
-    }
+    },
+    requestResetPassword: async (email) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/request-reset-password',
+            data: {
+                email: email,
+            }
+        })
+        return response;
+    },
+    resetPassword: async (token, userId, password) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/reset-password',
+            query: {
+                token: token,
+                id: userId,
+            },
+            data: {
+                password: password,
+            }
+        })
+        return response;
+    },
 }

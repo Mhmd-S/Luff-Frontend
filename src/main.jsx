@@ -10,11 +10,11 @@ import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
 import HomePage from './pages/HomePage';
 import Root from './pages/Root';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import RequestResetPasswordPage from './pages/RequestResetPasswordPage';
 import SettingsPage from './pages/SettingsPage';
 
 // Loaders
-
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -55,6 +55,16 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: <SettingsPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/reset-password',
+    element: <ResetPasswordPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/request-reset-password',
+    element: <RequestResetPasswordPage />,
     errorElement: <ErrorPage />,
   },
    // {
