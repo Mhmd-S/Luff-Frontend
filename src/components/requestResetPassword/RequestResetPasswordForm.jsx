@@ -19,11 +19,11 @@ const RequestResetPassword = ({ nextStep }) => {
     return (
       <InitialForm onSubmit={handleSubmit(onSubmit)}>  
 
-        <h1 className='text-3xl font-bold text-grey-900'>
+        <h1 className='text-3xl font-bold'>
             Change Your Password
         </h1>
 
-        <FormGeneralError message={generalError} />
+        { generalError && <FormGeneralError message={generalError} /> }
 
         <FormField
           label='TP email'

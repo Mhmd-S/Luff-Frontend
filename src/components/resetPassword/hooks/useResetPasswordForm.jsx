@@ -25,19 +25,17 @@ const useResetPasswordForm = ( nextStep ) => {
         setLoading(true);
 
         // Submit the data to the API
-        try{
-            const token = searchParams.get('token');
-            const userId = searchParams.get('userId');
-
-            const response = await userAPI.resetPassword(token, userId, data.password);
-            
+        const token = searchParams.get('token');
+        const userId = searchParams.get('id');
+        
+        const response = await userAPI.resetPassword(token, userId, data.password);
+        
+        if (response.data.status === 'success') {
             nextStep();
-        } catch(err) {
-            setGeneralError(err.response.data.message);
-        } finally {
+        } else {
+            setGeneralError(response.data.message);
             setLoading(false);
         }
-
     }
 
     return { 

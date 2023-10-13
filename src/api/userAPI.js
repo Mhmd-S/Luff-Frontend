@@ -148,7 +148,7 @@ export const userAPI = {
         const response = await api.request({
             method: 'POST',
             url: '/user/reset-password',
-            query: {
+            params: {
                 token: token,
                 id: userId,
             },

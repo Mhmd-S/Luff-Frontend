@@ -4,6 +4,7 @@ import FormField from '../common/FormField'
 import FormButton from '../common/FormButton'
 import { validatePasswords } from '../registration/utils/Step1Validation'
 import useResetPasswordForm from './hooks/useResetPasswordForm'
+import FormGeneralError from '../common/FormGeneralError'
 
 const ResetPasswordForm = ({ nextStep }) => {
 
@@ -13,11 +14,19 @@ const ResetPasswordForm = ({ nextStep }) => {
         onSubmit,
         watchPassword,
         loading,
+        generalError,
         errors
     } = useResetPasswordForm( nextStep );
 
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)}>
+
+        <h1 className='text-3xl font-bold'>
+            Change Your Password
+        </h1>
+
+        { generalError && <FormGeneralError message={generalError} /> }
+        
         <FormField
           label='Password'
           name='password'
