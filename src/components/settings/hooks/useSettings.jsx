@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ChangePassword from '../ChangePassword'
+import ProfilePictureSettings from '../ProfilePictureSettings';
 
 const useSettings = () => {
 
@@ -14,12 +14,10 @@ const useSettings = () => {
     }
 
     const displaySettingsPage = () => {
-        if (settingsPage == 'ChangePassword') {
-            return <ChangePassword goToMenu={goToMenu} />
-        }
-        // } else if (settingsPage == 'ChangeProfilePicture') {
-        //     return <ChangeProfilePicture />
-        // } else if (settingsPage == 'ChangeBio') {
+        if (settingsPage == 'ChangeProfilePicture') {
+            return <ProfilePictureSettings />
+        } 
+        // else if (settingsPage == 'ChangeBio') {
         //     return <ChangeBio />
         // } else if (settingsPage == 'ChangeGender') {
         //     return <ChangeGender />

@@ -5,9 +5,7 @@ import ResetSuccess from '../ResetSuccess';
 const useResetPassword = () => {
   
     const [step, setStep] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [generalError, setGeneralError] = useState(null); 
-
+    
     const nextStep = () => {
         setStep(step + 1);
     }

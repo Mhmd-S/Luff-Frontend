@@ -9,11 +9,11 @@ const useRegistration = () => {
     const renderStage = () => {
 
         switch (registrationStage) {
-            case 1:
+            case 0:
                 return <Step1Email />;
-            case 2:
+            case 1:
                 return <Step2EmailVerification />;
-            case 3:
+            case 2  :
                 return <Step3RegistrationComplete />;
             default:
                 return <Step1Email />;

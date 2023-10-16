@@ -1,15 +1,19 @@
 import { validateImage } from '../../../utils/ImageValidation';
 import { useEffect, useState } from 'react'
 
-const useFileUploadField = ({ 
+const useFileEditField = ({ 
         name, 
         setError, 
-         resetField, 
-         ...inputProps 
+        resetField, 
+        usersPicture,
     }) => {
     
-    const [imageFile, setImageFile] = useState(inputProps.defaultValue);
+    const [imageFile, setImageFile] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false);
+
+    useEffect(()=>{
+        setImageFile(usersPicture);
+    },[usersPicture])
 
     const handleFileChange = async (event) => {
       setIsLoading(true);
@@ -30,7 +34,7 @@ const useFileUploadField = ({
       setIsLoading(false);
     };
   
-    const handleRemoveImage = () => {
+    const handleEditImage = () => {
       resetField(`${name}`);
       setImageFile(null);
     };
@@ -38,9 +42,9 @@ const useFileUploadField = ({
     return {
       imageFile,
       isLoading,
-      handleFileChange,
-      handleRemoveImage
+      handleEditImage,
+      handleFileChange
     }
 }
 
-export default useFileUploadField
+export default useFileEditField

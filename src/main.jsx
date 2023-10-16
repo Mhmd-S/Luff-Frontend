@@ -12,7 +12,7 @@ import HomePage from './pages/HomePage';
 import Root from './pages/Root';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import RequestResetPasswordPage from './pages/RequestResetPasswordPage';
-import SettingsPage from './pages/SettingsPage';
+import Settings from './components/settings/Settings';
 
 // Loaders
 const router = createBrowserRouter([
@@ -24,6 +24,11 @@ const router = createBrowserRouter([
       {
         path: 'home',
         element: <HomePage />,
+      },
+      {
+        path: '/settings',
+        element: <Settings />,
+        errorElement: <ErrorPage />,
       },
       // {
       //   path: 'messages',
@@ -50,11 +55,6 @@ const router = createBrowserRouter([
   {
     path: '/onboarding',
     element: <OnboardingPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/settings',
-    element: <SettingsPage />,
     errorElement: <ErrorPage />,
   },
   {

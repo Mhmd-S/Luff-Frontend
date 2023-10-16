@@ -2,6 +2,7 @@ import useVerifyEmail from './hooks/useVerifyEmail';
 import FormField from '../common/FormField';
 import FormButton from '../common/FormButton';
 import InitialForm from '../common/InitialForm';
+import FormGeneralError from '../common/FormGeneralError';
 
 const Step2EmailVerification = () => {
 
@@ -10,6 +11,7 @@ const Step2EmailVerification = () => {
     handleSubmit, 
     register, 
     loading,
+    generalError,
     errors
    } = useVerifyEmail();
 
@@ -24,6 +26,8 @@ const Step2EmailVerification = () => {
           Please enter the 6 digit code we sent you!
         </h3>
       </div>
+
+      <FormGeneralError message={generalError} />
         
       <FormField
         label='Code'

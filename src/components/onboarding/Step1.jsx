@@ -24,7 +24,7 @@ const Step1 = ({ nextStep }) => {
 
 
   return (
-    <div className='h-4/5 md:h-full'>
+    <div className='h-4/5 w-full px-4 md:h-full'>
       <InitialForm onSubmit={handleSubmit(onSubmit)}>
 
         <h1 className='text-3xl font-bold text-grey-900'>

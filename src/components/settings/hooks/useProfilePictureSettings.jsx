@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { userAPI } from '../../../api/userAPI';
+import { useAuth } from '../../../contexts/useAuthContext';
 
-const useChangePassword = (nextStep) => {
+const useProfilePicutreSettings = (nextStep) => {
 
     const [ generalError, setGeneralError ] = useState('');
     const [ loading, setLoading ] = useState(false);
+
+    const { user } = useAuth();
 
     const { 
         register, 
@@ -39,10 +42,11 @@ const useChangePassword = (nextStep) => {
         register, 
         handleSubmit, 
         onSubmit,
+        user,
         loading,
         generalError, 
         errors 
     }
 }
 
-export default useChangePassword;
+export default useProfilePicutreSettings;

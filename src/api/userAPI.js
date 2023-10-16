@@ -109,11 +109,13 @@ export const userAPI = {
         })
         return response;
     },
-    uploadProfilePicture: async (file) => {
+    uploadProfilePicture: async (file, picNum) => {
 
         const formData = new FormData();
 
         formData.append('profilePicture', file);
+
+        formData.append('picNum', picNum);
 
         // Send the form data to the API endpoint
         const response = await api.request({

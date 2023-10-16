@@ -1,27 +1,26 @@
 import FormFieldError from './FormFieldError';
 import AddIcon from '../icons/AddIcon';
-import RemoveIcon from '../icons/RemoveIcon';
 import LoadingIcon from '../icons/LoadingIcon';
-import useFileUploadField from './hooks/useFileUploadField';
+import useFileEditField from './hooks/useFileEditField';
+import EditIcon from '../icons/EditIcon';
 
-const FileUploadField = ({
+const FileEditField = ({
   name,
   register,
   errors,
   setError,
   validationRules,
-  defaultValue,
+  usersPicture,
   placeholder,
   resetField,
-  ...inputProps
 }) => {
 
   const { 
     imageFile, 
     isLoading, 
     handleFileChange, 
-    handleRemoveImage 
-  } = useFileUploadField({ name, setError, resetField, ...inputProps });
+    handleEditImage 
+  } = useFileEditField({ name, setError, usersPicture, resetField });
 
   return (
     <div className={`h-full w-full relative flex justify-center items-center border-2 rounded-sm bg-slate-100  ${errors[name] && 'border-2 border-pink-600'}`}>
@@ -39,8 +38,19 @@ const FileUploadField = ({
       {/* The remove button for an image */}
       {imageFile && 
         <>
-          <RemoveIcon color='red' handleClick={handleRemoveImage} />
-          <img className='w-full' src={URL.createObjectURL(imageFile)} alt='Preview' />
+            <div className='right-[-5%] top-[-5%] absolute cursor-pointer rounded-xl bg-slate-300'>
+                <EditIcon color='black' onClick={handleEditImage} />
+                <input
+                    type='file'
+                    name={name}
+                    placeholder={placeholder}
+                    accept='image/png, image/jpeg'
+                    {...register(name, validationRules)}
+                    onInput={handleFileChange}
+                    className={`opacity-0 w-full h-full absolute`}
+                />
+            </div>
+            <img className='w-full' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
         </> 
       }
 
@@ -48,9 +58,8 @@ const FileUploadField = ({
         type='file'
         name={name}
         placeholder={placeholder}
-        accept='image/png, image/gif, image/jpeg'
+        accept='image/png, image/jpeg'
         {...register(name, validationRules)}
-        {...inputProps}
         onInput={handleFileChange}
         className={`opacity-0 absolute w-full h-full ${imageFile && 'hidden'}`}
       />
@@ -59,4 +68,4 @@ const FileUploadField = ({
   );
 };
 
-export default FileUploadField;
+export default FileEditField;

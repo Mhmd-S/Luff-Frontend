@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { userAPI } from '../../../api/userAPI';
 import useRegistrationContext from '../context/useRegistrationContext';
 import { useForm  } from 'react-hook-form';
 
 const useVerifyEmail = () => {
+
+    const [ generalError, setGeneralError ] = useState('');
 
     const { 
         register, 
@@ -13,6 +16,7 @@ const useVerifyEmail = () => {
     const { 
         goNextStage, 
         userInfo, 
+        loading,
         setLoading,
         } = useRegistrationContext();
 
@@ -31,6 +35,9 @@ const useVerifyEmail = () => {
             .then(()=> {
                 goNextStage();
             });
+        } else {
+            console.log(response)
+            setGeneralError(response.data.message?.code || response.data.message);
         }
     }
 
@@ -38,7 +45,9 @@ const useVerifyEmail = () => {
             onSubmit, 
             handleSubmit, 
             register, 
-            errors 
+            loading,
+            generalError,
+            errors,
         };
 }
 

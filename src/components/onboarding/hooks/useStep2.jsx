@@ -22,11 +22,11 @@ const useStep2 = ( nextStep ) => {
         try {
             setLoading(true);
 
-            let picsPromises = pics.map(async(pic) => {
+            let picsPromises = pics.map(async(pic, index) => {
                 
                 if ( pic.length === 0) return;
 
-                return await userAPI.uploadProfilePicture(pic[0]);
+                return await userAPI.uploadProfilePicture(pic[0], index);
             });
             
             await Promise.all(picsPromises);
