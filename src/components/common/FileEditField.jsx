@@ -11,7 +11,6 @@ const FileEditField = ({
   setError,
   validationRules,
   usersPicture,
-  placeholder,
   resetField,
 }) => {
 
@@ -43,26 +42,26 @@ const FileEditField = ({
                 <input
                     type='file'
                     name={name}
-                    placeholder={placeholder}
                     accept='image/png, image/jpeg'
                     {...register(name, validationRules)}
                     onInput={handleFileChange}
                     className={`opacity-0 w-full h-full absolute`}
                 />
             </div>
-            <img className='w-full' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
+            <img className='w-full relative' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
         </> 
       }
 
+      { !imageFile && 
       <input
         type='file'
         name={name}
-        placeholder={placeholder}
         accept='image/png, image/jpeg'
         {...register(name, validationRules)}
         onInput={handleFileChange}
-        className={`opacity-0 absolute w-full h-full ${imageFile && 'hidden'}`}
+        className={`opacity-0 absolute w-full h-full`}
       />
+      }
 
     </div>
   );

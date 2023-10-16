@@ -9,7 +9,7 @@ const useOnboarding = () => {
 
     const navigate = useNavigate();
 
-    const [ step, setStep ] = useState(1);
+    const [ step, setStep ] = useState(0);
 
     const { user, loading } = useAuth();
 
@@ -17,12 +17,12 @@ const useOnboarding = () => {
         if (!user) {
             // User is not authenticated, redirect to login
             navigate('/login');
-        } else if (user.onboardStep == 4) {
+        } else if (user.onboardStep == 2) {
             // User is already on step 2, onboarding completed, redirect to dashboard
             navigate('/dashboard');
         } else {
             // Set the step to user's onboardStep, 0 is default.
-            setStep(1);
+            setStep(user.onboardStep);
         }
     }, [user, loading]);
     

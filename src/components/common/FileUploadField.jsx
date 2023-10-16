@@ -10,8 +10,7 @@ const FileUploadField = ({
   errors,
   setError,
   validationRules,
-  defaultValue,
-  placeholder,
+  usersPicture,
   resetField,
   ...inputProps
 }) => {
@@ -21,7 +20,7 @@ const FileUploadField = ({
     isLoading, 
     handleFileChange, 
     handleRemoveImage 
-  } = useFileUploadField({ name, setError, resetField, ...inputProps });
+  } = useFileUploadField({ name, setError, resetField, usersPicture });
 
   return (
     <div className={`h-full w-full relative flex justify-center items-center border-2 rounded-sm bg-slate-100  ${errors[name] && 'border-2 border-pink-600'}`}>
@@ -39,15 +38,14 @@ const FileUploadField = ({
       {/* The remove button for an image */}
       {imageFile && 
         <>
-          <RemoveIcon color='red' handleClick={handleRemoveImage} />
-          <img className='w-full' src={URL.createObjectURL(imageFile)} alt='Preview' />
+          <RemoveIcon color='red' handleClick={()=>{inputProps?.handleDeleteImage();handleRemoveImage() }} />
+          <img className='w-full relative' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
         </> 
       }
 
       <input
         type='file'
         name={name}
-        placeholder={placeholder}
         accept='image/png, image/gif, image/jpeg'
         {...register(name, validationRules)}
         {...inputProps}

@@ -5,14 +5,13 @@ import FormGeneralError from '../common/FormGeneralError'
 import useProfilePicutreSettings from './hooks/useProfilePictureSettings'
 import FileEditField from '../common/FileEditField'
 
-// The validation is not working properly.
-
 const ProfilePictureSettings = () => {
 
     const { 
         register, 
         handleSubmit, 
-        onSubmit, 
+        onSubmit,
+        handleDeleteImage, 
         user,
         resetField,
         setError,
@@ -20,8 +19,6 @@ const ProfilePictureSettings = () => {
         loading,
         errors 
     } = useProfilePicutreSettings();
-
-    console.log(user);
 
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)}>
@@ -45,10 +42,7 @@ const ProfilePictureSettings = () => {
                 errors={errors}
                 resetField={resetField}
                 setError={setError}
-                validationRules={{
-                    required: 'Profile Picture is required',
-                }}
-                usersPicture={user.profilePicutres[0]}
+                usersPicture={user.profilePictures[0]}
                 />
 
             <FileEditField 
@@ -58,10 +52,7 @@ const ProfilePictureSettings = () => {
                 errors={errors}
                 resetField={resetField}
                 setError={setError}
-                validationRules={{
-                    required: 'Profile Picture is required',
-                }}
-                usersPicture={user.profilePicutres[0]}
+                usersPicture={user.profilePictures[1]}
                 />
 
             <FileEditField 
@@ -71,10 +62,7 @@ const ProfilePictureSettings = () => {
                 errors={errors}
                 resetField={resetField}
                 setError={setError}
-                validationRules={{
-                    required: 'Profile Picture is required',
-                }}
-                usersPicture={user.profilePicutres[0]}
+                usersPicture={user.profilePictures[2]}
                 />
 
             <FileUploadField 
@@ -84,6 +72,8 @@ const ProfilePictureSettings = () => {
                 resetField={resetField}
                 setError={setError}
                 errors={errors}
+                usersPicture={user.profilePictures[3]}
+                handleDeleteImage={()=>handleDeleteImage(3)}
                 />
 
             <FileUploadField 
@@ -93,6 +83,8 @@ const ProfilePictureSettings = () => {
                 resetField={resetField}
                 setError={setError}
                 errors={errors}
+                usersPicture={user.profilePictures[4]}
+                handleDeleteImage={()=>handleDeleteImage(4)}
                 />
 
             <FileUploadField 
@@ -102,6 +94,8 @@ const ProfilePictureSettings = () => {
                 errors={errors}
                 resetField={resetField}
                 setError={setError}
+                usersPicture={user.profilePictures[5]}
+                handleDeleteImage={()=>handleDeleteImage(5)}
                 />
         </div>
 

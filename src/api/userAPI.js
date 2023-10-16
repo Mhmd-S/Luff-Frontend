@@ -129,6 +129,16 @@ export const userAPI = {
 
         return response;
     },
+    deleteProfilePicture: async (picNum) => {
+        const response = await api.request({
+            method: 'DELETE',
+            url: '/user/delete-profile-pic',
+            data: {
+                picNum: picNum,
+            }
+        })
+        return response;
+    },
     onboardNext: async () => {
         const response = await api.request({
             method: 'PUT',

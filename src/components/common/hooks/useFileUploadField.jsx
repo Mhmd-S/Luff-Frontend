@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 const useFileUploadField = ({ 
         name, 
         setError, 
-         resetField, 
-         ...inputProps 
+        resetField, 
+        usersPicture
     }) => {
     
-    const [imageFile, setImageFile] = useState(inputProps.defaultValue);
+    const [ imageFile, setImageFile ] = useState(usersPicture);
     const [ isLoading, setIsLoading ] = useState(false);
 
     const handleFileChange = async (event) => {
@@ -31,7 +31,7 @@ const useFileUploadField = ({
     };
   
     const handleRemoveImage = () => {
-      resetField(`${name}`);
+      resetField(`${name}`, { defaultValue: '' }); // Not optimal, but it works
       setImageFile(null);
     };
 
