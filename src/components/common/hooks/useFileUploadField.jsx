@@ -9,10 +9,10 @@ const useFileUploadField = ({
     }) => {
     
     const [ imageFile, setImageFile ] = useState(usersPicture);
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(true);
 
     const handleFileChange = async (event) => {
-      setIsLoading(true);
+      setLoading(true);
       const selectedFile = event.target.files[0];
 
       if (selectedFile) {
@@ -21,13 +21,13 @@ const useFileUploadField = ({
         
         if (!result.valid) {
           setError(`${name}`, { type: 'manual', message: result.message });
-          setIsLoading(false);
+          setLoading(false);
           return;
         }
 
         setImageFile(selectedFile);
       }
-      setIsLoading(false);
+      setLoading(false);
     };
   
     const handleRemoveImage = () => {
@@ -37,7 +37,7 @@ const useFileUploadField = ({
 
     return {
       imageFile,
-      isLoading,
+      loading,
       handleFileChange,
       handleRemoveImage
     }

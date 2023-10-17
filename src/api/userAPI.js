@@ -12,6 +12,13 @@ export const userAPI = {
             })
             return response;
     },
+    getSelf: async () => {
+        const response = await api.request({
+            method: 'GET',
+            url: '/user/get-self',
+        })
+        return response;
+    },
     verifyCode: async (email, code) => {
         const response = await api.request({
             method: 'POST',

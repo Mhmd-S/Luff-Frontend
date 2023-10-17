@@ -38,8 +38,10 @@ const FileUploadField = ({
       {/* The remove button for an image */}
       {imageFile && 
         <>
-          <RemoveIcon color='red' handleClick={()=>{inputProps?.handleDeleteImage();handleRemoveImage() }} />
-          <img className='w-full relative' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
+          <div className='z-10'>
+            <RemoveIcon color='red' handleClick={()=>{inputProps?.handleDeleteImage();handleRemoveImage() }} />
+          </div>
+          <img className='w-full h-full object-cover relative' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
         </> 
       }
 
@@ -48,7 +50,6 @@ const FileUploadField = ({
         name={name}
         accept='image/png, image/gif, image/jpeg'
         {...register(name, validationRules)}
-        {...inputProps}
         onInput={handleFileChange}
         className={`opacity-0 absolute w-full h-full ${imageFile && 'hidden'}`}
       />

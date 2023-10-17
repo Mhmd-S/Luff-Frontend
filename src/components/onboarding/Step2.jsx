@@ -20,7 +20,7 @@ const Step2 = ({ nextStep }) => {
     } = useStep2( nextStep );
 
   return (
-    <InitialForm onSubmit={handleSubmit(onSubmit)}>
+    <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
         
         <h1 className='text-3xl font-bold text-grey-900'>
             Add Photos
@@ -98,7 +98,7 @@ const Step2 = ({ nextStep }) => {
                 />
         </div>
 
-        <FormButton loading={loading} text='Complete Profile' />
+        <FormButton text='Complete Profile' />
 
     </InitialForm>
   )

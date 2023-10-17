@@ -22,10 +22,15 @@ const Step1 = ({ nextStep }) => {
     { value: 'female', label: 'Female' },
   ];
 
+  const viewOptions = [
+    { value: 'men', label: 'Men' },
+    { value: 'women', label: 'Women' },
+  ];
+
 
   return (
     <div className='h-4/5 w-full px-4 md:h-full'>
-      <InitialForm onSubmit={handleSubmit(onSubmit)}>
+      <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
 
         <h1 className='text-3xl font-bold text-grey-900'>
           Complete Your Profile
@@ -96,15 +101,15 @@ const Step1 = ({ nextStep }) => {
             errors={errors}
             register={register}
             options={genderOptions} />
-{/* 
+
           <RadioGroup 
-            label='Personal Orientaion' 
+            label='Looking for' 
             name='orientation'
             errors={errors}
             register={register}
-            options={genderOptions} /> */}
+            options={viewOptions} />
 
-        <FormButton text='Next Step' loading={loading} />
+        <FormButton text='Next Step'/>
 
       </InitialForm>
     </div>

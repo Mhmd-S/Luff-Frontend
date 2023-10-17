@@ -8,15 +8,15 @@ const useFileEditField = ({
         usersPicture,
     }) => {
     
-    const [imageFile, setImageFile] = useState(null);
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [ imageFile, setImageFile ] = useState(null);
+    const [ loading, setLoading ] = useState(true);
 
     useEffect(()=>{
         setImageFile(usersPicture);
     },[usersPicture])
 
     const handleFileChange = async (event) => {
-      setIsLoading(true);
+      setLoading(true);
       const selectedFile = event.target.files[0];
 
       if (selectedFile) {
@@ -25,13 +25,13 @@ const useFileEditField = ({
         
         if (!result.valid) {
           setError(`${name}`, { type: 'manual', message: result.message });
-          setIsLoading(false);
+          setLoading(false);
           return;
         }
 
         setImageFile(selectedFile);
       }
-      setIsLoading(false);
+      setLoading(false);
     };
   
     const handleEditImage = () => {
@@ -41,7 +41,7 @@ const useFileEditField = ({
 
     return {
       imageFile,
-      isLoading,
+      loading,
       handleEditImage,
       handleFileChange
     }

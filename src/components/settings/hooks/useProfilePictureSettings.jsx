@@ -5,7 +5,7 @@ import { useAuth } from '../../../contexts/useAuthContext';
 
 const useProfilePicutreSettings = () => {
 
-    const { user } = useAuth();
+    const { user, getUserInfo } = useAuth();
     const [ generalError, setGeneralError ] = useState('');
     const [ loading, setLoading ] = useState(false);
     const [ usersImages, setUsersImages ] = useState({});
@@ -56,7 +56,13 @@ const useProfilePicutreSettings = () => {
                 return await userAPI.uploadProfilePicture(pic[0], index);
             });
             
-            await Promise.all(picsPromises);
+            const uploadResults = await Promise.all(picsPromises);
+
+            if (uploadResults.some(res => res)) {
+                // Check if any of the promises succeeded, then update the user
+                await getUserInfo();
+            }
+
         } catch(err) {
             setGeneralError(err.message);
         }

@@ -1,12 +1,8 @@
 import React from 'react'
 
-const LoadingIcon = ({ color }) => {
+const LoadingIcon = () => {
   return (
-    <div className='w-full h-full flex justify-center items-center'>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 36 36" strokeWidth={1.5} stroke={color ? color : "currentColor"} className="w-6 h-6 animate-spin">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-        </svg>
-    </div>
+    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" rx="1" width="10" height="10"><animate id="spinner_FFyM" begin="0;spinner_HDCY.end" attributeName="x" dur="0.2s" values="1;13" fill="freeze"/><animate id="spinner_AIvE" begin="spinner_1FwE.end" attributeName="y" dur="0.2s" values="1;13" fill="freeze"/><animate id="spinner_wWCL" begin="spinner_gH4o.end" attributeName="x" dur="0.2s" values="13;1" fill="freeze"/><animate id="spinner_S3Gg" begin="spinner_Q0bx.end" attributeName="y" dur="0.2s" values="13;1" fill="freeze"/></rect><rect x="1" y="13" rx="1" width="10" height="10"><animate id="spinner_1FwE" begin="spinner_FFyM.end" attributeName="y" dur="0.2s" values="13;1" fill="freeze"/><animate id="spinner_gH4o" begin="spinner_AIvE.end" attributeName="x" dur="0.2s" values="1;13" fill="freeze"/><animate id="spinner_Q0bx" begin="spinner_wWCL.end" attributeName="y" dur="0.2s" values="1;13" fill="freeze"/><animate id="spinner_HDCY" begin="spinner_S3Gg.end" attributeName="x" dur="0.2s" values="13;1" fill="freeze"/></rect></svg>
   )
 }
 
