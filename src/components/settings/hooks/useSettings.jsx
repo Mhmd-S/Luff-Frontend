@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import ProfilePictureSettings from '../ProfilePictureSettings';
+import ProfilePictureSettings from '../ChnageProfilePicture';
+import ChangeBio from '../ChangeBio';
+import ChangeGender from '../ChangeGender';
+import ChangeOrientation from '../ChangeOrientation';
 
 const useSettings = () => {
 
@@ -14,18 +17,18 @@ const useSettings = () => {
     }
 
     const displaySettingsPage = () => {
-        if (settingsPage == 'ChangeProfilePicture') {
-            return <ProfilePictureSettings />
-        } 
-        // else if (settingsPage == 'ChangeBio') {
-        //     return <ChangeBio />
-        // } else if (settingsPage == 'ChangeGender') {
-        //     return <ChangeGender />
-        // } else if (settingsPage == 'HelpAndSupport') {
-        //     return <HelpAndSupport />
-        // } else {
-        //     return <SettingsMenu handleClick={handleClick} />
-        // }
+        switch (settingsPage) {
+            case 'ChangeProfilePicture':
+                return <ProfilePictureSettings handleGoBack={()=>handleClick('')} />;
+            case 'ChangeBio':
+                return <ChangeBio handleGoBack={()=>handleClick('')} />;
+            case 'ChangeGender':
+                return <ChangeGender handleGoBack={()=>handleClick('')} />;
+            case 'ChangeOrientation':
+                return <ChangeOrientation handleGoBack={()=>handleClick('')} />;
+            default:
+                return null;
+        }
     }
 
     return {

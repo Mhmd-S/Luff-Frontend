@@ -5,7 +5,7 @@ import FormGeneralError from '../common/FormGeneralError'
 import useProfilePicutreSettings from './hooks/useProfilePictureSettings'
 import FileEditField from '../common/FileEditField'
 
-const ProfilePictureSettings = () => {
+const ProfilePictureSettings = ({ handleGoBack }) => {
 
     const { 
         register, 
@@ -23,7 +23,7 @@ const ProfilePictureSettings = () => {
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
         
-        <span className='w-full text-xl pl-4'>
+        <span className='w-full text-xl pl-4' onClick={handleGoBack}>
             Back
         </span>
         

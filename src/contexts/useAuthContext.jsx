@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const getUserInfo = async () => { // If the user is authenticated gets his info
     try {
       const isAuth = await userAPI.checkAuthStatus();
-      if (isAuth) {
+      if (isAuth.data.status == 'success') {
         const user = await userAPI.getSelf();
         setUser(user.data.data);
       }
