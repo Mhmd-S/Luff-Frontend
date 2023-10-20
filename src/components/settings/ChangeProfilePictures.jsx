@@ -5,7 +5,7 @@ import FormGeneralError from '../common/FormGeneralError'
 import useProfilePicutreSettings from './hooks/useProfilePictureSettings'
 import FileEditField from '../common/FileEditField'
 
-const ProfilePictureSettings = ({ handleGoBack }) => {
+const ChangeProfilePictures = ({ handleGoBack }) => {
 
     const { 
         register, 
@@ -27,7 +27,7 @@ const ProfilePictureSettings = ({ handleGoBack }) => {
             Back
         </span>
         
-        <h1 className='text-3xl w-full text-center font-bold text-grey-900'>
+        <h1 className='text-xl w-full text-center font-semibold text-grey-900'>
             Edit Profile Pictures
         </h1>
         
@@ -105,4 +105,4 @@ const ProfilePictureSettings = ({ handleGoBack }) => {
   )
 }
 
-export default ProfilePictureSettings
+export default ChangeProfilePictures

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ProfilePictureSettings from '../ChnageProfilePicture';
+import ChangeProfilePictures from '../ChangeProfilePictures';
 import ChangeBio from '../ChangeBio';
 import ChangeGender from '../ChangeGender';
 import ChangeOrientation from '../ChangeOrientation';
@@ -19,7 +19,7 @@ const useSettings = () => {
     const displaySettingsPage = () => {
         switch (settingsPage) {
             case 'ChangeProfilePicture':
-                return <ProfilePictureSettings handleGoBack={()=>handleClick('')} />;
+                return <ChangeProfilePictures handleGoBack={()=>handleClick('')} />;
             case 'ChangeBio':
                 return <ChangeBio handleGoBack={()=>handleClick('')} />;
             case 'ChangeGender':

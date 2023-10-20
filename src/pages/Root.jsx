@@ -6,7 +6,7 @@ import DiscoverIcon from "../components/icons/DiscoverIcon";
 
 const Root = () => {
   return (
-    <div className='w-screen h-screen grid grid-rows-[90%_10%] md:grid-rows-2 grid-cols-1 md:grid-cols-[10%_90%] items-center'>
+    <div className='w-screen h-screen grid grid-rows-[90%_10%] grid-cols-1 md:grid-cols-[10%_90%] md:grid-rows-1 items-center'>
 
         {/* <ul className='w-full px-4 h-max flex flex-row justify-between items-center md:hidden'>
             <li>

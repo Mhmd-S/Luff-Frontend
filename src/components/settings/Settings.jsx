@@ -1,6 +1,10 @@
 import FormButton from '../common/FormButton'
 import SettingsMenu from './SettingsMenu'
 import useSettings from './hooks/useSettings'
+import ChangeProfilePictures from './ChangeProfilePictures';
+import ChangeBio from './ChangeBio';
+import ChangeGender from './ChangeGender';
+import ChangeOrientation from './ChangeOrientation';
 
 const Settings = () => {
 
@@ -10,31 +14,52 @@ const Settings = () => {
         } = useSettings();
 
   return (
-    <>
+      <div className='w-full h-full flex flex-col items-center overflow-y-scroll'>
 
-      <div className={`w-full h-full ${settingsPage && 'hidden md:block md:w-1/3'}`}>
+        <h1 className='w-2/3 pt-10 font-bold text-4xl'>
+          Settings
+        </h1>
+        
+        <ul className={`w-full flex flex-col items-center h-full ${settingsPage && 'hidden'} [&>li]:my-6 [&>li]:rounded-md [&>li]:border-[1px] [&>li]:w-full [&>li]:md:w-2/3 `}>
 
-        <div className="w-full p-5 flex flex-col border-b-2 bg-[#fafafa]">
+          <li className='w-full h-full border-b-[1px]' onClick={()=>handleClick('ChangeProfilePicture')}>
 
-          <h1 className="text-4xl text-center font-semibold">
-            Settings
-          </h1>
+            <div className='w-full p-4 border-b-[1px]'>
 
-          <h3 className="text-xl py-6 text-center text-sky-500 underline">
-            View an edit information related to your account.
-          </h3>
+              <p className='text-2xl w-full font-bold text-grey-900'>
+                Change Profile Picture
+              </p>
+              
+              <p className='py-2'>
+                Modify your profile pictures, or add new ones.
+              </p>
+            
+            </div>
+            
+            <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4'>
+              <button onClick={()=>handleClick('changeProfilePictures')} className='w-fit h-fit text-sm py-2 px-3 bg-slate-900 text-white rounded-lg'>
+                Modify Profile Pictures
+              </button>
+            </div>
 
-        </div>
+          </li>
+          
+          <li>
+            <ChangeBio />
+          </li>
+          
+          <li>
+            <ChangeGender />
+          </li>
 
-        <SettingsMenu settingsPage={settingsPage} handleClick={handleClick} />
-
-      </div>
-
-      <div className='w-full h-full md:w-2/3 p-4'>
+          <li>
+            <ChangeOrientation />
+          </li>
+        </ul>
+        
         {displaySettingsPage()}
       </div>
-
-    </>
+  
   )
 }
 
