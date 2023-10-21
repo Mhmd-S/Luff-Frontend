@@ -10,10 +10,23 @@ export default {
         "Inter": ['Inter', 'sans-serif']
     },
     keyframes: {
-      animatedgradient: {
-        '0%': { backgroundPosition: '0% 50%' },
-        '50%': { backgroundPosition: '100% 50%' },
-        '100%': { backgroundPosition: '0% 50%' },
+      wiggle: {
+        '0%': {
+          boxShadow: '0px 0px 30px 5px rgba(239, 68, 68)',
+          border: '2px solid rgb(239, 68, 68)'
+        },
+        '25%': {
+          boxShadow: '0px 0px 30px 5px rgba(168, 85, 247)',
+          border: '2px solid rgb(168, 85, 247)'
+        },
+        '75%': {
+          boxShadow: '0px 0px 30px 5px rgba(34, 197, 94)',
+          border: '2px solid rgb(34, 197, 94)'
+        },
+        '100%': {
+          boxShadow: '0px 0px 30px 5px rgba(239, 68, 68)',
+          border: '2px solid rgb(239, 68, 68)'
+        },
       },
     },
     backgroundSize: {

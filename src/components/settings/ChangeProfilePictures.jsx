@@ -4,6 +4,7 @@ import FormButton from '../common/FormButton'
 import FormGeneralError from '../common/FormGeneralError'
 import useProfilePicutreSettings from './hooks/useProfilePictureSettings'
 import FileEditField from '../common/FileEditField'
+import BackIcon from '../icons/BackIcon'
 
 const ChangeProfilePictures = ({ handleGoBack }) => {
 
@@ -23,8 +24,8 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
         
-        <span className='w-full text-xl pl-4' onClick={handleGoBack}>
-            Back
+        <span className='w-full text-xl pt-4 pl-4' onClick={handleGoBack}>
+            <BackIcon/>
         </span>
         
         <h1 className='text-xl w-full text-center font-semibold text-grey-900'>
@@ -34,6 +35,7 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
         <FormGeneralError error={generalError} />
         
         <div className={`w-full h-[80%] p-2 grid grid-cols-[40%_40%] grid-rows-3 justify-center items-center place-items-center gap-6 md:w-3/5 md:grid-cols-[20%_20%_20%] md:grid-rows-2`}>
+            
             
             <FileEditField 
                 type='file' 

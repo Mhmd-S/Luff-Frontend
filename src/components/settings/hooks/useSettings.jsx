@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ChangeProfilePictures from '../ChangeProfilePictures';
 import ChangeBio from '../ChangeBio';
 import ChangeGender from '../ChangeGender';
 import ChangeOrientation from '../ChangeOrientation';
+import { useAuth } from '../../../contexts/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const useSettings = () => {
 
+    const navigate = useNavigate();
+
     const [settingsPage, setSettingsPage] = useState('');
+
+    const { user } = useAuth();
+
+    useEffect(()=>{
+        if (!user) {
+            navigate('login');
+        }
+    },[])
 
     const handleClick = (settingsName) => { 
         setSettingsPage(settingsName);

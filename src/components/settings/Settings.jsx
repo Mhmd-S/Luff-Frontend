@@ -14,13 +14,18 @@ const Settings = () => {
         } = useSettings();
 
   return (
-      <div className='w-full h-full flex flex-col items-center overflow-y-scroll'>
+      <div className='w-full h-full flex flex-col items-center overflow-y-scroll p-4'>
 
-        <h1 className='w-2/3 pt-10 font-bold text-4xl'>
-          Settings
-        </h1>
-        
-        <ul className={`w-full flex flex-col items-center h-full ${settingsPage && 'hidden'} [&>li]:my-6 [&>li]:rounded-md [&>li]:border-[1px] [&>li]:w-full [&>li]:md:w-2/3 `}>
+        <ul className={`w-full flex px-4 flex-col items-center h-full ${settingsPage && 'hidden'} [&>li]:my-6 [&>li]:rounded-md [&>li]:border-[1px] [&>li]:w-full [&>li]:md:w-2/3 `}>
+
+          <li className='flex p-8 bg-[#fafafa] flex-col items-center'>
+            <h1 className='w-full font-bold text-4xl'>
+              Settings
+            </h1>
+            <p className='w-full'>
+              Modify your profile settings.
+            </p>
+          </li>
 
           <li className='w-full h-full border-b-[1px]' onClick={()=>handleClick('ChangeProfilePicture')}>
 

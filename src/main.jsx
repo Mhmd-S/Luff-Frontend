@@ -13,6 +13,7 @@ import Root from './pages/Root';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import RequestResetPasswordPage from './pages/RequestResetPasswordPage';
 import Settings from './components/settings/Settings';
+import Landing from './pages/Landing';
 
 // Loaders
 const router = createBrowserRouter([
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
       //   errorElement: <ErrorPage />,
       // },
     ]
+  },
+  {
+    path: '/welcome',
+    element: <Landing />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/login',

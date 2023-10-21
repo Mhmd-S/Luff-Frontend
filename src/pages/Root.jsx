@@ -6,22 +6,14 @@ import DiscoverIcon from "../components/icons/DiscoverIcon";
 
 const Root = () => {
   return (
-    <div className='w-screen h-screen grid grid-rows-[90%_10%] grid-cols-1 md:grid-cols-[10%_90%] md:grid-rows-1 items-center'>
+    <div className='w-screen h-screen grid relative grid-cols-1 md:grid-cols-[10%_90%] md:grid-rows-1 items-center'>
 
-        {/* <ul className='w-full px-4 h-max flex flex-row justify-between items-center md:hidden'>
-            <li>
-                Logo
-            </li>
-            <li>
-                <SettingsIcon/>
-            </li>
-        </ul> */}
         
         <div className="md:order-2 w-full h-full">
             <Outlet />
         </div>
 
-        <ul className='w-full h-max flex flex-row md:flex-col justify-evenly items-center md:order-1'>
+        <ul className='w-full md:h-full sticky py-3 border-t-[1px] border-gray-400 bottom-0 bg-[#ffffffc3] flex flex-row justify-evenly items-center md:order-1 md:flex-col md:border-r-[1px] md:border-t-0'>
             
             <li className="hidden md:inline">
                 Logo

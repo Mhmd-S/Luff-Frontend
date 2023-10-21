@@ -4,7 +4,7 @@ import { RegistrationProvider } from '../components/registration/context/useRegi
 
 const RegistrationPage = () => {
   return (
-    <div className='w-screen h-screen flex flex-col justify-center items-center relative font-Inter'>
+    <div className='w-screen h-screen px-6 flex flex-col justify-center items-center relative font-Inter'>
       
       <div className='absolute inset-0 bg-[url(/beams-home@95.jpg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(0,0,0,0.5))]'>
       </div>
