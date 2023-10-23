@@ -58,10 +58,16 @@ const LoginForm = () => {
 
         <FormButton text='Log In' loading={loading}/> 
 
-        <div className='w-full text-center pt-2'>
+        <div className='w-full text-center pt-2 flex flex-col'>
           <span>Don't have an account? </span> 
           <Link to='/registration' className='text-center text-sky-500 hover:text-sky-600'>Register here</Link>
         </div>
+
+        <div className='w-full text-center pt-2 flex flex-col'>
+          <span>Forgot your password? </span> 
+          <Link to='/request-reset-password' className='text-center text-sky-500 hover:text-sky-600'>Reset password</Link>
+        </div>
+
 
       </InitialForm>
   )

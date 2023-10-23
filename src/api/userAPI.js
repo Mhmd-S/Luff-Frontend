@@ -5,7 +5,7 @@ export const userAPI = {
     sendVerificationCode: async (email) => {
             const response = await api.request({
                 method: 'POST',
-                url: '/user/verify-email',
+                url: '/registration/verify-email',
                 data: {
                     email: email,
                 }
@@ -22,7 +22,7 @@ export const userAPI = {
     verifyCode: async (email, code) => {
         const response = await api.request({
             method: 'POST',
-            url: '/user/verify-code',
+            url: '/registration/verify-code',
             data: {
                 email: email,
                 code: code,
@@ -33,7 +33,7 @@ export const userAPI = {
     registerUser: async (email, password) => {
         const response = await api.request({
             method: 'POST',
-            url: '/user/register',
+            url: '/registration/register',
             data: {
                 email: email,
                 password: password,
@@ -156,7 +156,7 @@ export const userAPI = {
     requestResetPassword: async (email) => {
         const response = await api.request({
             method: 'POST',
-            url: '/user/request-reset-password',
+            url: '/reset/request-reset-password',
             data: {
                 email: email,
             }
@@ -166,7 +166,7 @@ export const userAPI = {
     resetPassword: async (token, userId, password) => {
         const response = await api.request({
             method: 'POST',
-            url: '/user/reset-password',
+            url: '/reset/reset-password',
             params: {
                 token: token,
                 id: userId,

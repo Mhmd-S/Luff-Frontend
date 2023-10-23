@@ -11,6 +11,7 @@ const Settings = () => {
   const { settingsPage, 
           handleClick, 
           displaySettingsPage, 
+          logout,
         } = useSettings();
 
   return (
@@ -27,7 +28,7 @@ const Settings = () => {
             </p>
           </li>
 
-          <li className='w-full h-full border-b-[1px]' onClick={()=>handleClick('ChangeProfilePicture')}>
+          <li className='w-full h-full border-b-[1px]'>
 
             <div className='w-full p-4 border-b-[1px]'>
 
@@ -42,7 +43,7 @@ const Settings = () => {
             </div>
             
             <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4'>
-              <button onClick={()=>handleClick('changeProfilePictures')} className='w-fit h-fit text-sm py-2 px-3 bg-slate-900 text-white rounded-lg'>
+              <button onClick={()=>handleClick('ChangeProfilePictures')} className='w-fit h-fit text-sm py-2 px-3 bg-slate-900 text-white rounded-lg'>
                 Modify Profile Pictures
               </button>
             </div>
@@ -60,6 +61,29 @@ const Settings = () => {
           <li>
             <ChangeOrientation />
           </li>
+          
+          <li className='w-full h-full border-b-[1px] border-[#fad5d5]'>
+
+            <div className='w-full p-4 border-b-[1px]'>
+
+              <p className='text-2xl w-full font-bold text-grey-900'>
+                Log out of account
+              </p>
+              
+              <p className='py-2'>
+                Log out of account and be redirected to the login page.
+              </p>
+            
+            </div>
+            
+            <div className='w-full h-fit bg-[#fff0f0] flex justify-end py-2 px-4'>
+              <button onClick={logout} className='w-fit h-fit text-sm py-2 px-3 bg-red-600 text-white rounded-lg'>
+                Log Out
+              </button>
+            </div>
+
+          </li>
+          
         </ul>
         
         {displaySettingsPage()}

@@ -12,7 +12,7 @@ const useSettings = () => {
 
     const [settingsPage, setSettingsPage] = useState('');
 
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     useEffect(()=>{
         if (!user) {
@@ -30,14 +30,8 @@ const useSettings = () => {
 
     const displaySettingsPage = () => {
         switch (settingsPage) {
-            case 'ChangeProfilePicture':
+            case 'ChangeProfilePictures':
                 return <ChangeProfilePictures handleGoBack={()=>handleClick('')} />;
-            case 'ChangeBio':
-                return <ChangeBio handleGoBack={()=>handleClick('')} />;
-            case 'ChangeGender':
-                return <ChangeGender handleGoBack={()=>handleClick('')} />;
-            case 'ChangeOrientation':
-                return <ChangeOrientation handleGoBack={()=>handleClick('')} />;
             default:
                 return null;
         }
@@ -47,7 +41,8 @@ const useSettings = () => {
         settingsPage,
         handleClick,
         displaySettingsPage,
-        goToMenu
+        goToMenu,
+        logout,
     }
 }
 

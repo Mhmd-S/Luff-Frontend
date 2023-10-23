@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   }, []); // Remove 'user' from the dependency array
 
   const logout = () => {
-    userAPI.logout().then(() => setUser(null));
+    userAPI.logoutUser().then(() => setUser(null));
   };
 
   const memoValue = useMemo(
