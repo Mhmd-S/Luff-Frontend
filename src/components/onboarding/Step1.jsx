@@ -29,7 +29,7 @@ const Step1 = ({ nextStep }) => {
 
 
   return (
-    <div className='h-4/5 w-full px-4 md:h-full'>
+    <div className='h-4/5 w-full px-4 md:h-full md:w-1/3'>
       <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
 
         <h1 className='text-3xl font-bold text-grey-900'>
@@ -100,6 +100,9 @@ const Step1 = ({ nextStep }) => {
             name='gender'
             errors={errors}
             register={register}
+            validationRules={{
+              required: 'Gender is required',  
+            }}
             options={genderOptions} />
 
           <RadioGroup 
@@ -107,6 +110,9 @@ const Step1 = ({ nextStep }) => {
             name='orientation'
             errors={errors}
             register={register}
+            validationRules={{
+              required: 'Orientation is required',  
+            }}
             options={viewOptions} />
 
         <FormButton text='Next Step'/>

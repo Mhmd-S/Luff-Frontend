@@ -17,12 +17,12 @@ const useOnboarding = () => {
         if (!user) {
             // User is not authenticated, redirect to login
             navigate('/login');
-        } else if (user.onboardStep == 2) {
+        } else if (user.onboardStep == 5) {
             // User is already on step 2, onboarding completed, redirect to dashboard
             navigate('/dashboard');
         } else {
             // Set the step to user's onboardStep, 0 is default.
-            setStep(user.onboardStep);
+            setStep(0);
         }
     }, [user, loading]);
     

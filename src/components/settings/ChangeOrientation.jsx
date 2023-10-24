@@ -10,7 +10,6 @@ const genderOptions = [
     { value: 'female', label: 'Female' },
   ];
 
-
 const ChangeBio = ({ handleGoBack }) => {
 
   const {
