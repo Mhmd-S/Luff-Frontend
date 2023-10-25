@@ -2,6 +2,7 @@ import React from 'react'
 import useImageCarousel from './hooks/useImageCarousel'
 import ChevronRight from '../icons/ChevronRight';
 import ChevronLeft from '../icons/ChevronLeft';
+import CarouselIndicator from './CarouselIndicator';
 
 const ImageCarousel = ({ images }) => {
     
@@ -14,6 +15,10 @@ const ImageCarousel = ({ images }) => {
     return (
         <div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/3 after:content-['*'] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0">
             
+            <div className='w-full top-0 absolute h-fit z-10'>
+                <CarouselIndicator imagesLength={Object.keys(images).length} currentIndex={currentImageIndex} />
+            </div>
+
             <img className="w-full h-full object-cover relative " src={images[currentImageIndex]} alt={`Image ${currentImageIndex}`} />
 
             <button onClick={handlePrevClick} className={`${(currentImageIndex === 0) && 'hidden'} absolute pl-3 w-1/2 h-full left-0 flex items-center justify-start md:transition-all md:opacity-0 md:hover:opacity-100`}>

@@ -90,8 +90,8 @@ const Step1 = ({ nextStep }) => {
                     message: 'Bio must be at least 25 characters long',
                 },
                 maxLength: {
-                    value: 500,
-                    message: 'Bio must be less than 500 characters long',
+                    value: 250,
+                    message: 'Bio must be less than 250 characters long',
                 },
             }}/>
             

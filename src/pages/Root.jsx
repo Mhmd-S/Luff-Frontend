@@ -12,7 +12,7 @@ const Root = () => {
             <Outlet />
         </div>
 
-        <ul className='w-full h-full sticky py-3 border-t-[1px] border-gray-400 bottom-0 bg-[#ffffffc3] flex flex-row justify-evenly items-center md:order-1 md:flex-col md:border-r-[1px] md:border-t-0'>
+        <ul className='w-full h-full sticky py-3 border-t-[1px] border-sky-500 bottom-0 bg-[#ffffffc3] flex flex-row justify-evenly items-center md:order-1 md:flex-col md:border-r-[1px] md:border-t-0'>
             
             <li className="hidden md:inline">
                 Logo

@@ -9,3 +9,5 @@ const CrossIcon = () => {
 }
 
 export default CrossIcon
+
+// Add indicator for the caoursel ------------------------------------------
