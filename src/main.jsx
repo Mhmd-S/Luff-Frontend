@@ -14,6 +14,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import RequestResetPasswordPage from './pages/RequestResetPasswordPage';
 import Settings from './components/settings/Settings';
 import Landing from './pages/Landing';
+import Profile from './components/profile/Profile';
 
 // Loaders
 const router = createBrowserRouter([
@@ -23,12 +24,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'home',
+        path: '/home',
         element: <HomePage />,
       },
       {
         path: '/settings',
         element: <Settings />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
         errorElement: <ErrorPage />,
       },
       // {
@@ -73,11 +79,6 @@ const router = createBrowserRouter([
     element: <RequestResetPasswordPage />,
     errorElement: <ErrorPage />,
   },
-   // {
-   //   path: 'profile',
-   //   element: <ProfilesPage />,
-   //   errorElement: <ErrorPage />,
-   // },
   // {
   //   path: '*', 
   //   element: <ErrorPage />,
