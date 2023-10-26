@@ -4,7 +4,7 @@ import HeartIcon from '../icons/HeartIcon';
 import CrossIcon from '../icons/CrossIcon';
 import CardDetails from './CardDetails';
 
-const Card = ({ userInfo }) => {
+const Card = ({ userInfo, handleReject, handleLike }) => {
     return (
         <div className='w-full h-full flex flex-col items-center relative md:w-1/3'>
             
@@ -13,11 +13,11 @@ const Card = ({ userInfo }) => {
             <CardDetails userInfo={userInfo} />
             
             <div className='absolute bottom-0 w-full flex justify-evenly items-center pb-4 z-10'>
-                <span className='p-3 border-red-500 border-4 rounded-full cursor-pointer'>
+                <span className='p-3 border-red-500 border-4 rounded-full cursor-pointer' onClick={handleLike}>
                     <HeartIcon />
                 </span>
                 
-                <span className='p-3 border-blue-600 border-4 rounded-full cursor-pointer'>
+                <span className='p-3 border-blue-600 border-4 rounded-full cursor-pointer' onClick={handleReject}>
                     <CrossIcon />
                 </span>
             </div>

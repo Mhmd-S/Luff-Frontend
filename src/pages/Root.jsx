@@ -19,7 +19,9 @@ const Root = () => {
             </li>
 
             <li>
-                <HomeIcon/>
+                <Link to='/home'>
+                    <HomeIcon/>
+                </Link>
             </li>
             
             <li>

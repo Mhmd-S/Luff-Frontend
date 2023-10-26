@@ -19,6 +19,38 @@ export const userAPI = {
         })
         return response;
     },
+    getUsers: async (page, limit, filter) => {
+        const response = await api.request({
+            method: 'GET',
+            url: '/user/get-users',
+            params: {
+                page: page,
+                limit: limit,
+                filter: filter,
+            }
+        })
+        return response;
+    },
+    likeUser: async (userId) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/like-user',
+            params: {
+                userId: userId,
+            }
+        })
+        return response;
+    },
+    rejectUser: async (userId) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/reject-user',
+            params: {
+                userId: userId,
+            }
+        })
+        return response;
+    },
     verifyCode: async (email, code) => {
         const response = await api.request({
             method: 'POST',
