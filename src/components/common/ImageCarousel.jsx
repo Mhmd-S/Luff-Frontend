@@ -19,7 +19,7 @@ const ImageCarousel = ({ images }) => {
                 <CarouselIndicator imagesLength={Object.keys(images).length} currentIndex={currentImageIndex} />
             </div>
 
-            <img className="w-full h-full object-cover relative " src={images[currentImageIndex]} alt={`Image ${currentImageIndex}`} />
+            <img className="w-full h-full object-cover" src={images[currentImageIndex]} alt={`Image ${currentImageIndex}`} />
 
             <button onClick={handlePrevClick} className={`${(currentImageIndex === 0) && 'hidden'} absolute pl-3 w-1/2 h-full left-0 flex items-center justify-start md:transition-all md:opacity-0 md:hover:opacity-100`}>
                 <span className='w-fit bg-[#5555552d] rounded-full p-4'>
