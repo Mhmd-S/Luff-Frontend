@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../common/Card';
 import { userAPI } from '../../../api/userAPI';
+import Matched from '../../common/Matched';
 
 const useMatching = () => {
     // Fetch users
     const [users, setUsers] = useState([]);
-    const [userIndex, setUserIndex] = useState(0);
+    const [matched, setMatched] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const fetchUsers = async () => {
         setLoading(true);
         try {
             const response = await userAPI.getUsers();
-            if (response.data.data.length === 0) {
-                setUserIndex(-1);
-            }
             setUsers(response.data.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -30,35 +28,51 @@ const useMatching = () => {
     const handleLike = async (id) => {
         setLoading(true);
         const result = await userAPI.likeUser(id);
-        setUserIndex(userIndex + 1);
+        console.log(result);
+        if (result.data?.data) {
+            setMatched(result.data.data);
+        }
+        setUsers(prev => prev.filter(user => user._id !== id));
+        
+        if (users.length === 0) {
+            fetchUsers();
+        }
+
         setLoading(false);
     };
 
     const handleReject = async (id) => {
         setLoading(true);
-        const result = await userAPI.rejectUser(id);
-        setUserIndex(userIndex + 1);
+        await userAPI.rejectUser(id);
+        setUsers(prev => prev.filter(user => user._id !== id));
+        if (users.length === 0) {
+            fetchUsers();
+        }
         setLoading(false);
     };
 
-    const renderUser = () => {
+    const closeMatched = () => {
+        setMatched(null);
+    };
 
-        if (userIndex == -1) {
-            return (
-                <div>
-                    <h1 className='text-3xl text-center'>No more users to match :/</h1>
-                </div>
-            )
+    const renderUser = () => {
+        if (matched) {
+            return <Matched userInfo={matched} handleClick={closeMatched} />;
         }
 
-        const user = users[userIndex];
+        const user = users[0];
 
-        if (userIndex >= users.length) {
-            fetchUsers();
+        if (!user?._id) {
+            return <h1>There are no more users to display</h1>;
         }
 
         return (
-            <Card userInfo={user} key={user._id} handleLike={() => handleLike(user._id)} handleReject={() => handleReject(user._id)} />
+            <Card
+                userInfo={user}
+                key={user._id}
+                handleLike={() => handleLike(user._id)}
+                handleReject={() => handleReject(user._id)}
+            />
         );
     };
 

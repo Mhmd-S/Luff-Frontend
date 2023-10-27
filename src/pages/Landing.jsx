@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Landing = () => {
   return (
     // add background image
-    <div className='w-screen h-screen relative flex flex-col justify-center items-center'>
+    <div className='w-screen h-screen relative flex flex-col justify-center items-center '>
 
       <header className='absolute bg-[#fafafa] top-0 w-full py-4 border-b-2'>
         logo

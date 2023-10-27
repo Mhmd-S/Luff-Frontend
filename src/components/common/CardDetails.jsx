@@ -36,7 +36,7 @@ const CardDetails = ({ userInfo }) => {
                 </div>
             </div>
             <p className={`${!openCard &&  'hidden'} p-3 py-6 `}>
-            Environmental conservation is crucial for the survival of our planet. It involves protecting and preserving natural resources, ecosystems, and biodiversity. Human activities, such as deforestation, pollution, and overconsumption, have led to climate change and the endangerment of numerous species. To ensure a sustainable future, we must adopt eco-friendly practices, reduce our carbon footprint,
+                {userInfo.bio}  
             </p>
       </div>
     )
