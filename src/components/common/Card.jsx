@@ -26,3 +26,5 @@ const Card = ({ userInfo, handleReject, handleLike }) => {
 }
 
 export default Card
+
+

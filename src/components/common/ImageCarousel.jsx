@@ -13,7 +13,7 @@ const ImageCarousel = ({ images }) => {
     } = useImageCarousel(Object.keys(images).length);
 
     return (
-        <div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/3 after:content-['*'] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0">
+        <div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/3 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0">
             
             {/* Images indicator */}
             <div className='w-full top-0 absolute h-fit z-10'>
