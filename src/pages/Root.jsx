@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import SettingsIcon from "../components/icons/SettingsIcon";
 import HomeIcon from "../components/icons/HomeIcon";
-import ChatIcon from "../components/icons/ChatIcon";
+import ChatIcon from "../components/chat/ChatIcon";
 import DiscoverIcon from "../components/icons/DiscoverIcon";
 
 const Root = () => {
@@ -29,7 +29,9 @@ const Root = () => {
             </li>
             
             <li>
-                <ChatIcon/>
+                <Link to='/chat'>
+                    <ChatIcon/>
+                </Link>
             </li>
 
             <li>

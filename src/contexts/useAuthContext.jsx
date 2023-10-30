@@ -1,5 +1,4 @@
 import { createContext, useState, useMemo, useEffect, useContext } from 'react';
-
 import { userAPI } from '../api/userAPI';
 import CheckCircle from '../components/icons/CheckCircle';
 

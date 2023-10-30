@@ -16,6 +16,7 @@ import Settings from './components/settings/Settings';
 import Landing from './pages/Landing';
 import Profile from './components/profile/Profile';
 import { NotificationProvider } from './contexts/useNotificationContext';
+import Chat from './components/chat/Chat';
 
 // Loaders
 const router = createBrowserRouter([
@@ -38,11 +39,11 @@ const router = createBrowserRouter([
         element: <Profile />,
         errorElement: <ErrorPage />,
       },
-      // {
-      //   path: 'messages',
-      //   element: <SettingsPage />,
-      //   errorElement: <ErrorPage />,
-      // },
+      {
+        path: '/chat',
+        element: <Chat />,
+        errorElement: <ErrorPage />,
+      },
       // {
       //   path: 'discover',
       //   element: <DiscoverPage />,

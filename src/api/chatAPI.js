@@ -2,44 +2,59 @@ import { api } from './configs/axiosConfigs'
 
 const chatAPI = {
     getChat: async (chatId, pageNum) => {
-        try {
-            const response = await api.get(`/chat/get-chat?chatId=${chatId}&page=${pageNum}`);
-            return response.data;
-        } catch (err) {
-            console.log('Could not process your request at the moment. Try again later!');
-        }
+        const response = await api.request({
+            method: 'GET',
+            url: '/chat/chat',
+            params: {
+                chatId: chatId,
+                page: pageNum,
+            }
+        });
+        return response;
     },
 
     getChats: async (pageNum) => {
-        try {
-            const response = await api.get(`/chat/user-contacts?page=${pageNum}`);
-            return response.data;
-        } catch (err) {
-            console.log('Could not process your request at the moment. Try again later!')
-        }
+        const response = await api.request({
+            method: 'GET',
+            url: '/chat/chats',
+            params: {
+                page: pageNum,
+            }
+        });
+        return response;
+    },
+
+    getUnreadChatsCount: async () => {
+        const response = await api.request({
+            method: 'GET',
+            url: '/chat/get-unread-chats-count',
+        });
+        return response;
     },
 
     createChat: async (participants) => {
-        try {
-            const response = await api.post('/create-chat', participants, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            });
-            return response.data;
-        } catch (err) {
-            console.log('Could not process your request at the moment. Please try again later.');
-        }
+        const response = await api.request({
+            method: 'POST',
+            url: '/create-chat',
+            data: participants,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
+        return response;
     },
-
-    addToChat: async (chatId, message) => {
-        try {
-            const response = await api.post(`/chat/${chatId}`, message);
-            return response.data;
-        } catch (err) {
-            console.log('Could not process your request at the moment. Try again later!')
-        }    
-    }
+    // Add update chat to seen make them params instead of injecting it into the url
+    // addToChat: async (chatId, message) => {
+    //     const response = await api.request({
+    //         method: 'POST',
+    //         url: `/chat`,
+    //         data: message,
+    //         params: {
+    //             id: chatId,
+    //         },
+    //     });
+    //     return response;
+    // }
 };
 
 export default chatAPI;

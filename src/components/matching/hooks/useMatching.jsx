@@ -6,39 +6,7 @@ import Matched from '../../common/Matched';
 const useMatching = () => {
     // Fetch users
     const [users, setUsers] = useState([]);
-    const [matched, setMatched] = useState({
-        "email": "Alysson_Roberts@gmail.com",
-        "password": "Onq_BaNWmjQlWkq",
-        "name": "Latoya Fritsch",
-        "dob": {
-          "$date": {
-            "$numberLong": "-239799702363"
-          }
-        },
-        "gender": "male",
-        "orientation": "female",
-        "matches": [],
-        "likedUsers": [],
-        "profilePictures": {
-          "0": "",
-          "1": "",
-          "2": "",
-          "3": "",
-          "4": "",
-          "5": ""
-        },
-        "blockedUsers": [],
-        "bio": "neck supporter, educator 🦟",
-        "verified": false,
-        "onboardStep": 2,
-        "createdAt": {
-          "$date": "2023-10-23T13:16:14.205Z"
-        },
-        "updatedAt": {
-          "$date": "2023-10-23T13:16:14.205Z"
-        },
-        "__v": 0
-      });
+    const [matched, setMatched] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const fetchUsers = async () => {
