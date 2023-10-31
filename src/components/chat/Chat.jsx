@@ -1,19 +1,25 @@
 import React from 'react'
 import useChat from './hooks/useChat'
 import Contacts from './Contacts';
+import ActiveChat from './ActiveChat';
 
 const Chat = () => {
 
   const  {
-    recipientId,
-    setRecipientId,
+    recipient,
+    setRecipient,
     chatId,
     setChatId
   } = useChat();
 
   return (
     <div className='w-full h-full'>
-        <Contacts setRecipientId={setRecipientId} setChatId={setChatId} recipientId={recipientId} />
+        {chatId && recipient 
+        ?
+          <ActiveChat setRecipient={setRecipient} setChatId={setChatId} chatId={chatId} recipient={recipient} />
+        :
+          <Contacts setRecipient={setRecipient} setChatId={setChatId} recipient={recipient} />
+        }
     </div>
   )
 }

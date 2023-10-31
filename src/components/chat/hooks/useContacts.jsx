@@ -5,7 +5,7 @@ import { socket} from '../../../socket-io/socket';
 import Contact from '../Contact';
 import LoadingIcon from '../../icons/LoadingIcon';
 
-const useContacts = ( setChatId, setRecipientId ) => {
+const useContacts = ( setChatId, setRecipient ) => {
     const [chats, setChats] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -52,14 +52,14 @@ const useContacts = ( setChatId, setRecipientId ) => {
 
     // Handle socket messages
     const handleSocketMessage = (data) => {
-      const { chatId, sender, recipient, message, timestamp } = data;
+      const { chatId, sender, Recipient, message, timestamp } = data;
     
       setChats((prevChats) => {
         const chatIndex = prevChats.findIndex((chat) => chat._id === chatId);
     
         const updatedChat = {
           _id: chatId,
-          participants: [sender, recipient],
+          participants: [sender, Recipient],
           lastMessage: {
             content: message,
             updatedAt: timestamp,
@@ -141,7 +141,7 @@ const useContacts = ( setChatId, setRecipientId ) => {
         const chatsEle = chats.map((chat) => {
             const contactInfo = chat.participants[0]._id === user._id ? chat.participants[1] : chat.participants[0];
             return (
-                <Contact key={chat._id} chat={chat} contactInfo={contactInfo} setRecipientId={setRecipientId} setChatId={setChatId} />    
+                <Contact key={chat._id} chat={chat} contactInfo={contactInfo} setRecipient={setRecipient} setChatId={setChatId} />    
             );
         });
     

@@ -1,15 +1,15 @@
-import  { useEffect, useState, useRef } from 'react';
+import  { useState } from 'react';
 import chatAPI from '../../../api/chatAPI'
 
 const useChat = () => {
 
-  const [ recipientId, setRecipientId ] = useState(null);
+  const [ recipient, setRecipient ] = useState(null);
   const [ chatId, setChatId ] = useState(null);
 
 
   return {
-    recipientId,
-    setRecipientId,
+    recipient,
+    setRecipient,
     chatId,
     setChatId
   }

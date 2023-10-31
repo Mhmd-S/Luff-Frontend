@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Contact = ({ chat, contactInfo, setChatId, handleSetRecipient }) => {
+const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
 
     const convertDate = (date) => {
         const dateObj = new Date(date);
@@ -37,7 +37,7 @@ const Contact = ({ chat, contactInfo, setChatId, handleSetRecipient }) => {
     <div
         className='w-full h-20 flex items-center border-b border-[#e4e6e8] cursor-pointer hover:bg-[#f5f5f5]'
         onClick={() => {
-            handleSetRecipient(contactInfo);
+            setRecipient(contactInfo);
             setChatId(chat._id);
         }}>
         <div className='h-full flex justify-center items-start pt-4'>

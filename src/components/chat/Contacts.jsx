@@ -1,10 +1,10 @@
 import useContacts from './hooks/useContacts';
 
-const Contacts = ({ setChatId, setRecipientId, recipient }) => {
+const Contacts = ({ setChatId, setRecipient, recipient }) => {
    
     const { 
         populateChats
-    } = useContacts(setChatId, setRecipientId);
+    } = useContacts(setChatId, setRecipient);
 
     return (
         <div className='w-full h-full' >
