@@ -5,19 +5,15 @@ import Contacts from './Contacts';
 const Chat = () => {
 
   const  {
-    chats,
-    activeChat,
-    containerRef,
-    setActive,
-    removeActive,
-    addChat,
-    removeChat,
-    updateChat,
+    recipientId,
+    setRecipientId,
+    chatId,
+    setChatId
   } = useChat();
 
   return (
     <div className='w-full h-full'>
-        <Contacts chats={chats} containerRef={containerRef} />
+        <Contacts setRecipientId={setRecipientId} setChatId={setChatId} recipientId={recipientId} />
     </div>
   )
 }
