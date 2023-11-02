@@ -1,66 +1,51 @@
 import React from 'react'
+import { convertDateLong } from '../../utils/Utils';
+import useContact from './hooks/useContact';
 
 const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
 
-    const convertDate = (date) => {
-        const dateObj = new Date(date);
-        const now = new Date(); // Get the current date and time
-    
-        let dateStr;
-        let timeStr;
-    
-        // Check if the date is today, then display the time
-        if (
-            dateObj.getDate() === now.getDate() &&
-            dateObj.getMonth() === now.getMonth() &&
-            dateObj.getFullYear() === now.getFullYear()
-        ) {
-            dateStr = '';
-            timeStr = dateObj.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
-            });
-        } else if (Math.abs(now - dateObj) < 7 * 24 * 60 * 60 * 1000) {
-            // Check if the date is within the last 7 days (604800000 milliseconds)
-            dateStr = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
-            timeStr = '';
-        } else {
-            dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            timeStr = '';
-        }
-    
-        return `${dateStr} ${timeStr}`.trim();
-    };
+    const {
+        user
+    } = useContact();
 
   return (
     <div
-        className='w-full h-20 flex items-center border-b border-[#e4e6e8] cursor-pointer hover:bg-[#f5f5f5]'
+        className='w-full h-20 px-2 grid grid-cols-[20%_80%] items-center border-b border-[#e4e6e8] cursor-pointer hover:bg-[#f5f5f5]'
         onClick={() => {
             setRecipient(contactInfo);
             setChatId(chat._id);
-        }}>
-        <div className='h-full flex justify-center items-start pt-4'>
-            {contactInfo.profilePictures[0] ? (
-            <img
-                src={contactInfo.profilePictures[0]}
-                alt='Profile'
-                className='w-10 h-10 rounded-full'
-            />
-            ) : (
-            <img src='' alt='profileImage'/>
-            )}
-        </div>
-        <div className='h-full  grid grid-rows-[40%_60%] pt-2 px-1'>
-            <div className='overflow-hidden truncate'>{contactInfo.name}</div>
-            <div className='text-[#71768b] w-full overflow-hidden md:text-sm'>
-                {chat.lastMessage && chat.lastMessage.content }
+        }}
+        >
+        
+        {/* Profile Pic */}
+        <img
+            src={contactInfo.profilePictures[0]}
+            alt='Profile'
+            className='w-12 h-12 rounded-full'
+        />
+        
+
+        <div className='w-full h-full flex flex-col justify-center'>
+            {/* Name and Date */}
+            <div className='w-full flex justify-between'>
+                <p className='text-lg font-bold overflow-hidden truncate'>
+                    {contactInfo.name}
+                </p>
+                <p className='text-[0.85rem] md:text-[0.7rem]'>
+                    {chat.lastMessage && convertDateLong(chat.lastMessage.updatedAt)}
+                </p>
             </div>
             
+            {/* Last Message */}
+            <div className='w-full text-[#71768b] flex justify-between overflow-hidden truncate md:text-sm'>
+                <p className='overflow-hidden truncate w-[90%]'>
+                    {chat.lastMessage ? chat.lastMessage.content : `You have been matched with ${contactInfo.name}` }
+                </p>
+                {!chat.lastMessage?.seenBy.includes(user._id) && <span className='w-4 h-4 rounded-full inline-block bg-sky-500 animate-pulse'></span>}
+            </div>    
+            
         </div>
-        <div className='text-[0.85rem] h-full pt-2 md:text-[0.7rem]'>
-            {chat.lastMessage && convertDate(chat.lastMessage.updatedAt)}
-        </div>
+
     </div>
   )
 }

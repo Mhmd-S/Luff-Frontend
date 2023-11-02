@@ -8,9 +8,9 @@ const ChatIcon = () => {
     const { notificationNumb } = useChatIcon();
 
     return (
-      <div>
+      <div className='relative'>
         <MessageIcon />
-        <span>
+        <span className='absolute rounded-full text-white bg-sky-500 py-1 px-2 text-[0.7rem] top-4 left-4'>
             {notificationNumb}  
         </span>
       </div>

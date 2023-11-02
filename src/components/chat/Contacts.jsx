@@ -7,7 +7,7 @@ const Contacts = ({ setChatId, setRecipient, recipient }) => {
     } = useContacts(setChatId, setRecipient);
 
     return (
-        <div className='w-full h-full' >
+        <div className='w-full h-full md:w-1/3 md:border-[1px] md:shadow-lg md:rounded-md' >
            {populateChats()}
         </div>
     );

@@ -33,30 +33,17 @@ const chatAPI = {
         });
         return response;
     },
-
-    createChat: async (participants) => {
+    updateChatToSeen: async (chatId, message) => {
         const response = await api.request({
-            method: 'POST',
-            url: '/create-chat',
-            data: participants,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+            method: 'PUT',
+            url: `/chat/update-chat-to-seen`,
+            data: message,
+            params: {
+                id: chatId,
             },
         });
         return response;
-    },
-    // Add update chat to seen make them params instead of injecting it into the url
-    // addToChat: async (chatId, message) => {
-    //     const response = await api.request({
-    //         method: 'POST',
-    //         url: `/chat`,
-    //         data: message,
-    //         params: {
-    //             id: chatId,
-    //         },
-    //     });
-    //     return response;
-    // }
+    }
 };
 
 export default chatAPI;
