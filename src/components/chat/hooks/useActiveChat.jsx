@@ -33,12 +33,11 @@ const useChatActive = (chatId, recipient) => {
     socket.on('receive-message', (data) => {
         const { chatId, sender, recipient, message, timestamp } = data;
 
-        const newMessage = {
+        const newMessage = { // this
           _id: generateUUID(),
           content: message,
-          sender: {
-            _id: sender._id,
-          },
+          senderId: sender._id,
+          recipientId: recipient._id,
           createdAt: timestamp,
         }
 
@@ -118,7 +117,6 @@ useEffect(() => {
       setStopFetching(true);
     }
 
-    console.log(res.data.data.lastMessage) // somehing wrong. lastmessage is an array????
     if (page == 1 && !res.data.data.lastMessage?.seenBy.includes(user._id)) {
       await chatAPI.updateChatToSeen(chatId);
     }
@@ -131,6 +129,10 @@ useEffect(() => {
   }
 
   const sendMessage = () => {
+    if (!messageInput) {
+      return;
+    }
+    
     // Send the message to the server
     socket.emit('send-message', {
       recipient: recipient, 

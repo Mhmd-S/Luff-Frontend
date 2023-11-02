@@ -31,7 +31,7 @@ const useContacts = ( setChatId, setRecipient ) => {
         }
 
         setError(null);
-    
+
         if (res.data.data.length === 0) {
           setStopFetching(true);
         } else {
@@ -52,16 +52,20 @@ const useContacts = ( setChatId, setRecipient ) => {
 
     // Handle socket messages
     const handleSocketMessage = (data) => {
-      const { chatId, sender, Recipient, message, timestamp } = data;
+      console.log(data);
+      const { chatId, sender, recipient, message, timestamp } = data;
     
       setChats((prevChats) => {
         const chatIndex = prevChats.findIndex((chat) => chat._id === chatId);
     
-        const updatedChat = {
-          _id: chatId,
-          participants: [sender, Recipient],
+        console.log(data);
+  
+        const updatedChat = { // this
+          _id: chatId, // here
+          participants: [sender, recipient],
           lastMessage: {
             content: message,
+            seenBy: [sender],
             updatedAt: timestamp,
           },
         };
@@ -147,6 +151,7 @@ const useContacts = ( setChatId, setRecipient ) => {
     
         return (
             <div className='w-full h-full overflow-y-auto'>
+                
                 {chatsEle}
 
                 {loading && 

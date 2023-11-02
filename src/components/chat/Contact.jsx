@@ -41,6 +41,7 @@ const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
                 <p className='overflow-hidden truncate w-[90%]'>
                     {chat.lastMessage ? chat.lastMessage.content : `You have been matched with ${contactInfo.name}` }
                 </p>
+                {console.log(chat)}
                 {!chat.lastMessage?.seenBy.includes(user._id) && <span className='w-4 h-4 rounded-full inline-block bg-sky-500 animate-pulse'></span>}
             </div>    
             

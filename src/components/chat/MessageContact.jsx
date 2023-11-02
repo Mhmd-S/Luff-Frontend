@@ -3,8 +3,8 @@ import { convertDateShort } from '../../utils/Utils'
 
 const MessageContact = ({ message }) => {
   return (
-    <div key={message._id} className='max-w-full text-white flex flex-col items-end'>
-        <div className='max-w-full break-words border-[1px] border-slate-900 my-1 px-4 py-1 self-end rounded-3xl'>
+    <div key={message._id} className='max-w-full text-black flex flex-col items-start'>
+        <div className='max-w-full break-words border-[1px] border-slate-900 px-4 py-2 self-start rounded-xl'>
           {message.content}
         </div>
         <div className='text-[0.7rem] text-black'>
