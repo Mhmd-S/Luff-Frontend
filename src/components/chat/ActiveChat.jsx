@@ -13,7 +13,7 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
     populateMessages,
     enterPressed,
     messageInput,
-    isLoading,
+    loading,
     error,
     containerRef,
     bottomRef,
@@ -34,17 +34,13 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
           </div>
           
         </div>
-        
-        {isLoading ? 
-        <div className='w-full h-full flex justify-center items-center'><LoadingIcon size={12} /></div> 
-        :
-        <ul className=' bg-white p-2 text-sm w-full overflow-y-scroll scrollbar:bg-blue-500 rounded-t-xl scrollbar scrollbar-thumb-blue-500 scrollbar-track-gray-200'>
+
+        <ul className='w-full h-full bg-white p-2 text-sm overflow-y-scroll scrollbar:bg-blue-500 rounded-t-xl scrollbar scrollbar-thumb-blue-500 scrollbar-track-gray-200'>
             <li ref={containerRef}></li>
+            <li className='h-[5%] w-full p-2 flex items-center justify-center'>{loading ? <LoadingIcon /> : ''}</li>
             {error ? error : populateMessages()}
             <li ref={bottomRef}></li>
         </ul>
-        }
-
 
         {/* Text box to write message */}
         <div className='w-full h-full bg-white border-t-[1px] border-slate-900 z-20 flex justify-evenly items-center px-2 self md:rounded-b-md'>

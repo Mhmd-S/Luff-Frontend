@@ -96,6 +96,8 @@ useEffect(() => {
 
     const res = await chatAPI.getChat(chatId, page);
 
+    console.log(res)
+    console.log(page)
 
     if (res.status !== 200) {
       setError(<div className='p-2 text-center h-full flex flex-col justify-center items-center'>A problem was encounterd. Try again later</div>);
@@ -105,14 +107,13 @@ useEffect(() => {
 
     setError(null);
 
-     
     if (res.data.data.messages.length === 0)  {
       setLoading(false);
       setStopFetching(true);
       return;
     }
 
-    if (res.data.data.messages.length < 50) {
+    if (res.data.data.messages.length < 25) {
       setLoading(false);
       setStopFetching(true);
     }
@@ -132,7 +133,7 @@ useEffect(() => {
     if (!messageInput) {
       return;
     }
-    
+
     // Send the message to the server
     socket.emit('send-message', {
       recipient: recipient, 
