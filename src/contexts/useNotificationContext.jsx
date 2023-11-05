@@ -26,16 +26,25 @@ export const NotificationProvider = ({ children }) => {
     // Watch the socket for messages
     useEffect(() => {
 
-        socket.on('recieve-message', ( data ) => {
-            setNotifications(( notifications ) => notifications + 1)
+        socket.on('receive-message', ( data ) => {
+            addNotification();
         })
         
         socket.on('match', ( data ) => {
-            console.log(data)
-            setNotifications(( notifications ) => notifications + 1)
+            addNotification();
         })
+
+        // Cleanup
+        return () => {
+            socket.off('sent-message', addNotification);
+            socket.off('match', addNotification);
+          };
         
     }, [])
+
+    const addNotification = () => {
+        setNotifications((notifications) => notifications + 1);
+    }
 
     const removeNotification = () => {
         setNotifications((notifications) => notifications - 1);

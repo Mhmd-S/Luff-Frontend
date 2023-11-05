@@ -33,13 +33,23 @@ const chatAPI = {
         });
         return response;
     },
-    updateChatToSeen: async (chatId, message) => {
+    updateChatToSeen: async (chatId, pageNum) => {
         const response = await api.request({
             method: 'PUT',
             url: `/chat/update-chat-to-seen`,
-            data: message,
             params: {
                 id: chatId,
+                page: pageNum,
+            },
+        });
+        return response;
+    },
+    updateMessageToSeen: async (messageId) => {
+        const response = await api.request({
+            method: 'PUT',
+            url: `/chat/update-chat-to-seen`,
+            params: {
+                id: messageId,
             },
         });
         return response;
