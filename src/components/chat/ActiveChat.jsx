@@ -1,18 +1,15 @@
 import React from 'react'
-import MesageArrow from '../icons/MesageArrow';
 import useActiveChat from './hooks/useActiveChat';
 import LoadingIcon from '../icons/LoadingIcon';
 import BackIcon from '../icons/BackIcon';
 import useChatActive from './hooks/useActiveChat';
+import MessageField from './MessageField';
 
 const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
   
   const {
-    setMessageInput,
-    sendMessage,
     populateMessages,
-    enterPressed,
-    messageInput,
+    setMessages,
     loading,
     error,
     containerRef,
@@ -43,12 +40,7 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
         </ul>
 
         {/* Text box to write message */}
-        <div className='w-full h-full bg-white border-t-[1px] border-slate-900 z-20 flex justify-evenly items-center px-2 self md:rounded-b-md'>
-          <textarea type="text" placeholder='Type your message' value={messageInput} onChange={(e) => setMessageInput(e.target.value)} onKeyDown={enterPressed} className='rounded-xl resize-none w-[85%] outline-none border-[1px] border-black p-2 text-sm overflow-y-auto'/>
-          <button onClick={sendMessage} className='w-[10%]'>
-            <MesageArrow />
-          </button>
-        </div>
+        <MessageField chatId={chatId} recipient={recipient} setMessages={setMessages} />
 
       </div> 
   )

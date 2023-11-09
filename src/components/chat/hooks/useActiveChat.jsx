@@ -10,11 +10,9 @@ import { useNotification } from '../../../contexts/useNotificationContext';
 
 const useChatActive = (chatId, recipient) => {
 
-    const [chat, setChat] = useState(null);
-    const [messageInput, setMessageInput] = useState('');
     const [messages, setMessages] = useState([]);
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [stopFetching, setStopFetching] = useState(false);
     const [error, setError] = useState(null);   
 
@@ -26,25 +24,12 @@ const useChatActive = (chatId, recipient) => {
     const { user } = useAuth();
     const { removeNotification } = useNotification();
 
+
     // Reset the messages when the chatId changes
     useEffect( ()=> {
-      fetchChat();
-      setMessages([]);
-      setPage(1);
-      setStopFetching(false);
-    }, [ chatId,recipient ])
-
-
-    useEffect(()=>{
-        socket.on('receive-message', handleRecieveMessage)    
-
-
-        return () => {
-            socket.off('receive-message', handleRecieveMessage)    
-        }
-    }, [])
-
-    useEffect(() => {
+    
+      // Setup sockets
+      socket.on('receive-message', handleRecieveMessage)    
 
       const container = containerRef.current;
 
@@ -55,9 +40,13 @@ const useChatActive = (chatId, recipient) => {
       };
 
       const observer = new IntersectionObserver(
-          ([entry]) => {
+          async([entry]) => {
+            console.log(page)
               if (entry.isIntersecting) {
-                  fetchChat()
+                if (stopFetching) {
+                    return;
+                }
+                  await fetchChat()
               }
           },
           options
@@ -68,9 +57,11 @@ const useChatActive = (chatId, recipient) => {
       }
 
       return () => {
-          observer.disconnect();
-      };
-    }, [stopFetching, page]);
+        observer.disconnect(),
+        socket.off('receive-message', handleRecieveMessage)    
+      }
+
+    }, [chatId, recipient, page, stopFetching])
 
     useLayoutEffect(() => {
         
@@ -79,8 +70,9 @@ const useChatActive = (chatId, recipient) => {
             return;
         }
 
-            bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-        }, [messages]);     
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+        
+    }, [messages, page]);     
     
 
     const handleRecieveMessage = (data) => {
@@ -88,7 +80,7 @@ const useChatActive = (chatId, recipient) => {
         handleReadMessage(data._id);
         
         // Set the new message in the messages
-        setMessages((prevMessages) => [...prevMessages, data]);
+        setMessages((prevMessages) => [ ...prevMessages, data]);
     }
 
     const handleReadMessage = (messageId) => {
@@ -115,8 +107,10 @@ const useChatActive = (chatId, recipient) => {
           return;
         }   
 
-        setError(null); 
-        
+        if (error) {
+            setError(null);
+        }
+                
         // If there are no messages, stop future fetching
         if (res.data.data.messages.length === 0)  {
           setLoading(false);
@@ -124,56 +118,32 @@ const useChatActive = (chatId, recipient) => {
           return;
         }   
         
-        // If the number of messages is less than 25, stop future fetching
-        if (res.data.data.messages.length < 25) {
+        // If the number of messages is less than 20, stop future fetching
+        if (res.data.data.messages.length < 30) {
           setLoading(false);
           setStopFetching(true);
         }   
 
-        // Update chat to seen if the last message is not seen by the user
-        if (!res.data.data?.lastMessage?.seenBy.includes(user._id) ) {
-            removeNotification();
-        }
-        
-        setMessages([ ...messages, ...res.data.data.messages.reverse() ]);
-        setPage(page + 1);
+        // Update message to seen if the last message is not seen by the user
+        for (const mesg in res.data.data.messages) {
+            if (!res.data.data.messages[mesg].seenBy.includes(user._id)) {
+                handleReadMessage(res.data.data.messages[mesg]._id);
+            }
+        }       
+
+        setPage((prevPage) => prevPage + 1);
+        setMessages((prevMessages) => [...res.data.data.messages, ...prevMessages]);
         setLoading(false); 
     }
 
-    const sendMessage = () => {
-        if (!messageInput) {
-          return;
-        }
-
-        // Send the message to the server
-        socket.emit('send-message', {
-            recipient: recipient, 
-            message: messageInput,
-            chatId: chatId,
-        });
-
-        // Add the sent message to the local state
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { senderId: user._id, content: messageInput, createdAt: new Date(), chatId: chatId, _id: generateUUID() },
-        ]); 
-
-        // Clear the message input
-        setMessageInput('');
-    }
-
-    const enterPressed = (e) => {
-        if ( (e.key === 'Enter' || e.code === 13) && !e.shiftKey) {
-          e.preventDefault();
-          sendMessage();
-        }
-    }
-
+    // Factory function to populate the messages
     const populateMessages = () => {
+        console.log('Message Pop')
         let messagesElements = []
+        let messagesReversed = [...messages];
 
         if (messages.length > 0) {
-          messagesElements = messages.map((message) => {
+          messagesElements = messagesReversed.map((message) => {
 
             if (message.senderId === user._id) {
                 return (
@@ -195,13 +165,10 @@ const useChatActive = (chatId, recipient) => {
 
   return {
     populateMessages,
-    sendMessage,
-    setMessageInput,
-    enterPressed,
+    setMessages,
     containerRef,
     bottomRef,
     loading,
-    messageInput
   };
 
 };

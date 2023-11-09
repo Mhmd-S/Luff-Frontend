@@ -14,7 +14,6 @@ const chatAPI = {
     },
 
     getChats: async (pageNum) => {
-        console.log(pageNum);
         const response = await api.request({
             method: 'GET',
             url: '/chat/chats',
@@ -22,7 +21,6 @@ const chatAPI = {
                 page: pageNum,
             }
         });
-        console.log(response);
         return response;
     },
 
@@ -56,4 +54,4 @@ const chatAPI = {
     }
 };
 
-export default chatAPI;
+export default chatAPI; 
