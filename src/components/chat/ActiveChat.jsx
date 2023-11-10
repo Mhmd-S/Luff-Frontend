@@ -12,8 +12,9 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
     setMessages,
     loading,
     error,
-    containerRef,
+    topRef,
     bottomRef,
+    chatWindowRef
   } = useActiveChat(chatId, recipient);
 
   return (
@@ -32,11 +33,12 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
           
         </div>
 
-        <ul className='w-full h-full bg-white p-2 text-sm overflow-y-scroll scrollbar:bg-blue-500 rounded-t-xl scrollbar scrollbar-thumb-blue-500 scrollbar-track-gray-200'>
-            <li ref={containerRef}></li>
-            <li className='h-[5%] w-full p-2 flex items-center justify-center'>{loading ? <LoadingIcon /> : ''}</li>
-            {error ? error : populateMessages()}
-            <li ref={bottomRef}></li>
+        <ul className='w-full h-full bg-white p-2 text-sm overflow-y-scroll scrollbar:bg-blue-500 rounded-t-xl scrollbar scrollbar-thumb-blue-500 scrollbar-track-gray-200' ref={chatWindowRef}>
+          <li ref={topRef}></li>
+          {error && <li className='w-full p-2 flex items-center justify-center'>{error}</li>}
+          {populateMessages()}
+          {loading && <li className='w-full p-2 flex items-center justify-center'><LoadingIcon /></li>}
+          <li ref={bottomRef}></li>
         </ul>
 
         {/* Text box to write message */}

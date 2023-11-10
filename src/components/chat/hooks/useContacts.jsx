@@ -52,21 +52,19 @@ const useContacts = ( setChatId, setRecipient ) => {
 
     // Handle socket messages
     const handleSocketMessage = (data) => {
-      console.log(data);
-      const { chatId, sender, recipient, message, timestamp } = data;
+
+      const { chatId, sender, recipient, content, createdAt } = data;
     
       setChats((prevChats) => {
         const chatIndex = prevChats.findIndex((chat) => chat._id === chatId);
-    
-        console.log(data);
   
-        const updatedChat = { // this
-          _id: chatId, // here
+        const updatedChat = {
+          _id: chatId, 
           participants: [sender, recipient],
           lastMessage: {
-            content: message,
-            seenBy: [sender],
-            updatedAt: timestamp,
+            content: content,
+            seenBy: [sender._id],
+            updatedAt: createdAt,
           },
         };
     
@@ -143,10 +141,13 @@ const useContacts = ( setChatId, setRecipient ) => {
         }
 
         const chatsEle = chats.map((chat) => {
-            const contactInfo = chat.participants[0]._id === user._id ? chat.participants[1] : chat.participants[0];
-            return (
-                <Contact key={chat._id} chat={chat} contactInfo={contactInfo} setRecipient={setRecipient} setChatId={setChatId} />    
-            );
+          
+          // Looks for the sender which is found in the participants array as an user object.
+          const contactInfo = chat.participants[0]?._id === user._id ? chat.participants[1] : chat.participants[0];
+
+          return (
+              <Contact key={chat._id} chat={chat} contactInfo={contactInfo} setRecipient={setRecipient} setChatId={setChatId} />    
+          );
         });
     
         return (

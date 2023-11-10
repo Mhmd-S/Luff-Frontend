@@ -17,8 +17,9 @@ const useChatActive = (chatId, recipient) => {
     const [error, setError] = useState(null);   
 
     // Refs
-    const containerRef = useRef(null);
+    const topRef = useRef(null);
     const bottomRef = useRef(null);
+    const chatWindowRef = useRef(null);
 
     // Contexts
     const { user } = useAuth();
@@ -31,17 +32,16 @@ const useChatActive = (chatId, recipient) => {
       // Setup sockets
       socket.on('receive-message', handleRecieveMessage)    
 
-      const container = containerRef.current;
+      const topOfChat = topRef.current;
 
       const options = {
-          root: null,
-          rootMargin: '0px',
+          root: chatWindowRef.current,
+          rootMargin: '300px',
           threshold: 0.1,
       };
 
       const observer = new IntersectionObserver(
           async([entry]) => {
-            console.log(page)
               if (entry.isIntersecting) {
                 if (stopFetching) {
                     return;
@@ -52,8 +52,8 @@ const useChatActive = (chatId, recipient) => {
           options
       );
 
-      if (container) {
-          observer.observe(container);
+      if (topOfChat) {
+          observer.observe(topOfChat);
       }
 
       return () => {
@@ -65,14 +65,14 @@ const useChatActive = (chatId, recipient) => {
 
     useLayoutEffect(() => {
         
-        if (page - 1 === 1) {
-            bottomRef.current?.scrollIntoView({ behavior: "instant" });
+        if (page > 1) {
+            bottomRef.current?.scrollIntoView({ behavior: "smooth" });
             return;
         }
 
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+        bottomRef.current?.scrollIntoView({ behavior: "instant" });
         
-    }, [messages, page]);     
+    }, [messages]);     
     
 
     const handleRecieveMessage = (data) => {
@@ -119,7 +119,7 @@ const useChatActive = (chatId, recipient) => {
         }   
         
         // If the number of messages is less than 20, stop future fetching
-        if (res.data.data.messages.length < 30) {
+        if (res.data.data.messages.length < 5) {
           setLoading(false);
           setStopFetching(true);
         }   
@@ -127,7 +127,9 @@ const useChatActive = (chatId, recipient) => {
         // Update message to seen if the last message is not seen by the user
         for (const mesg in res.data.data.messages) {
             if (!res.data.data.messages[mesg].seenBy.includes(user._id)) {
+              console.log(res.data.data.messages[mesg]._id, 'read')
                 handleReadMessage(res.data.data.messages[mesg]._id);
+                removeNotification();
             }
         }       
 
@@ -166,8 +168,9 @@ const useChatActive = (chatId, recipient) => {
   return {
     populateMessages,
     setMessages,
-    containerRef,
+    topRef,
     bottomRef,
+    chatWindowRef,
     loading,
   };
 

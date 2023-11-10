@@ -40,6 +40,7 @@ const useMessageField = ({ recipient, chatId, setMessages }) => {
 
     return {
         messageInput,
+        sendMessage,
         setMessageInput,
         enterPressed
     }
