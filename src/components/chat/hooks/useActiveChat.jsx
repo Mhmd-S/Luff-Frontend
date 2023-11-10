@@ -37,7 +37,7 @@ const useChatActive = (chatId, recipient) => {
       const options = {
           root: chatWindowRef.current,
           rootMargin: '300px',
-          threshold: 0.1,
+          threshold: 0.5,
       };
 
       const observer = new IntersectionObserver(
@@ -65,12 +65,15 @@ const useChatActive = (chatId, recipient) => {
 
     useLayoutEffect(() => {
         
-        if (page > 1) {
-            bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+        if (page == 2) {
+            bottomRef.current?.scrollIntoView({ behavior: "instant" });
             return;
         }
 
-        bottomRef.current?.scrollIntoView({ behavior: "instant" });
+        chatWindowRef.current?.scrollTo({
+            top: topRef.current?.offsetTop,
+            behavior: "instant"
+        });
         
     }, [messages]);     
     
@@ -119,7 +122,7 @@ const useChatActive = (chatId, recipient) => {
         }   
         
         // If the number of messages is less than 20, stop future fetching
-        if (res.data.data.messages.length < 5) {
+        if (res.data.data.messages.length < 30) {
           setLoading(false);
           setStopFetching(true);
         }   
@@ -134,7 +137,7 @@ const useChatActive = (chatId, recipient) => {
         }       
 
         setPage((prevPage) => prevPage + 1);
-        setMessages((prevMessages) => [...res.data.data.messages, ...prevMessages]);
+        setMessages((prevMessages) => [...prevMessages, ...res.data.data.messages]);
         setLoading(false); 
     }
 
@@ -178,3 +181,6 @@ const useChatActive = (chatId, recipient) => {
 
 export default useChatActive;
 
+
+
+// Find the suitable ratio of messages and scroll root margin
