@@ -70,13 +70,14 @@ const useChatActive = (chatId, recipient) => {
             return;
         }
 
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+
         chatWindowRef.current?.scrollTo({
             top: topRef.current?.offsetTop,
             behavior: "instant"
         });
         
-    }, [messages]);     
-    
+    }, [messages]);    
 
     const handleRecieveMessage = (data) => {
 
@@ -84,6 +85,7 @@ const useChatActive = (chatId, recipient) => {
         
         // Set the new message in the messages
         setMessages((prevMessages) => [ ...prevMessages, data]);
+        removeNotification();
     }
 
     const handleReadMessage = (messageId) => {
@@ -137,7 +139,7 @@ const useChatActive = (chatId, recipient) => {
         }       
 
         setPage((prevPage) => prevPage + 1);
-        setMessages((prevMessages) => [...prevMessages, ...res.data.data.messages]);
+        setMessages((prevMessages) => [...res.data.data.messages, ...prevMessages]);
         setLoading(false); 
     }
 
