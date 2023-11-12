@@ -64,20 +64,30 @@ const useChatActive = (chatId, recipient) => {
     }, [chatId, recipient, page, stopFetching])
 
     useLayoutEffect(() => {
-        
-        if (page == 2) {
-            bottomRef.current?.scrollIntoView({ behavior: "instant" });
-            return;
-        }
 
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+      if (page === 2) {
+          // Scroll to the bottom instantly when page is 2
+          bottomRef.current?.scrollIntoView({ behavior: "instant" });
+      } else {
+          // Keep scroll in the same position
+          const chatWindow = chatWindowRef.current;
 
-        chatWindowRef.current?.scrollTo({
-            top: topRef.current?.offsetTop,
-            behavior: "instant"
-        });
-        
-    }, [messages]);    
+          if (chatWindow) {
+              const currentScrollTop = chatWindow.scrollTop;
+  
+              // Calculate the new scroll position based on the current scroll top
+              const newScrollTop = topRef.current?.offsetTop + bottomRef.current?.offsetHeight;
+  
+              // Set the scroll position
+              chatWindow.scrollTo({ top: newScrollTop, behavior: "instant" });
+  
+              // Restore the original scroll position if needed
+              chatWindow.scrollTop = currentScrollTop;
+          }
+      }
+
+  }, [page, messages]);
+     
 
     const handleRecieveMessage = (data) => {
 
@@ -86,6 +96,9 @@ const useChatActive = (chatId, recipient) => {
         // Set the new message in the messages
         setMessages((prevMessages) => [ ...prevMessages, data]);
         removeNotification();
+
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+
     }
 
     const handleReadMessage = (messageId) => {
@@ -117,7 +130,7 @@ const useChatActive = (chatId, recipient) => {
         }
                 
         // If there are no messages, stop future fetching
-        if (res.data.data.messages.length === 0)  {
+        if (!res.data.data?.messages)  {
           setLoading(false);
           setStopFetching(true);
           return;
@@ -150,19 +163,21 @@ const useChatActive = (chatId, recipient) => {
         let messagesReversed = [...messages];
 
         if (messages.length > 0) {
-          messagesElements = messagesReversed.map((message) => {
+          
+          messagesElements = messagesReversed.map((message, index) => {
 
             if (message.senderId === user._id) {
-                return (
+              return (
                 <MessageUser key={message._id} message={message} />
-                );
+              );
+
             } else {
-                return (
+              return (
                 <MessageContact key={message._id} message={message} />
-                );
+              );
             }
 
-            })
+          })
         }
 
         messagesElements.push(<div key={generateUUID()} ref={bottomRef} />);
