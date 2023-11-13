@@ -19,7 +19,7 @@ const LoginForm = () => {
   return (
       <InitialForm onSubmit={handleSubmit(onSubmit)} >
         
-        <h3 className='w-full text-center'>
+        <h3 className='w-full text-center text-xl'>
           Please enter your <span className='text-sky-500'>TP Email</span> and <span className='text-sky-500'>Password</span> to log in.
         </h3>
 
@@ -57,11 +57,6 @@ const LoginForm = () => {
         />
 
         <FormButton text='Log In' loading={loading}/> 
-
-        <div className='w-full text-center pt-2 flex flex-col'>
-          <span>Don't have an account? </span> 
-          <Link to='/registration' className='text-center text-sky-500 hover:text-sky-600'>Register here</Link>
-        </div>
 
         <div className='w-full text-center pt-2 flex flex-col'>
           <span>Forgot your password? </span> 

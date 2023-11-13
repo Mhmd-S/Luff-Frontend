@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { userAPI } from '../../../api/userAPI';
 import { useAuth } from '../../../contexts/useAuthContext';
+import { useNotification } from '../../../contexts/useNotificationContext';
 
 const useProfilePicutreSettings = () => {
 
     const { user, getUserInfo } = useAuth();
     const [ generalError, setGeneralError ] = useState('');
     const [ loading, setLoading ] = useState(false);
+
     const [ usersImages, setUsersImages ] = useState({});
+    const { setNotification } = useNotification();
 
     useEffect(() => {
         setUsersImages(user.profilePictures);
@@ -37,8 +40,6 @@ const useProfilePicutreSettings = () => {
             setLoading(true);
 
             let picsPromises = pics.map(async(pic, index) => {
-
-                console.log(index, pic);
                 
                 if ( pic.length === 0) 
                 {
@@ -61,6 +62,7 @@ const useProfilePicutreSettings = () => {
             if (uploadResults.some(res => res)) {
                 // Check if any of the promises succeeded, then update the user
                 await getUserInfo();
+                setNotification('Profile Pictures Updated');
             }
 
         } catch(err) {

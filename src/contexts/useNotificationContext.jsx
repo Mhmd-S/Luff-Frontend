@@ -6,7 +6,8 @@ const NotificationContext = createContext()
 
 export const NotificationProvider = ({ children }) => {
 
-    const [notifications, setNotifications] = useState(0);
+    const [ notifications, setNotifications ] = useState(0);
+    const [ notificationMessage, setNotificationMessage ] = useState('');
 
     const fetchNotifications = async () => {
         const response = await chatAPI.getUnreadChatsCount();
@@ -43,19 +44,31 @@ export const NotificationProvider = ({ children }) => {
     }, [])
 
     const addNotification = () => {
+        if (notifications === 99 ) { return; }
         setNotifications((notifications) => notifications + 1);
     }
 
     const removeNotification = () => {
+        if (notifications === 0 ) { return; }
         setNotifications((notifications) => notifications - 1);
     }
-        
+
+    // Remote after 5 seconds
+    const setNotification = (message) => {
+        setNotificationMessage(message);
+        setTimeout(() => {
+            setNotificationMessage('');
+        }, 5000);
+    }
+
     const memoValue = useMemo(
         () => ({
             notifications,
+            notificationMessage,
             removeNotification,
+            setNotification
         }),
-        [notifications]
+        [notifications, notificationMessage]
     );
     
 

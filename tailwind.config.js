@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      gridTemplateRows: {
+        'settingsLargeScreen': 'repeat(6, 40%)',
+        'settingsSmallScreen': 'repeat(6, 25%)',
+      },
       fontFamily: {
         "Inter": ['Inter', 'sans-serif']
     },

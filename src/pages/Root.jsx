@@ -3,8 +3,24 @@ import SettingsIcon from "../components/icons/SettingsIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ChatIcon from "../components/chat/ChatIcon";
 import DiscoverIcon from "../components/icons/DiscoverIcon";
+import { useNotification } from "../contexts/useNotificationContext";
+import { useAuth } from "../contexts/useAuthContext";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Root = () => {
+
+    const navigate = useNavigate();
+
+    const { notificationMessage } = useNotification();
+    const { user } = useAuth();
+
+    useEffect(()=>{
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user])
+
   return (
     <div className='w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[10%_90%] md:grid-rows-1 items-center'>
 
@@ -24,9 +40,9 @@ const Root = () => {
                 </Link>
             </li>
             
-            <li>
+            {/* <li>
                 <DiscoverIcon/>
-            </li>
+            </li> */}
             
             <li>
                 <Link to='/chat'>
@@ -51,6 +67,13 @@ const Root = () => {
             </li>
 
         </ul>
+
+        {/* Notification Message */}
+        {notificationMessage && 
+            <div className="absolute min-w-[40%] top-[7.5%] right-[5%] bg-green-500 p-4 rounded-lg text-white md:min-w-[25%] text-center">
+                {notificationMessage}
+            </div>
+        }
 
     </div>
   )

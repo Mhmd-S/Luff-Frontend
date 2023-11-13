@@ -3,6 +3,7 @@ import { userAPI } from '../../../api/userAPI';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../contexts/useAuthContext';
+import { useNotification } from '../../../contexts/useNotificationContext';
 
 const useChangeGender = () => {
 
@@ -10,6 +11,7 @@ const useChangeGender = () => {
     const [loading, setLoading] = useState(false);
 
     const { user } = useAuth();
+    const { setNotification } = useNotification();
 
     const { 
         register, 
@@ -34,6 +36,8 @@ const useChangeGender = () => {
 
       if (response.data.status === 'fail') {
         setGeneralError(response.data.message);
+      } else {
+        setNotification('Change Successful');
       }
     }
 

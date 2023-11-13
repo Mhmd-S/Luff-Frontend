@@ -6,8 +6,8 @@ import useChangeGender from './hooks/useChangeGender'
 import FormGeneralError from '../common/FormGeneralError'
 
 const genderOptions = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
+  { value: '1', label: 'Male' },
+  { value: '2', label: 'Female' },
 ];
 
 const ChangeBio = () => {
@@ -18,13 +18,14 @@ const ChangeBio = () => {
     onSubmit,
     generalError,
     user,
-    errors
+    errors,
+    loading
   } = useChangeGender();
 
   return (
-    <InitialForm onSubmit={handleSubmit(onSubmit)}>
+    <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
 
-      <div className='w-full h-full p-4 border-b-[1px]'>
+      <div className='w-full h-full p-4 flex flex-col justify-evenly'>
 
         <h1 className='text-2xl w-full mb-2 font-bold text-grey-900'>
           Change Your Gender
@@ -45,7 +46,7 @@ const ChangeBio = () => {
                />
       </div>
 
-      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4'>
+      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4  border-t-[1px]'>
         <FormButton text='Save' />
       </div>
 

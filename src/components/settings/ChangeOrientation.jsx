@@ -6,8 +6,8 @@ import useChangeGender from './hooks/useChangeGender'
 import FormGeneralError from '../common/FormGeneralError'
 
 const genderOptions = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
+    { value: '1', label: 'Male' },
+    { value: '2', label: 'Female' },
   ];
 
 const ChangeBio = ({ handleGoBack }) => {
@@ -18,38 +18,39 @@ const ChangeBio = ({ handleGoBack }) => {
     onSubmit,
     generalError,
     user,
-    errors
+    errors,
+    loading
   } = useChangeGender();
 
   return (
-    <InitialForm onSubmit={handleSubmit(onSubmit)}>
+      <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading} >
 
-      <div className='w-full h-full p-4 border-b-[1px]'>
-                  
-        <h1 className='text-2xl w-full mb-2 font-bold text-grey-900'>
-          Change Your Orientaion
-        </h1>  
-    
-        <FormGeneralError message={generalError} />
-    
-        <RadioGroup 
-              label='' 
-              name='orientation'
-              errors={errors}
-              register={register}
-              options={genderOptions}
-              defaultOption={user.orientation}
-              validationRules={
-                {required: 'Orientation is required'}
-              }
-               />
-      </div>
+        <div className='w-full h-full p-4 flex flex-col justify-evenly'>
 
-      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4'>
-       <FormButton text='Save' />
-      </div>
+          <h1 className='text-2xl w-full mb-2 font-bold text-grey-900'>
+            Change Your Orientaion
+          </h1>  
 
-    </InitialForm>
+          <FormGeneralError message={generalError} />
+
+          <RadioGroup 
+                label='' 
+                name='orientation'
+                errors={errors}
+                register={register}
+                options={genderOptions}
+                defaultOption={user.orientation}
+                validationRules={
+                  {required: 'Orientation is required'}
+                }
+                 />
+        </div>
+
+        <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4  border-t-[1px]'>
+         <FormButton text='Save' />
+        </div>
+
+      </InitialForm>
   )
 }
 

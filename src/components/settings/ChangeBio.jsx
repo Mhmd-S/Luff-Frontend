@@ -19,7 +19,7 @@ const ChangeBio = ({ handleGoBack }) => {
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)}>
  
-      <div className='w-full h-full p-4 border-b-[1px]'>
+      <div className='w-full h-full p-4'>
 
         <h1 className='text-2xl p-2 mb-2 w-full font-bold text-grey-900'>
           Edit Your Bio
@@ -50,7 +50,7 @@ const ChangeBio = ({ handleGoBack }) => {
             />
       </div>
 
-      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4'>
+      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4 border-t-[1px]'>
         <FormButton text='Save' />
       </div>
 
