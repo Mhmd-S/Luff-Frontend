@@ -28,7 +28,7 @@ const Root = () => {
             <Outlet />
         </div>
 
-        <ul className='w-full h-full sticky py-3 border-t-[1px] border-black bottom-0 bg-[#ffffffc3] flex flex-row justify-evenly items-center md:order-1 md:flex-col md:border-r-[1px] md:border-t-0'>
+        <ul className='w-full h-full sticky py-3 border-t-[1px] border-slate-400 bottom-0 bg-[#fafafa] flex flex-row justify-evenly items-center md:order-1 md:flex-col md:border-r-[1px] md:border-t-0'>
             
             <li className="hidden md:inline">
                 Logo
@@ -59,9 +59,9 @@ const Root = () => {
             <li>
                 <Link to='/profile'>
                     <img 
-                        src='https://via.placeholder.com/50' 
+                        src={user.profilePictures[0]} 
                         alt='logo'
-                        className='w-10 h-10 rounded-full'
+                        className='w-10 h-10 rounded-full border-[1px] border-black'
                         />
                 </Link>
             </li>
@@ -70,7 +70,7 @@ const Root = () => {
 
         {/* Notification Message */}
         {notificationMessage && 
-            <div className="absolute min-w-[40%] top-[7.5%] right-[5%] bg-green-500 p-4 rounded-lg text-white md:min-w-[25%] text-center">
+            <div className="absolute min-w-[40%] z-30 top-[7.5%] right-[5%] bg-green-500 p-4 rounded-lg text-white md:min-w-[25%] text-center">
                 {notificationMessage}
             </div>
         }

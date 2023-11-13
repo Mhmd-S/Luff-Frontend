@@ -7,9 +7,9 @@ const RegistrationPage = () => {
   return (
     <div className='w-screen h-screen flex flex-col items-center relative'>
       
-      <div className='flex justify-between items-center w-full h-[7%] px-4 border-b-[1px] border-b-slate-300 mb-4 md:h-[12.5%]'>
+      <div className='flex justify-between items-center bg-[#fafafa]  w-full h-[7%] px-4 border-b-[1px] border-b-slate-300 mb-4 md:h-[12.5%]'>
           
-          <Link to='/'>
+          <Link to='/welcome'>
             <h1 className='text-3xl text-slate-900' >
               Luff
             </h1>

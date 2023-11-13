@@ -1,7 +1,7 @@
 import React from 'react'
 import InitialForm from '../common/InitialForm'
 import RadioGroup from '../common/RadioGroup' 
-import FormButton from '../common/FormButton'
+import FormButton2 from '../common/FormButton2'
 import useChangeGender from './hooks/useChangeGender'
 import FormGeneralError from '../common/FormGeneralError'
 
@@ -47,7 +47,7 @@ const ChangeBio = ({ handleGoBack }) => {
         </div>
 
         <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4  border-t-[1px]'>
-         <FormButton text='Save' />
+         <FormButton2 text='Save' />
         </div>
 
       </InitialForm>

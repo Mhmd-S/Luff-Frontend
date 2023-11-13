@@ -41,7 +41,8 @@ const FileEditField = ({
       {/* The remove button for an image */}
       {imageFile && 
         <>
-            <div className='right-[-5%] top-[-5%] absolute cursor-pointer rounded-xl bg-slate-300 z-10'>
+            <div className='absolute right-[-5%] top-[-5%] rounded-xl bg-slate-300 z-10'>
+              <div className='relative w-full h-full'>
                 <EditIcon color='black' onClick={handleEditImage} />
                 <input
                     type='file'
@@ -49,8 +50,9 @@ const FileEditField = ({
                     accept='image/png, image/jpeg'
                     {...register(name, validationRules)}
                     onInput={handleFileChange}
-                    className={`opacity-0 w-full h-full absolute`}
+                    className={`opacity-0 w-full h-full absolute top-0 r-0`}
                 />
+              </div>
             </div>
             <img className='w-full h-full object-cover relative' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
         </> 

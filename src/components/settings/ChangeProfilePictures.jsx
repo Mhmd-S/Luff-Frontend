@@ -1,6 +1,6 @@
 import InitialForm from '../common/InitialForm'
 import FileUploadField from '../common/FileUploadField'
-import FormButton from '../common/FormButton'
+import FormButton2 from '../common/FormButton2'
 import FormGeneralError from '../common/FormGeneralError'
 import useProfilePicutreSettings from './hooks/useProfilePictureSettings'
 import FileEditField from '../common/FileEditField'
@@ -24,18 +24,17 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
         
-        <span className='w-full text-xl pt-4 pl-4' onClick={handleGoBack}>
+        <span className='w-full text-xl pt-4 pl-4 hover:cursor-pointer' onClick={handleGoBack}>
             <BackIcon/>
         </span>
         
-        <h1 className='text-xl w-full text-center font-semibold text-grey-900'>
+        <h1 className='text-2xl w-full text-center font-semibold text-grey-900'>
             Edit Profile Pictures
         </h1>
         
         <FormGeneralError error={generalError} />
         
         <div className={`w-full h-[80%] p-2 grid grid-cols-[40%_40%] grid-rows-3 justify-center items-center place-items-center gap-6 md:w-3/5 md:grid-cols-[20%_20%_20%] md:grid-rows-2`}>
-            
             
             <FileEditField 
                 type='file' 
@@ -101,7 +100,7 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
                 />
         </div>
 
-        <FormButton loading={loading} text='Save' />
+        <FormButton2 loading={loading} text='Save' />
 
     </InitialForm>
   )

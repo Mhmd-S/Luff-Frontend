@@ -1,7 +1,7 @@
 import InitialForm from '../common/InitialForm'
 import FileUploadField from '../common/FileUploadField'
 import useStep2 from './hooks/useStep2'
-import FormButton from '../common/FormButton'
+import FormButton2 from '../common/FormButton2'
 import FormGeneralError from '../common/FormGeneralError'
 
 // The validation is not working properly.
@@ -98,7 +98,7 @@ const Step2 = ({ nextStep }) => {
                 />
         </div>
 
-        <FormButton text='Complete Profile' />
+        <FormButton2 text='Complete Profile' />
 
     </InitialForm>
   )
