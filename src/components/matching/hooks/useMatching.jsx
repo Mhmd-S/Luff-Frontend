@@ -8,14 +8,15 @@ const useMatching = () => {
     const [users, setUsers] = useState([]);
     const [matched, setMatched] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [err, setErr] = useState(null);
 
     const fetchUsers = async () => {
         setLoading(true);
         try {
             const response = await userAPI.getUsers();
             setUsers(response.data.data);
-        } catch (error) {
-            console.error('Error fetching users:', error);
+        } catch (err) {
+            setError('Ops! Something went wrong. Please try again later.');
         } finally {
             setLoading(false);
         }
@@ -34,7 +35,7 @@ const useMatching = () => {
         }
         setUsers(prev => prev.filter(user => user._id !== id));
         
-        if (users.length === 0) {
+        if (users.length < 5) {
             fetchUsers();
         }
 
@@ -45,7 +46,7 @@ const useMatching = () => {
         setLoading(true);
         await userAPI.rejectUser(id);
         setUsers(prev => prev.filter(user => user._id !== id));
-        if (users.length === 0) {
+        if (users.length < 5) {
             fetchUsers();
         }
         setLoading(false);
@@ -56,6 +57,11 @@ const useMatching = () => {
     };
 
     const renderUser = () => {
+
+        if (err) {
+            return <h1>{err}</h1>;
+        }
+
         if (matched) {
             return <Matched userInfo={matched} handleClick={closeMatched} />;
         }
@@ -77,8 +83,6 @@ const useMatching = () => {
     };
 
     return {
-        users,
-        loading,
         renderUser,
     };
 };

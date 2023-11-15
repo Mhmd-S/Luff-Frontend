@@ -18,7 +18,14 @@ const Root = () => {
     useEffect(()=>{
         if (!user) {
             navigate('/login');
+            return;
         }
+
+        if (user.onboardStep !== 2 ){
+            navigate('/onboarding')
+            return;
+        }
+
     }, [user])
 
   return (

@@ -32,7 +32,7 @@ const useLogin = () => {
     
     if (response.data.status === 'success') {
       setUser(response.data.user);
-      navigate('/dashboard');
+      navigate('/home');
     } else {
       setGeneralError(response.data.message);
     }

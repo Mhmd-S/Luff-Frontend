@@ -143,7 +143,7 @@ export const userAPI = {
             method: 'PUT',
             url: '/user/update-orientation',
             data: {
-                orientaion: orientation
+                orientation: orientation
             }
         })
         return response;

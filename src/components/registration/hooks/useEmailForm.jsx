@@ -20,7 +20,7 @@ export const useEmailForm = () => {
             setLoading, 
           } = useRegistrationContext();
 
-    const watchPassword = watch('password', '');
+    const watchPassword = watch('password');
 
     const onSubmit = (data) => {
       verifyEmail(data);

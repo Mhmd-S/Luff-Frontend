@@ -58,7 +58,7 @@ const Step1Email = () => {
             },
           }}
         />
-
+      {/* Watch not working */}
         <FormField
           label='Confirm Password'
           name='confirmPassword'
@@ -68,7 +68,7 @@ const Step1Email = () => {
           validationRules={{
             required: 'Confirm Password is required',
             validate: (value) => {
-              validatePasswords(value, watchPassword.current) || 'Passwords do not match'
+              return validatePasswords(value, watchPassword)
             }
           }}
         />

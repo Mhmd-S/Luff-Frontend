@@ -3,7 +3,7 @@ import { userAPI } from '../../../api/userAPI';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../contexts/useAuthContext';
-import { useNotification } from '../../../contexts/useNotificationContext';
+  import { useNotification } from '../../../contexts/useNotificationContext';
 
 const useChangeGender = () => {
 

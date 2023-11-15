@@ -20,23 +20,31 @@ const useStep1 = (nextStep) => {
         setLoading(true);
 
         // Submit the data to the API
-        try{
-            await userAPI.updateName(data.name);
-            await userAPI.updateDob(data.dob);
-            await userAPI.updateBio(data.bio);
-            await userAPI.updateGender(data.gender);
-            await userAPI.updateOrientation(data.orientation);
-            // await userAPI.updateOrientation(data.orientation);
-            await userAPI.onboardNext();
-        } catch(err) {
-            setGeneralError(err.response.data.message);
-            setLoading(false);
-            return;
-        }
+        const onBoardResult = [
+            await userAPI.updateName(data.name),
+            await userAPI.updateDob(data.dob),
+            await userAPI.updateBio(data.bio),
+            await userAPI.updateGender(data.gender),
+            await userAPI.updateOrientation(data.orientation),
+        ]
 
-        if (generalError === '') {
+        // Check if any of the API calls failed
+        const generalError = onBoardResult.find(result => result.data.status === 'fail');
+
+        // If any of the API calls failed, set the general error to the message
+        if (generalError) {
+            setGeneralError(generalError.data.message);
+        } else {
+            const response = await userAPI.onboardNext();
+
+            // If updating the onboard step failed, set the general error to the message
+            if (response.data.status === 'fail') {
+                setGeneralError('We are facing some issues. Please try again later.');
+                return;
+            }
+
             nextStep();
-        }
+            }
 
         setLoading(false);    
     }

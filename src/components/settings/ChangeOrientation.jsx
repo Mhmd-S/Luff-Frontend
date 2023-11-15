@@ -6,8 +6,8 @@ import useChangeGender from './hooks/useChangeGender'
 import FormGeneralError from '../common/FormGeneralError'
 
 const genderOptions = [
-    { value: '1', label: 'Male' },
-    { value: '2', label: 'Female' },
+    { value: '1', label: 'Men' },
+    { value: '2', label: 'Women' },
   ];
 
 const ChangeBio = ({ handleGoBack }) => {

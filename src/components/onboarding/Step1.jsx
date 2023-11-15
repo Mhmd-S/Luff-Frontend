@@ -18,13 +18,13 @@ const Step1 = ({ nextStep }) => {
   } = useStep1(nextStep);
 
   const genderOptions = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
+    { value: '1', label: 'Male' },
+    { value: '2', label: 'Female' },
   ];
 
   const viewOptions = [
-    { value: 'men', label: 'Men' },
-    { value: 'women', label: 'Women' },
+    { value: '1', label: 'Men' },
+    { value: '2', label: 'Women' },
   ];
 
 

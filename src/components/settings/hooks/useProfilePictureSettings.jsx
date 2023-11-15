@@ -59,10 +59,16 @@ const useProfilePicutreSettings = () => {
             
             const uploadResults = await Promise.all(picsPromises);
 
-            if (uploadResults.some(res => res)) {
-                // Check if any of the promises succeeded, then update the user
-                await getUserInfo();
-                setNotification('Profile Pictures Updated');
+            // Check if any of the promises failed
+            const generalError = uploadResults.find(result => result.data.status === 'fail');
+
+            // If any of the API calls failed, set the general error to the message
+            if (generalError) setGeneralError(generalError.data.message);
+
+            // If there was no general error, set the users images to the new ones
+            if (generalError === '') {
+                // setUsersImages(uploadResults.map(result => result.data.data));
+                setNotification('Change Successful');
             }
 
         } catch(err) {

@@ -49,10 +49,6 @@ const LoginForm = () => {
           errors={errors}
           validationRules={{
             required: 'Password is required',
-            pattern: {
-              value: /^[A-Za-z\d@$!%*?&]{8,15}$/,
-              message: 'Password must be 8-15 characters long',
-            },
           }}
         />
 
