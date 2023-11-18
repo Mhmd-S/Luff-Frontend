@@ -4,6 +4,7 @@ import FormField from '../common/FormField'
 import useRequestResetPasswordForm from './hooks/useRequestResetPasswordForm'
 import FormGeneralError from '../common/FormGeneralError'
 import FormButton from '../common/FormButton'
+import { Link } from 'react-router-dom'
 
 const RequestResetPassword = ({ nextStep }) => {
 
@@ -17,6 +18,8 @@ const RequestResetPassword = ({ nextStep }) => {
     } = useRequestResetPasswordForm({ nextStep });
 
     return (
+      <div className='w-full h-1/2 flex flex-col justify-evenly bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+
       <InitialForm onSubmit={handleSubmit(onSubmit)}>  
 
         <h1 className='text-3xl font-bold'>
@@ -44,6 +47,13 @@ const RequestResetPassword = ({ nextStep }) => {
         <FormButton loading={loading} text='Request Reset Password' />
 
       </InitialForm>
+
+      <div className='w-full text-center pt-2 flex flex-col'>
+        <span>Found your password? </span> 
+        <Link to='/login' className='text-center text-[#F76301] hover:underline'>Log In</Link>
+      </div>
+
+    </div>
     )
 }
 

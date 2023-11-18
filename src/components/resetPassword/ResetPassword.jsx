@@ -8,7 +8,7 @@ const ResetPassword = () => {
   } = useResetPassword();
 
   return (
-    <div className='w-full md:w-2/6 h-2/5 md:h-3/5 p-4 flex justify-center items-center'>
+    <div className='w-full h-full rounded-xl flex flex-col items-center justify-evenly p-4 bg-[#fafafa]'>
       {renderResetPassword()}
     </div>
   )

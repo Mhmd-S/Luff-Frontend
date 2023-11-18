@@ -8,7 +8,7 @@ const useRegistration = () => {
 
     const renderStage = () => {
 
-        switch (registrationStage) {
+        switch (2) {
             case 0:
                 return <Step1Email />;
             case 1:
