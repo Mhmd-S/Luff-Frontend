@@ -2,7 +2,8 @@ import { useContext, createContext, useState, useMemo } from "react";
 
 const RegistrationContext = createContext();
 
-export const RegistrationProvider = ({ children }) => { // I also included general error handling here hehehe
+export const RegistrationProvider = ({ children }) => { 
+  
     const [ registrationStage, setRegistrationStage ] = useState(0);
     const [ userInfo, setUserInfo ] = useState('');
     const [ loading, setLoading ] = useState(false);

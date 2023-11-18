@@ -7,7 +7,10 @@ const Registration = () => {
     const { renderStage } = useRegistration();
 
   return (
-    <div className='w-4/5 h-3/6 md:h-1/2 md:w-1/2 lg:w-1/4 lg:h-3/4 bg-white bg-opacity-90 rounded-xl p-4 flex flex-col items-center relative'> 
+    <div className='w-full h-full rounded-xl flex flex-col items-center justify-evenly p-4 bg-[#fafafa]'>
+        <p className='text-purple-500 text-5xl font-bold md:text-6xl'>
+          Luff
+        </p>
       {renderStage()}
     </div>
   )

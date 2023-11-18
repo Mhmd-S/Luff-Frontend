@@ -19,11 +19,12 @@ const Step1Email = () => {
         } = useEmailForm();
 
   return (
-      <InitialForm onSubmit={handleSubmit(onSubmit)} >  
-        
-        <h3 className='w-full text-center text-xl'>
-          Please enter your <span className='text-sky-500'>TP Email</span> and <span className='text-sky-500'>Password</span> to get started.
+    <div className='w-full h-3/4 flex flex-col bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+      <h3 className='w-full text-center text-xl'>
+          Create a new <span className='text-purple-700 font-bold'>account</span>
         </h3>
+    
+    <InitialForm onSubmit={handleSubmit(onSubmit)} >       
 
         { generalError && <FormGeneralError message={generalError} /> }
 
@@ -76,6 +77,13 @@ const Step1Email = () => {
         <FormButton text='Verify Email' loading={loading}/> 
 
       </InitialForm>
+
+      <div className='w-full text-center pt-2 flex flex-col'>
+            <span>Already have an account? </span> 
+            <Link to='/login' className='text-center text-[#F76301] hover:underline'>Log In</Link>
+          </div>
+
+      </div>
   )
 }
 

@@ -17,13 +17,13 @@ const LoginForm = () => {
         } = useLogin();
 
   return (
-      <div className='w-full h-full bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-3/5 md:h-3/4'>
+      <div className='w-full h-3/4 flex flex-col bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-3/5 md:h-3/4'>
         
-        <InitialForm onSubmit={handleSubmit(onSubmit)} >
-          
-          <h3 className='w-full text-center text-xl'>
+        <h3 className='w-full text-center text-xl'>
             Please enter your <span className='text-purple-900 font-bold'>TP Email</span> and <span className='text-purple-900 font-bold'>Password</span> to log in.
           </h3>
+
+        <InitialForm onSubmit={handleSubmit(onSubmit)} >
     
           { generalError && <FormGeneralError message={generalError} /> }
     
@@ -56,7 +56,9 @@ const LoginForm = () => {
   
           <FormButton text='Log In' loading={loading}/> 
           
-          <div className='w-full text-center pt-2 flex flex-col'>
+        </InitialForm>
+      
+        <div className='w-full text-center pt-2 flex flex-col'>
             <span>Forgot your password? </span> 
             <Link to='/request-reset-password' className='text-center text-[#F76301] hover:underline'>Reset password</Link>
           </div>
@@ -65,8 +67,7 @@ const LoginForm = () => {
             <span>Don't have an account? </span> 
             <Link to='/registration' className='text-center text-[#F76301] hover:underline'>Register</Link>
           </div>
-        
-        </InitialForm>
+      
       </div>
   )
 }
