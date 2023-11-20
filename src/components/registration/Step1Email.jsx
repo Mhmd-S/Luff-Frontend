@@ -19,14 +19,15 @@ const Step1Email = () => {
         } = useEmailForm();
 
   return (
-    <div className='w-full h-3/4 flex flex-col bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+    <div className='w-full h-3/4 flex flex-col bg-white border-[1.5px] border-[#F76301] p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+      
       <h3 className='w-full text-center text-xl'>
-          Create a new <span className='text-purple-700 font-bold'>account</span>
-        </h3>
+        Create a new <span className='text-purple-700 font-bold'>account</span>
+      </h3>
     
-    <InitialForm onSubmit={handleSubmit(onSubmit)} >       
+      <InitialForm onSubmit={handleSubmit(onSubmit)} >       
 
-        { generalError && <FormGeneralError message={generalError} /> }
+        {generalError && <FormGeneralError message={generalError} /> }
 
         <FormField
           label='TP email'
@@ -59,7 +60,7 @@ const Step1Email = () => {
             },
           }}
         />
-      {/* Watch not working */}
+
         <FormField
           label='Confirm Password'
           name='confirmPassword'

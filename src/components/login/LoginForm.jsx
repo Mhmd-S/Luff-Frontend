@@ -17,7 +17,7 @@ const LoginForm = () => {
         } = useLogin();
 
   return (
-      <div className='w-full h-3/4 flex flex-col bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-3/5 md:h-3/4'>
+      <div className='w-full h-3/4 flex flex-col bg-white border-[1.5px] border-[#F76301] p-6 rounded-lg shadow-lg md:w-3/5 md:h-3/4'>
         
         <h3 className='w-full text-center text-xl'>
             Please enter your <span className='text-purple-900 font-bold'>TP Email</span> and <span className='text-purple-900 font-bold'>Password</span> to log in.
@@ -28,12 +28,11 @@ const LoginForm = () => {
           { generalError && <FormGeneralError message={generalError} /> }
     
           <FormField
-            label='TP email'
             name='email'
             type='email'
             register={register}
             errors={errors}
-            placeholder='ex. TP012345@mail.apu.edu.my'
+            placeholder='Email'
             validationRules={{
               required: 'TP email is required',
               pattern: {
@@ -44,10 +43,10 @@ const LoginForm = () => {
           />
   
           <FormField
-            label='Password'
             name='password'
             type='password'
             register={register}
+            placeholder={'Password'}
             errors={errors}
             validationRules={{
               required: 'Password is required',

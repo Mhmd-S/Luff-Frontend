@@ -19,7 +19,7 @@ const FileUploadField = ({
     imageFile, 
     isLoading, 
     handleFileChange, 
-    handleRemoveImage 
+    handleRemoveImage
   } = useFileUploadField({ name, setError, resetField, usersPicture });
 
   return (
@@ -39,7 +39,7 @@ const FileUploadField = ({
       {imageFile && 
         <>
           <div className='z-10'>
-            <RemoveIcon color='red' handleClick={()=>{inputProps?.handleDeleteImage();handleRemoveImage() }} />
+            <RemoveIcon color='red' handleClick={()=>{handleRemoveImage(); inputProps?.handleDeleteImage()}} />
           </div>
           <img className='w-full h-full object-cover relative' src={typeof imageFile == 'string' ? imageFile : URL.createObjectURL(imageFile)} alt='Preview' />
         </> 

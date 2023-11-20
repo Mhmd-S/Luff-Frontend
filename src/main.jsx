@@ -15,10 +15,9 @@ import RequestResetPasswordPage from './pages/RequestResetPasswordPage';
 import Settings from './components/settings/Settings';
 import Landing from './pages/Landing';
 import Profile from './components/profile/Profile';
-import { NotificationProvider } from './contexts/useNotificationContext';
 import Chat from './components/chat/Chat';
+import { NotificationProvider } from './contexts/useNotificationContext';
 
-// Loaders
 const router = createBrowserRouter([
   {
     path: '/',

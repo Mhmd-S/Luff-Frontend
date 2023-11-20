@@ -55,25 +55,28 @@ const useProfilePicutreSettings = () => {
                 }
 
                 return await userAPI.uploadProfilePicture(pic[0], index);
+                
             });
             
-            const uploadResults = await Promise.all(picsPromises);
+            const uploadResults = await Promise.allSettled(picsPromises);
 
-            // Check if any of the promises failed
-            const generalError = uploadResults.find(result => result.data.status === 'fail');
+            // Check if any of the promises failedcons
+            const generalError = uploadResults.find(result => result.status !== 200 ? false : true);
 
             // If any of the API calls failed, set the general error to the message
-            if (generalError) setGeneralError(generalError.data.message);
-
-            // If there was no general error, set the users images to the new ones
-            if (generalError === '') {
-                // setUsersImages(uploadResults.map(result => result.data.data));
+            if (generalError) {
+                setGeneralError(generalError.data.message);
+            } else {
+                // If there was no general error, set the users images to the new ones
+                await getUserInfo();
                 setNotification('Change Successful');
             }
+            
 
         } catch(err) {
-            setGeneralError(err.message);
+            setGeneralError('Could not upload images');
         }
+
         setLoading(false);
     }
 

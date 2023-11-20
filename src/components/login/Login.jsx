@@ -8,7 +8,7 @@ const Login = () => {
       <div className='w-4/5 text-slate-900 text-5xl text-center md:h-3/4 md:flex md:flex-col md:justify-evenly md:text-left md:text-8xl md:pl-10'>
        
         <p className='text-purple-500 font-bold w-full'>
-          Luff
+          WELCOME BACK!
         </p>
 
         <p className='hidden text-slate-900 md:text-2xl md:block'>

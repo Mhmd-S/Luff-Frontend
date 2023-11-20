@@ -10,7 +10,7 @@ const useChangeGender = () => {
     const [ generalError, setGeneralError ] = useState('');
     const [ loading, setLoading ] = useState(false);
 
-    const { user } = useAuth();
+    const { user, getUserInfo } = useAuth();
     const { setNotification } = useNotification();
 
     const { 
@@ -31,14 +31,15 @@ const useChangeGender = () => {
       setLoading(true);
 
       const response = await userAPI.updateGender(data.gender);
-      
-      setLoading(false);
 
       if (response.data.status === 'fail') {
         setGeneralError(response.data.message);
       } else {
         setNotification('Change Successful');
+        getUserInfo();
       }
+
+      setLoading(false);
     }
 
   return {

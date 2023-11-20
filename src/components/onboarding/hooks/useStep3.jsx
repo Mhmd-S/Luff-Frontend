@@ -7,6 +7,7 @@ const useStep3 = () => {
 
     // Go to dashboard after 3 secs of loading
     useEffect(()=> {
+
         const timeout = setTimeout(() => {
             navigate('/home');
         }, 3000);

@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../contexts/useAuthContext';
 import { useNotification } from '../../../contexts/useNotificationContext';
 
-const useChangeGender = () => {
+const useChangeOrientation = () => {
 
     const  [generalError, setGeneralError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const { user } = useAuth();
+    const { user, getUserInfo } = useAuth();
     const { setNotification } = useNotification();
 
     const { 
@@ -30,15 +30,16 @@ const useChangeGender = () => {
 
       setLoading(true);
 
-      const response = await userAPI.updateOrientation(data.gender);
+      const response = await userAPI.updateOrientation(data.orientation);
       
-      setLoading(false);
-
       if (response.data.status === 'fail') {
         setGeneralError(response.data.message);
       } else {
+        getUserInfo();
         setNotification('Change Successful');
       }
+
+      setLoading(false);
     }
 
   return {
@@ -52,4 +53,4 @@ const useChangeGender = () => {
   }
 }
 
-export default useChangeGender;
+export default useChangeOrientation;

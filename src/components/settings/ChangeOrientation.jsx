@@ -2,8 +2,8 @@ import React from 'react'
 import InitialForm from '../common/InitialForm'
 import RadioGroup from '../common/RadioGroup' 
 import FormButton2 from '../common/FormButton2'
-import useChangeGender from './hooks/useChangeGender'
 import FormGeneralError from '../common/FormGeneralError'
+import useChangeOrientation from './hooks/useOrientation'
 
 const genderOptions = [
     { value: '1', label: 'Men' },
@@ -20,7 +20,7 @@ const ChangeBio = ({ handleGoBack }) => {
     user,
     errors,
     loading
-  } = useChangeGender();
+  } = useChangeOrientation();
 
   return (
       <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading} >

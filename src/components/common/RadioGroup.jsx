@@ -10,8 +10,8 @@ const RadioGroup = ({ name, label, options, register, validationRules, errors, d
       <div className='w-full h-full flex justify-evenly'>
         {options.map((option) => (
           <RadioButton
-            key={Math.random()*100+name}
-            id={option.value}
+            key={option.label}
+            id={option.label}
             name={name}
             value={option.value}
             label={option.label}
