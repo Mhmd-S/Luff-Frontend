@@ -17,7 +17,7 @@ const Step2EmailVerification = () => {
    } = useVerifyEmail();
 
   return (
-    <div className='w-full h-1/2 flex flex-col justify-evenly bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+    <div className='w-full h-1/2 flex flex-col justify-evenly bg-white border-[1.5px] border-my-orange p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
       
       <h3 className='w-full text-center text-xl pt-12'>
         Insert the <span className='text-purple-700 font-bold'>6 digit code</span> sent your email.  

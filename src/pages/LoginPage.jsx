@@ -1,38 +1,21 @@
-import React from 'react'
-import Login from '../components/login/Login'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import Login from '../components/login/Login';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
-  return (
-    <div className='w-screen h-screen flex flex-col items-center justify-center relative bg-[#fafafa]'>
+	return (
+		<div className="w-screen h-screen  relative bg-[#fafafa] grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[15%_85%]">
+			
+      <div className='w-full flex justify-center items-center'>
+        <img src='./logo1.png' alt='logo' className='h-3/4'/>
+        <h1 className=' text-5xl font-8bit font-bold text-purple-500'>
+          LUFF
+        </h1>
+      </div>
 
-          <div className='w-full flex justify-between p-4'>
-            <h1>
-              Logo
-            </h1>
+			<Login />
+		</div>
+	);
+};
 
-          <ul className='flex items-center justify-evenly w-1/4'>
-            
-            <li>
-              <Link to='/settings'>
-                Contact
-              </Link>
-            </li>
-
-            <li>
-              <Link to='/signup'>
-                Signup
-              </Link>
-            </li>
-            
-          </ul>
-        
-        </div>
-
-      <Login/>
-      
-    </div>
-  )
-}
-
-export default LoginPage
+export default LoginPage;

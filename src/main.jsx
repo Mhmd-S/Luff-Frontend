@@ -21,6 +21,11 @@ import { NotificationProvider } from './contexts/useNotificationContext';
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <Landing />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
@@ -49,11 +54,6 @@ const router = createBrowserRouter([
       //   errorElement: <ErrorPage />,
       // },
     ]
-  },
-  {
-    path: '/welcome',
-    element: <Landing />,
-    errorElement: <ErrorPage />,
   },
   {
     path: '/login',

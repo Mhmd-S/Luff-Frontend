@@ -9,14 +9,14 @@ const useOnboarding = () => {
 
     const navigate = useNavigate();
 
-    const [ step, setStep ] = useState(0);
+    const [ step, setStep ] = useState(2);
 
     const { user, loading } = useAuth();
 
     useEffect(() => {
-        if (!user) {
+        if (user) {
             // User is not authenticated, redirect to login
-            navigate('/login');
+            // navigate('/login');
         } else if (user.onboardStep == 2) {
             // User is already on step 2, onboarding completed, redirect to dashboard
             navigate('/home');
@@ -36,7 +36,7 @@ const useOnboarding = () => {
     }
 
     const renderStep = () => {
-        switch(step) {
+        switch(2) {
             case 0:
                 return <Step1 nextStep={nextStep} />
             case 1:

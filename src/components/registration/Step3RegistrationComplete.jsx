@@ -4,7 +4,7 @@ import Cake from '../icons/Cake';
 
 const Step3RegistrationComplete = () => {
   return (
-    <div className='w-full h-1/2 flex flex-col justify-evenly items-center bg-white border-[1px] border-[#e6e6e6] p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+    <div className='w-full h-1/2 flex flex-col justify-evenly items-center bg-white border-[1.5px] border-my-orange p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
       
       <Cake />
       

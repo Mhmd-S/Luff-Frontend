@@ -22,12 +22,12 @@ const Step2 = ({ nextStep }) => {
   return (
     <InitialForm onSubmit={handleSubmit(onSubmit)} loading={loading}>
         
-        <h1 className='text-3xl font-bold text-grey-900'>
+        <h1 className='text-3xl text-purple-500 font-bold text-grey-900'>
             Add Photos
         </h1>
         
-        <h3 className='text-sky-500 underline'>
-            Add at least 3 photos
+        <h3 className='text-slate-900'>
+            Add at <span className='text-purple-500 font-semibold'>least 3 photos</span>
         </h3>
 
         <FormGeneralError error={generalError} />
