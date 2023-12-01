@@ -1,17 +1,18 @@
-import React from 'react'
-import useMatching from './hooks/useMatching'
+import React from 'react';
+import useMatching from './hooks/useMatching';
 import LoadingIcon from '../icons/LoadingIcon';
-import Matched from '../common/Matched';
+import ControlsGuide from './ControlsGuide';
+
 
 const Matching = () => {
-  
-    const { renderUser, loading } = useMatching();
+	const { renderUser, loading } = useMatching();
 
-    return (
-    <div className='relative w-full h-full flex justify-center items-center'>
-        { loading ? <LoadingIcon /> : renderUser() }
-    </div>
-  )
-}
+	return (
+		<div className="relative w-full h-full flex justify-center items-center py-2 md:">
+			{loading ? <LoadingIcon /> : renderUser()}
+			<ControlsGuide />
+		</div>
+	);
+};
 
-export default Matching
+export default Matching;

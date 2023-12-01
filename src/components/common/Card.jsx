@@ -1,30 +1,39 @@
-import React from 'react'
+import React from 'react';
 import ImageCarousel from './ImageCarousel';
 import HeartIcon from '../icons/HeartIcon';
 import CrossIcon from '../icons/CrossIcon';
 import CardDetails from './CardDetails';
 
+// ToDo Handle key presses
+
 const Card = ({ userInfo, handleReject, handleLike }) => {
-    return (
-        <div className='w-full h-full flex flex-col items-center relative md:w-1/3'>
-            
-            <ImageCarousel images={userInfo.profilePictures}/>
+	return (
+		<div className="relative w-full h-full flex flex-col items-center md:w-1/3 md:rounded-lg md:border-2">
+			<ImageCarousel
+				images={userInfo.profilePictures}
+				handleLike={handleLike}
+				handleReject={handleReject}
+			/>
 
-            <CardDetails userInfo={userInfo} />
-            
-            <div className='absolute bottom-0 w-full flex justify-evenly items-center pb-4 z-10'>
-                <span className='p-3 border-red-500 border-4 rounded-full cursor-pointer' onClick={handleLike}>
-                    <HeartIcon />
-                </span>
-                
-                <span className='p-3 border-blue-600 border-4 rounded-full cursor-pointer' onClick={handleReject}>
-                    <CrossIcon />
-                </span>
-            </div>
-        </div>
-    )
-}
+			<CardDetails userInfo={userInfo} />
 
-export default Card
+			<div className="absolute bottom-0 w-full flex justify-evenly items-center pb-6 z-10">
+				<span
+					className="p-3 border-purple-500 border-4 rounded-full cursor-pointer"
+					onClick={handleLike}
+				>
+					<HeartIcon />
+				</span>
 
+				<span
+					className="p-3 border-my-orange border-4 rounded-full cursor-pointer"
+					onClick={handleReject}
+				>
+					<CrossIcon />
+				</span>
+			</div>
+		</div>
+	);
+};
 
+export default Card;

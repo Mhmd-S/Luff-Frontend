@@ -8,7 +8,7 @@ const Profile = () => {
   const { user } = useProfile()
 
   return (
-    <div className='w-full h-full flex bg-[rgb(251,251,251)]'>
+    <div className='w-full h-full flex p-2'>
       
       <div className='hidden md:block mt-2 text-slate-900 w-1/3 p-8'>
         <h1 className='text-bold text-4xl underline'>

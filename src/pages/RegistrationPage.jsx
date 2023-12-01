@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 const RegistrationPage = () => {
 	return (
-		<div className="w-screen h-screen overflow-x-hidden  relative bg-[#fafafa] flex flex-col">
-			<div className="w-ful h-20 flex justify-center items-center">
-				<img src="./logo1.png" alt="logo" className="h-1/2 " />
-				<h1 className=" text-4xl font-8bit font-bold text-purple-500">
+		<div className="w-screen h-screen overflow-x-hidden  relative bg-[#fafafa] flex flex-col justify-center items-center">
+			<div className="w-full h-24 flex justify-center items-center">
+				<img src="./logo1.png" alt="logo" className="h-3/4" />
+				<h1 className=" text-5xl font-8bit font-bold text-purple-500">
 					LUFF
 				</h1>
 			</div>

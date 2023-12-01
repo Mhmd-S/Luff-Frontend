@@ -8,7 +8,6 @@ import ErrorPage from './pages/ErrorPage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
-import HomePage from './pages/HomePage';
 import Root from './pages/Root';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import RequestResetPasswordPage from './pages/RequestResetPasswordPage';
@@ -17,6 +16,7 @@ import Landing from './pages/Landing';
 import Profile from './components/profile/Profile';
 import Chat from './components/chat/Chat';
 import { NotificationProvider } from './contexts/useNotificationContext';
+import Matching from './components/matching/Matching';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/home',
-        element: <HomePage />,
+        element: <Matching />,
       },
       {
         path: '/settings',
@@ -48,11 +48,6 @@ const router = createBrowserRouter([
         element: <Chat />,
         errorElement: <ErrorPage />,
       },
-      // {
-      //   path: 'discover',
-      //   element: <DiscoverPage />,
-      //   errorElement: <ErrorPage />,
-      // },
     ]
   },
   {

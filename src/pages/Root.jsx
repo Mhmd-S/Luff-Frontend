@@ -29,16 +29,16 @@ const Root = () => {
     }, [user])
 
   return (
-        <div className='w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[10%_90%] md:grid-rows-1 items-center'>
+        <div className='w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[10%_90%] md:grid-rows-1 items-center place-items-center'>
             
-            <div className="md:order-2 w-full h-full">
+            <div className="md:order-2 w-full h-full md:bg-[#f0f2f4]">
                 <Outlet />
-            </div>
+            </div>  
 
-            <ul className='w-full h-full sticky py-3 border-t-[1px] border-slate-400 bottom-0 bg-[#fafafa] flex flex-row justify-evenly items-center md:order-1 md:flex-col md:border-r-[1px] md:border-t-0'>
+            <ul className='w-full h-full sticky border-t-[1px] bottom-0 flex flex-row justify-evenly items-center  md:flex-col '>
 
-                <li className="hidden md:inline">
-                    Logo
+                <li className="hidden md:flex md:items-center md:justify-center">
+                    <img src='./logo1.png' alt='logo' className="w-1/2" />
                 </li>
 
                 <li>
@@ -68,7 +68,7 @@ const Root = () => {
                         <img 
                             src={user.profilePictures[0]} 
                             alt='logo'
-                            className='w-10 h-10 rounded-full border-[1px] border-black'
+                            className='w-10 h-10 rounded-full border-[1px] border-my-orange'
                             />
                     </Link>
                 </li>

@@ -1,36 +1,59 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-const useImageCarousel = (images) => {
+const useImageCarousel = (images, handleLike, handleReject) => {
+	const [profileImages, setProfileImages] = useState([]);
+	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const [ profileImages, setProfileImages ] = useState([]);
+	useEffect(() => {
+		const imagesValues = Object.values(images);
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+		// Gets valid images from the user profile
+		const validImages = imagesValues.filter((image) => {
+			return image !== '';
+		});
 
-  useEffect(() => {
-    const imagesValues = Object.values(images);
+		setProfileImages(validImages);
 
-    // Gets valid images from the user profile
-    const validImages = imagesValues.filter((image) => {
-      return image !== '';
-    })
+		window.addEventListener('keydown', (e) =>
+			handleKeyDown(e, validImages.length)
+		);
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+	}, []);
 
-    setProfileImages(validImages);
-  },[])  
+	const handlePrevClick = () => {
+		setCurrentImageIndex((prevIndex) =>
+			prevIndex === 0 ? profileImages.length - 1 : prevIndex - 1
+		);
+	};
 
-    const handlePrevClick = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? profileImages.length - 1 : prevIndex - 1));
-    };
+	const handleNextClick = () => {
+		setCurrentImageIndex((prevIndex) =>
+			prevIndex === profileImages.length - 1 ? 0 : prevIndex + 1
+		);
+	};
 
-    const handleNextClick = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === profileImages.length - 1 ? 0 : prevIndex + 1));
-    };
+	const handleKeyDown = (e, imagesLength) => {
+		if (e.isTrusted === false) return;
+		if (e.code === 'ArrowLeft') {
+			handleLike();
+		} else if (e.code === 'ArrowRight') {
+			handleReject();
+		} else if (e.code === 'Space') {
+			setCurrentImageIndex((prevIndex) =>
+				prevIndex === imagesLength - 1 ? 0 : prevIndex + 1
+			);
+		}
+	};
 
-  return {
-    profileImages,
-    currentImageIndex,
-    handlePrevClick,
-    handleNextClick
-  }
-}
+	return {
+		profileImages,
+		currentImageIndex,
+		handlePrevClick,
+		handleNextClick,
+		handleKeyDown,
+	};
+};
 
-export default useImageCarousel
+export default useImageCarousel;
