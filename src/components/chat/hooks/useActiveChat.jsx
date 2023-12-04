@@ -93,6 +93,9 @@ const useChatActive = (chatId, recipient) => {
 
         handleReadMessage(data._id);
         
+        // To help with rendering the message
+        data.senderId = data.sender._id;
+
         // Set the new message in the messages
         setMessages((prevMessages) => [ ...prevMessages, data]);
         removeNotification();
@@ -158,7 +161,6 @@ const useChatActive = (chatId, recipient) => {
 
     // Factory function to populate the messages
     const populateMessages = () => {
-        console.log('Message Pop')
         let messagesElements = []
         let messagesReversed = [...messages];
 

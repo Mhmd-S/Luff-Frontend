@@ -19,7 +19,7 @@ const Settings = () => {
 
         <ul className={` overflow-y-scroll w-full h-full grid grid-cols-1 grid-rows-settingsSmallScreen place-items-center gap-14 px-4 ${settingsPage && 'hidden'} [&>li]:my-6 [&>li]:rounded-md [&>li]:border-[1px] [&>li]:h-full [&>li]:w-full [&>li]:flex [&>li]:flex-col [&>li]:justify-between [&>li]:md:w-2/3 md:grid-rows-settingsLargeScreen`}>
 
-          <li className='flex p-8 bg-[#fafafa] flex-col items-center'>
+          <li className='flex p-8 bg-[#fafafa] flex-col items-center md:hidden'>
             <h1 className='w-full font-bold text-4xl'>
               Settings
             </h1>

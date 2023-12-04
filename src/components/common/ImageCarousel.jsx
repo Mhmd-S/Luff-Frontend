@@ -4,14 +4,14 @@ import ChevronLeft from '../icons/ChevronLeft';
 import CarouselIndicator from './CarouselIndicator';
 import useImageCarousel from './hooks/useImageCarousel';
 
-const ImageCarousel = ({ images, handleLike, handleReject }) => {
+const ImageCarousel = ({ images, handleLike, handleReject, dummyCard }) => {
 
     const {
         profileImages,
         currentImageIndex,
         handlePrevClick,
         handleNextClick,
-    } = useImageCarousel(images, handleLike, handleReject);
+    } = useImageCarousel(images, handleLike, handleReject, dummyCard);
 
 	return (
 		<div

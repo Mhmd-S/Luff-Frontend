@@ -4,15 +4,14 @@ import HeartIcon from '../icons/HeartIcon';
 import CrossIcon from '../icons/CrossIcon';
 import CardDetails from './CardDetails';
 
-// ToDo Handle key presses
-
-const Card = ({ userInfo, handleReject, handleLike }) => {
+const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 	return (
-		<div className="relative w-full h-full flex flex-col items-center md:w-1/3 md:rounded-lg md:border-2">
+		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:rounded-lg md:border-2">
 			<ImageCarousel
 				images={userInfo.profilePictures}
 				handleLike={handleLike}
 				handleReject={handleReject}
+				dummyCard={dummyCard}
 			/>
 
 			<CardDetails userInfo={userInfo} />

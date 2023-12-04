@@ -4,10 +4,10 @@ import { convertDateShort } from '../../utils/Utils'
 const MessageUser = ({ message }) => {
   return (
     <div key={message._id} className='max-w-[90%] text-white flex flex-col items-end ml-[15%] p-2'>
-        <div className='max-w-full break-words bg-slate-900 px-4 py-2 self-end rounded-xl'>
+        <div className='max-w-full break-words bg-purple-600 px-4 py-2 self-end rounded-xl'>
           {message.content}
         </div>
-        <div className='text-[0.7rem] text-black'>
+        <div className='text-[0.7rem]'>
           {convertDateShort(message.createdAt)}
         </div>
     </div>

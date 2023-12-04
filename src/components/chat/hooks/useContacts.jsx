@@ -1,179 +1,188 @@
-import  { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import chatAPI from '../../../api/chatAPI';
 import { useAuth } from '../../../contexts/useAuthContext';
-import { socket} from '../../../socket-io/socket';
+import { socket } from '../../../socket-io/socket';
 import Contact from '../Contact';
 import LoadingIcon from '../../icons/LoadingIcon';
 
-const useContacts = ( setChatId, setRecipient ) => {
-    const [chats, setChats] = useState([]);
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
-    const [stopFetching, setStopFetching] = useState(false);
-    const [error, setError ] = useState(null);
+const useContacts = (setChatId, setRecipient) => {
+	const [chats, setChats] = useState([]);
+	const [page, setPage] = useState(1);
+	const [loading, setLoading] = useState(false);
+	const [stopFetching, setStopFetching] = useState(false);
+	const [error, setError] = useState(null);
 
-    const { user } = useAuth();
+	const { user } = useAuth();
 
-    const containerRef = useRef(null);
+	const containerRef = useRef(null);
 
-    // Handle the response from the fetch request
-    const handleFetchResponse = (res) => {
+	// Handle the response from the fetch request
+	const handleFetchResponse = (res) => {
+		if (res == null) {
+			return;
+		}
 
-        if (res == null) {
-            return;
-        }
+		if (res.status !== 200) {
+			setError('A problem was encountered. Try again later');
+			return;
+		}
 
-        if (res.status !== 200) {
-          setError(
-            'A problem was encountered. Try again later'
-          );
-          return;
-        }
+		setError(null);
 
-        setError(null);
+		if (res.data.data.length === 0) {
+			setStopFetching(true);
+		} else {
+			setPage(page + 1);
+			setChats([...chats, ...res.data.data]);
+		}
+	};
 
-        if (res.data.data.length === 0) {
-          setStopFetching(true);
-        } else {
-          setPage(page + 1);
-          setChats([...chats, ...res.data.data]);
-        }
-    };
+	// Fetch chats
+	const fetchChats = async () => {
+		const res = await chatAPI.getChats(page);
 
-    // Fetch chats
-    const fetchChats = async () => {
-    
-      const res = await chatAPI.getChats(page);
+		setLoading(true);
+		handleFetchResponse(res);
+		setLoading(false);
+	};
 
-      setLoading(true);
-      handleFetchResponse(res);
-      setLoading(false);
-    };
+	// Handle socket messages
+	const handleSocketMessage = (data) => {
+		const { chatId, sender, recipient, content, createdAt } = data;
+		console.log(data);
+		// Search if the chat is in the chats array
+		setChats((prevChats) => {
+			const chatIndex = prevChats.findIndex(
+				(chat) => chat._id === chatId
+			);
+			
+			// Creates a new objects with the updated last message
+			const updatedChat = {
+				_id: chatId,
+				participants: [sender, recipient],
+				lastMessage: {
+					content: content,
+					seenBy: [sender._id],
+					updatedAt: createdAt,
+				},
+			};
 
-    // Handle socket messages
-    const handleSocketMessage = (data) => {
+			// The problem is when I recieve a message that i send, I get my own data but only the user's Id. bcz the object is integrated to be sent one way only
 
-      const { chatId, sender, recipient, content, createdAt } = data;
-    
-      setChats((prevChats) => {
-        const chatIndex = prevChats.findIndex((chat) => chat._id === chatId);
-  
-        const updatedChat = {
-          _id: chatId, 
-          participants: [sender, recipient],
-          lastMessage: {
-            content: content,
-            seenBy: [sender._id],
-            updatedAt: createdAt,
-          },
-        };
-    
-        if (chatIndex !== -1) {
-          prevChats.splice(chatIndex, 1);
-        }
-    
-        prevChats.unshift(updatedChat);
-    
-        return [...prevChats];
-      });
-    };
+			// Deletes the old chats position in the contacts array
+			if (chatIndex !== -1) {
+				prevChats.splice(chatIndex, 1);
+			}
 
-    // Initail fetch and setting up
-    useEffect(()=>{
-        // Fetch chats on mount
-        fetchChats();
+			// Inserts the chat in the beggining of the array
+			prevChats.unshift(updatedChat);
 
-        // Listen for new messages
-        socket.on('sent-message', handleSocketMessage);
-        socket.on('receive-message', handleSocketMessage);
-      
-        // Cleanup
-        return () => {
-          socket.off('sent-message', handleSocketMessage);
-          socket.off('receive-message', handleSocketMessage);
-        };
-        
-    },[])
+			return [...prevChats];
+		});
+	};
 
-    // Setting up the intersection observer
-    useEffect(() => {
-      const container = containerRef.current;
-    
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1,
-      };
-    
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting && !stopFetching) {
-            fetchChats();
-          }
-        },
-        options
-      );
-    
-      if (container) {
-        observer.observe(container);
-      }
-    
-      return () => {
-        observer.disconnect();
-      };
-    }, [chats, stopFetching]);
-      
-    // Populate chats
-    const populateChats = () => {
+	// Initail fetch and setting up
+	useEffect(() => {
+		// Fetch chats on mount
+		fetchChats();
 
-        if (error) {
-            return(
-                <div className='p-2 text-center h-full flex flex-col justify-center items-center'>
-                    {error}
-                </div>
-            )
-        }
+		// Listen for new messages
+		socket.on('sent-message', handleSocketMessage);
+		socket.on('receive-message', handleSocketMessage);
 
-        if (chats.length === 0) { 
-            return (
-                <div className='p-2 text-center h-full flex flex-col justify-center items-center'>No chats found</div>
-            );
-        }
+		// Cleanup
+		return () => {
+			socket.off('sent-message', handleSocketMessage);
+			socket.off('receive-message', handleSocketMessage);
+		};
+	}, []);
 
-        const chatsEle = chats.map((chat) => {
-          
-          // Looks for the sender which is found in the participants array as an user object.
-          const contactInfo = chat.participants[0]?._id === user._id ? chat.participants[1] : chat.participants[0];
+	// Setting up the intersection observer
+	useEffect(() => {
+		const container = containerRef.current;
 
-          return (
-              <Contact key={chat._id} chat={chat} contactInfo={contactInfo} setRecipient={setRecipient} setChatId={setChatId} />    
-          );
-        });
-    
-        return (
-            <div className='w-full h-full overflow-y-auto'>
-                
-                {chatsEle}
+		const options = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.1,
+		};
 
-                {loading && 
-                    <div className='p-2 text-center'>
-                        <LoadingIcon />
-                    </div>
-                }
-                
-                <div ref={containerRef} className='border-[1px] border-transparent'></div>
-            </div>
-        );
+		const observer = new IntersectionObserver(([entry]) => {
+			if (entry.isIntersecting && !stopFetching) {
+				fetchChats();
+			}
+		}, options);
 
-    }
+		if (container) {
+			observer.observe(container);
+		}
 
-    return {
-        chats,
-        loading,
-        error,
-        containerRef,
-        populateChats
-    }
+		return () => {
+			observer.disconnect();
+		};
+	}, [chats, stopFetching]);
+
+	// Populate chats
+	const populateChats = () => {
+		if (error) {
+			return (
+				<div className="p-2 text-center h-full flex flex-col justify-center items-center">
+					{error}
+				</div>
+			);
+		}
+
+		if (chats.length === 0) {
+			return (
+				<div className="p-2 text-center h-full flex flex-col justify-center items-center">
+					No chats found
+				</div>
+			);
+		}
+
+		const chatsEle = chats.map((chat) => {
+			// Looks for the sender which is found in the participants array as an user object.
+			const contactInfo =
+				chat.participants[0]?._id === user._id
+					? chat.participants[1]
+					: chat.participants[0];
+
+			return (
+				<Contact
+					key={chat._id}
+					chat={chat}
+					contactInfo={contactInfo}
+					setRecipient={setRecipient}
+					setChatId={setChatId}
+				/>
+			);
+		});
+
+		return (
+			<div className="w-full h-full overflow-y-auto">
+				{chatsEle}
+
+				{loading && (
+					<div className="p-2 text-center">
+						<LoadingIcon />
+					</div>
+				)}
+
+				<div
+					ref={containerRef}
+					className="border-[1px] border-transparent"
+				></div>
+			</div>
+		);
+	};
+
+	return {
+		chats,
+		loading,
+		error,
+		containerRef,
+		populateChats,
+	};
 };
 
 export default useContacts;

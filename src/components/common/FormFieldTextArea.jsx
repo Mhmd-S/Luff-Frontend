@@ -12,7 +12,7 @@ const FormFieldTextArea = ({
   ...inputProps
 }) => {
   return (
-    <div className='w-full flex flex-col p-2'>
+    <div className='w-full flex flex-col'>
       
       <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
         {label}

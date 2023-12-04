@@ -29,7 +29,7 @@ const ChangeBio = ({ handleGoBack }) => {
 
         <FormFieldTextArea 
             type='text' 
-            name='Bio' 
+            name='bio' 
             register={register}
             errors={errors}
             placeholder='Bio'
@@ -41,8 +41,8 @@ const ChangeBio = ({ handleGoBack }) => {
                   message: 'Bio must be at least 3 characters'
                 },
                 maxLength: {
-                  value: 100,
-                  message: 'Bio must be at most 100 characters'
+                  value: 250,
+                  message: 'Bio must be at most 250 characters'
                 }
               }
             }
@@ -50,7 +50,7 @@ const ChangeBio = ({ handleGoBack }) => {
             />
       </div>
 
-      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4 border-t-[1px]'>
+      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4 border-t-[1px] md:bg-transparent md:border-t-0 md:border-b-2'>
         <FormButton2 text='Save' />
       </div>
 

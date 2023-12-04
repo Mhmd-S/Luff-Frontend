@@ -13,7 +13,7 @@ const Chat = () => {
   } = useChat();
 
   return (
-    <div className='w-full h-full flex justify-center items-center py-2'>
+    <div className='w-full h-full flex justify-center items-center'>
         {chatId && recipient 
         ?
           <ActiveChat setRecipient={setRecipient} setChatId={setChatId} chatId={chatId} recipient={recipient} />

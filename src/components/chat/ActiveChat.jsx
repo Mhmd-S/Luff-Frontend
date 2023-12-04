@@ -18,7 +18,7 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
   } = useActiveChat(chatId, recipient);
 
   return (
-      <div className='relative w-full bg-slate-900 h-full grid grid-rows-[10%_77%_13%] grid-cols-1 md:w-1/3 md:shadow-lg md:border-slate-900 md:rounded-md'>
+      <div className='relative w-full bg-purple-600 h-full grid grid-rows-[10%_77%_13%] grid-cols-1 md:border-slate-900 md:rounded-md md:w-2/5'>
 
         <div className='w-full h-full flex items-center py-6 text-white'>
 

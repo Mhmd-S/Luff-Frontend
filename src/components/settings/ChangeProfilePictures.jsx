@@ -34,7 +34,7 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
         
         <FormGeneralError error={generalError} />
         
-        <div className={`w-full h-[80%] p-2 grid grid-cols-[40%_40%] grid-rows-3 justify-center items-center place-items-center gap-6 md:w-3/5 md:grid-cols-[20%_20%_20%] md:grid-rows-2`}>
+        <div className={`w-full h-[80%] p-2 grid grid-cols-[40%_40%] grid-rows-3 justify-center items-center place-items-center gap-6 md:w-4/6 md:h-[70%] md:grid-cols-[20%_20%_20%] md:grid-rows-2`}>
             
             <FileEditField 
                 type='file' 

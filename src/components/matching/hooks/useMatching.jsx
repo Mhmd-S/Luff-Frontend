@@ -32,6 +32,7 @@ const useMatching = () => {
 		setLoading(true);
 		const result = await userAPI.likeUser(id);
 		console.log(result);
+		console.log(id)
 		if (result.data?.data) {
 			setMatched(result.data.data);
 		}
@@ -71,7 +72,7 @@ const useMatching = () => {
 
 		if (!user?._id) {
 			return (
-				<div className="relative w-full h-full flex flex-col items-center justify-center bg-white md:w-1/3 md:rounded-lg md:border-2">
+				<div className="relative w-full h-full flex flex-col items-center justify-center bg-white md:w-2/5 md:rounded-lg md:border-2">
 					<FontAwesomeIcon
 						icon={faSkullCrossbones}
 						className="text-8xl text-purple-300"
@@ -79,7 +80,7 @@ const useMatching = () => {
 					<h3 className="text-3xl text-purple-300 text-center mt-4 px-3">
 						No more users to show!
 					</h3>
-                </div>
+				</div>
 			);
 		}
 

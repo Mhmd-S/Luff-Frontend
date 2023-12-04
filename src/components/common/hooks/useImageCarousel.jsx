@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const useImageCarousel = (images, handleLike, handleReject) => {
+const useImageCarousel = (images, handleLike, handleReject, dummyCard) => {
 	const [profileImages, setProfileImages] = useState([]);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -35,7 +35,7 @@ const useImageCarousel = (images, handleLike, handleReject) => {
 	};
 
 	const handleKeyDown = (e, imagesLength) => {
-		if (e.isTrusted === false) return;
+		if (e.isTrusted === false || dummyCard) return;
 		if (e.code === 'ArrowLeft') {
 			handleLike();
 		} else if (e.code === 'ArrowRight') {
