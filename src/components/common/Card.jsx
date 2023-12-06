@@ -6,7 +6,7 @@ import CardDetails from './CardDetails';
 
 const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 	return (
-		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:rounded-xl md:border-2">
+		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:hidden">
 			<ImageCarousel
 				images={userInfo.profilePictures}
 				handleLike={handleLike}

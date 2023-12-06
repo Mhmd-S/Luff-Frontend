@@ -1,16 +1,15 @@
-import FormButton from '../common/FormButton';
-import SettingsMenu from './SettingsMenu';
-import useSettings from './hooks/useSettings';
-import ChangeProfilePictures from './ChangeProfilePictures';
 import ChangeBio from './ChangeBio';
 import ChangeGender from './ChangeGender';
 import ChangeOrientation from './ChangeOrientation';
 import FormButton2 from '../common/FormButton2';
+import { useAuth } from '../../contexts/useAuthContext';
 
 const SettingsDesktop = ({ setShowImagesEditor }) => {
+	const { user } = useAuth();
+
 	return (
 		<div className="w-full h-full flex flex-col py-2 ">
-			<h3 className=" w-fit ml-3 mt-3 border-b-2 border-purple-500 font-bold text-xl">
+			<h3 className=" w-fit ml-3 border-b-2 border-purple-500 font-bold text-xl">
 				Profile and Settings
 			</h3>
 			<ul
@@ -28,7 +27,10 @@ const SettingsDesktop = ({ setShowImagesEditor }) => {
 					</div>
 
 					<div className="w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4  border-t-[1px]  md:bg-transparent md:border-t-0 md:border-b-2">
-						<FormButton2 text="Modify Profile Pictures" onClick={() => setShowImagesEditor(true)}/>
+						<FormButton2
+							text="Modify Profile Pictures"
+							onClick={() => setShowImagesEditor(true)}
+						/>
 					</div>
 				</li>
 

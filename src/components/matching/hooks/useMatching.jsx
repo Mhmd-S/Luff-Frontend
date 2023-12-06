@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../common/Card';
+import CardDekstop from '../../common/CardDesktop';
 import { userAPI } from '../../../api/userAPI';
 import Matched from '../../common/Matched';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +11,7 @@ const useMatching = () => {
 	const [users, setUsers] = useState([]);
 	const [matched, setMatched] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [viewPortWidth, setViewPortWidth] = useState(window.innerWidth);
 	const [err, setErr] = useState(null);
 
 	const fetchUsers = async () => {
@@ -26,13 +28,24 @@ const useMatching = () => {
 
 	useEffect(() => {
 		fetchUsers(); // Call the fetchUsers function to initiate the data fetching
+		const handleResize = () => {
+			setViewPortWidth(window.innerWidth);
+		};
+
+		// Add event listener for window resize
+		window.addEventListener('resize', handleResize);
+
+		// Remove event listener on component unmount
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
 	}, []);
 
 	const handleLike = async (id) => {
 		setLoading(true);
 		const result = await userAPI.likeUser(id);
 		console.log(result);
-		console.log(id)
+		console.log(id);
 		if (result.data?.data) {
 			setMatched(result.data.data);
 		}
@@ -84,7 +97,14 @@ const useMatching = () => {
 			);
 		}
 
-		return (
+		return viewPortWidth > 768 ? (
+			<CardDekstop
+				userInfo={user}
+				key={user._id}
+				handleLike={() => handleLike(user._id)}
+				handleReject={() => handleReject(user._id)}
+			/>
+		) : (
 			<Card
 				userInfo={user}
 				key={user._id}
