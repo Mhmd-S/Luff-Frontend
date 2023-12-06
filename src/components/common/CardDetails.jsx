@@ -15,7 +15,7 @@ const CardDetails = ({ userInfo }) => {
     } = useCardDetails();
 
     return (
-      <div className={`w-full flex flex-col absolute ${openCard ?'text-black h-fit bottom-0 pb-20 bg-white' : 'text-white bottom-0 mb-20'} z-10`}>
+      <div className={`w-full flex flex-col absolute ${openCard ?'text-black h-fit bottom-0 pb-20 bg-white' : 'text-white bottom-0 mb-20'} z-10 md:rounded-b-xl`}>
             <div className={`w-full flex items-center p-4 ${openCard ? 'border-y-2 border-black' : 'mb-7'}`}>
                 <p className={`text-4xl font-bold`}>
                     {userInfo.name}
@@ -35,7 +35,7 @@ const CardDetails = ({ userInfo }) => {
                     }
                 </div>
             </div>
-            <p className={`${!openCard &&  'hidden'} p-3 py-6 `}>
+            <p className={`${!openCard &&  'hidden'} p-3 mb-10`}>
                 {userInfo.bio}  
             </p>
       </div>

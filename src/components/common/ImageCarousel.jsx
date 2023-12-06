@@ -15,7 +15,7 @@ const ImageCarousel = ({ images, handleLike, handleReject, dummyCard }) => {
 
 	return (
 		<div
-			className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 after:md:rounded-md"
+			className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 after:md:rounded-xl"
 		>
 			{/* Images indicator */}
 			<div className="w-full top-0 absolute h-fit z-10">
@@ -27,7 +27,7 @@ const ImageCarousel = ({ images, handleLike, handleReject, dummyCard }) => {
 
 			{/* User's Picutre */}
 			<img
-				className="w-full h-full object-cover md:rounded-md"
+				className="w-full h-full object-cover md:rounded-xl"
 				src={profileImages[currentImageIndex]}
 				alt={`Image ${currentImageIndex}`}
 			/>

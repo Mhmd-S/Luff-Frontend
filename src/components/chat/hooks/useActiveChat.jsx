@@ -1,205 +1,194 @@
-import  { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import chatAPI from '../../../api/chatAPI';
 import { useAuth } from '../../../contexts/useAuthContext';
-import { socket} from '../../../socket-io/socket';
+import { socket } from '../../../socket-io/socket';
 import MessageUser from '../MessageUser';
 import { generateUUID } from '../../../utils/uuid';
 import MessageContact from '../MessageContact';
 import { useNotification } from '../../../contexts/useNotificationContext';
 
-
 const useChatActive = (chatId, recipient) => {
+	const [messages, setMessages] = useState([]);
+	const [page, setPage] = useState(1);
+	const [loading, setLoading] = useState(true);
+	const [stopFetching, setStopFetching] = useState(false);
+	const [error, setError] = useState(null);
 
-    const [messages, setMessages] = useState([]);
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(true);
-    const [stopFetching, setStopFetching] = useState(false);
-    const [error, setError] = useState(null);   
+	// Refs
+	const topRef = useRef(null);
+	const bottomRef = useRef(null);
+	const chatWindowRef = useRef(null);
 
-    // Refs
-    const topRef = useRef(null);
-    const bottomRef = useRef(null);
-    const chatWindowRef = useRef(null);
+	// Contexts
+	const { user } = useAuth();
+	const { removeNotification } = useNotification();
 
-    // Contexts
-    const { user } = useAuth();
-    const { removeNotification } = useNotification();
+	// Reset the messages when the chatId changes
+	useEffect(() => {
+		// Setup sockets
+		socket.on('receive-message', handleRecieveMessage);
+		socket.on('sent-message', handleSentMessage);
 
+		const topOfChat = topRef.current;
 
-    // Reset the messages when the chatId changes
-    useEffect( ()=> {
-    
-      // Setup sockets
-      socket.on('receive-message', handleRecieveMessage)    
+		const options = {
+			root: chatWindowRef.current,
+			rootMargin: '300px',
+			threshold: 0.5,
+		};
 
-      const topOfChat = topRef.current;
+		const observer = new IntersectionObserver(async ([entry]) => {
+			if (entry.isIntersecting) {
+				if (stopFetching) {
+					return;
+				}
+				await fetchChat();
+			}
+		}, options);
 
-      const options = {
-          root: chatWindowRef.current,
-          rootMargin: '300px',
-          threshold: 0.5,
-      };
+		if (topOfChat) {
+			observer.observe(topOfChat);
+		}
 
-      const observer = new IntersectionObserver(
-          async([entry]) => {
-              if (entry.isIntersecting) {
-                if (stopFetching) {
-                    return;
-                }
-                  await fetchChat()
-              }
-          },
-          options
-      );
+		return () => {
+			observer.disconnect(),
+				socket.off('receive-message', handleRecieveMessage);
+			socket.off('sent-message', handleSentMessage);
+		};
+	}, [chatId, recipient, page, stopFetching]);
 
-      if (topOfChat) {
-          observer.observe(topOfChat);
-      }
+	useLayoutEffect(() => {
+		if (
+			page === 2 ||
+			messages[messages.length - 1]?.senderId === user._id
+		) {
+			// Scroll to the bottom instantly when page is 2
+			bottomRef.current?.scrollIntoView({ behavior: 'instant' });
+		} else {
+			// Keep scroll in the same position
+			const chatWindow = chatWindowRef.current;
 
-      return () => {
-        observer.disconnect(),
-        socket.off('receive-message', handleRecieveMessage)    
-      }
+			if (chatWindow) {
+				const currentScrollTop = chatWindow.scrollTop;
 
-    }, [chatId, recipient, page, stopFetching])
+				// Calculate the new scroll position based on the current scroll top
+				const newScrollTop =
+					topRef.current?.offsetTop + bottomRef.current?.offsetHeight;
 
-    useLayoutEffect(() => {
+				// Set the scroll position
+				chatWindow.scrollTo({ top: newScrollTop, behavior: 'smooth' });
 
-      if (page === 2) {
-          // Scroll to the bottom instantly when page is 2
-          bottomRef.current?.scrollIntoView({ behavior: "instant" });
-      } else {
-          // Keep scroll in the same position
-          const chatWindow = chatWindowRef.current;
+				// Restore the original scroll position if needed
+				chatWindow.scrollTop = currentScrollTop;
+			}
+		}
+	}, [page, messages]);
 
-          if (chatWindow) {
-              const currentScrollTop = chatWindow.scrollTop;
-  
-              // Calculate the new scroll position based on the current scroll top
-              const newScrollTop = topRef.current?.offsetTop + bottomRef.current?.offsetHeight;
-  
-              // Set the scroll position
-              chatWindow.scrollTo({ top: newScrollTop, behavior: "instant" });
-  
-              // Restore the original scroll position if needed
-              chatWindow.scrollTop = currentScrollTop;
-          }
-      }
+	const handleRecieveMessage = (data) => {
+		handleReadMessage(data._id);
 
-  }, [page, messages]);
-     
+		// To help with rendering the message
+		data.senderId = data.sender._id;
 
-    const handleRecieveMessage = (data) => {
+		// Set the new message in the messages
+		setMessages((prevMessages) => [...prevMessages, data]);
+		removeNotification();
+	};
 
-        handleReadMessage(data._id);
-        
-        // To help with rendering the message
-        data.senderId = data.sender._id;
+	const handleSentMessage = (data) => {
+		setMessages((prevMessages) => [...prevMessages, data]);
+	};
 
-        // Set the new message in the messages
-        setMessages((prevMessages) => [ ...prevMessages, data]);
-        removeNotification();
+	const handleReadMessage = (messageId) => {
+		socket.emit('read-message', {
+			messageId: messageId,
+		});
+	};
 
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+	const fetchChat = async () => {
+		if (stopFetching || !recipient || !chatId) {
+			return;
+		}
 
-    }
+		setLoading(true);
 
-    const handleReadMessage = (messageId) => {
+		const res = await chatAPI.getChat(chatId, page);
 
-        socket.emit('read-message', {
-            messageId: messageId,
-        });
+		// If there is an error
+		if (res.status !== 200) {
+			setError(
+				<div className="p-2 text-center h-full flex flex-col justify-center items-center">
+					A problem was encounterd. Try again later
+				</div>
+			);
+			setLoading(false);
+			return;
+		}
 
-    }
+		if (error) {
+			setError(null);
+		}
 
-    const fetchChat = async() => {
-        if (stopFetching || !recipient || !chatId) {
-          return;
-        }       
+		// If there are no messages, stop future fetching
+		if (!res.data.data?.messages) {
+			setLoading(false);
+			setStopFetching(true);
+			return;
+		}
 
-        setLoading(true);   
-        
-        const res = await chatAPI.getChat(chatId, page);    
+		// If the number of messages is less than 20, stop future fetching
+		if (res.data.data.messages.length < 30) {
+			setLoading(false);
+			setStopFetching(true);
+		}
 
-        // If there is an error
-        if (res.status !== 200) {
-          setError(<div className='p-2 text-center h-full flex flex-col justify-center items-center'>A problem was encounterd. Try again later</div>);
-          setLoading(false);
-          return;
-        }   
+		// Update message to seen if the last message is not seen by the user
+		for (const mesg in res.data.data.messages) {
+			if (!res.data.data.messages[mesg].seenBy.includes(user._id)) {
+				handleReadMessage(res.data.data.messages[mesg]._id);
+				removeNotification();
+			}
+		}
 
-        if (error) {
-            setError(null);
-        }
-                
-        // If there are no messages, stop future fetching
-        if (!res.data.data?.messages)  {
-          setLoading(false);
-          setStopFetching(true);
-          return;
-        }   
-        
-        // If the number of messages is less than 20, stop future fetching
-        if (res.data.data.messages.length < 30) {
-          setLoading(false);
-          setStopFetching(true);
-        }   
+		setPage((prevPage) => prevPage + 1);
+		setMessages((prevMessages) => [
+			...res.data.data.messages,
+			...prevMessages,
+		]);
+		setLoading(false);
+	};
 
-        // Update message to seen if the last message is not seen by the user
-        for (const mesg in res.data.data.messages) {
-            if (!res.data.data.messages[mesg].seenBy.includes(user._id)) {
-              console.log(res.data.data.messages[mesg]._id, 'read')
-                handleReadMessage(res.data.data.messages[mesg]._id);
-                removeNotification();
-            }
-        }       
+	// Factory function to populate the messages
+	const populateMessages = () => {
+		let messagesElements = [];
+		let messagesReversed = [...messages];
 
-        setPage((prevPage) => prevPage + 1);
-        setMessages((prevMessages) => [...res.data.data.messages, ...prevMessages]);
-        setLoading(false); 
-    }
+		if (messages.length > 0) {
+			messagesElements = messagesReversed.map((message, index) => {
+				if (message.senderId === user._id) {
+					return <MessageUser key={message._id} message={message} />;
+				} else {
+					return (
+						<MessageContact key={message._id} message={message} />
+					);
+				}
+			});
+		}
 
-    // Factory function to populate the messages
-    const populateMessages = () => {
-        let messagesElements = []
-        let messagesReversed = [...messages];
+		messagesElements.push(<div key={generateUUID()} ref={bottomRef} />);
 
-        if (messages.length > 0) {
-          
-          messagesElements = messagesReversed.map((message, index) => {
+		return messagesElements;
+	};
 
-            if (message.senderId === user._id) {
-              return (
-                <MessageUser key={message._id} message={message} />
-              );
-
-            } else {
-              return (
-                <MessageContact key={message._id} message={message} />
-              );
-            }
-
-          })
-        }
-
-        messagesElements.push(<div key={generateUUID()} ref={bottomRef} />);
-
-        return messagesElements;
-    }
-
-  return {
-    populateMessages,
-    setMessages,
-    topRef,
-    bottomRef,
-    chatWindowRef,
-    loading,
-  };
-
+	return {
+		populateMessages,
+		topRef,
+		bottomRef,
+		chatWindowRef,
+		loading,
+	};
 };
 
 export default useChatActive;
-
-
 
 // Find the suitable ratio of messages and scroll root margin

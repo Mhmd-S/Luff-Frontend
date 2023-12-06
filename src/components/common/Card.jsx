@@ -6,7 +6,7 @@ import CardDetails from './CardDetails';
 
 const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 	return (
-		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:rounded-lg md:border-2">
+		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:rounded-xl md:border-2">
 			<ImageCarousel
 				images={userInfo.profilePictures}
 				handleLike={handleLike}
@@ -16,7 +16,7 @@ const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 
 			<CardDetails userInfo={userInfo} />
 
-			<div className="absolute bottom-0 w-full flex justify-evenly items-center pb-6 z-10">
+			<div className="absolute bottom-0 w-full flex justify-evenly items-center pb-6 z-10 md:border-b-xl">
 				<span
 					className="p-3 border-purple-500 border-4 rounded-full cursor-pointer"
 					onClick={handleLike}

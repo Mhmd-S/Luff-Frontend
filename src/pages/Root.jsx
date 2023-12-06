@@ -57,7 +57,7 @@ const Root = () => {
 	}, [user]);
 
 	return (
-		<div className="w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[27.5%_72.5%] md:grid-rows-1">
+		<div className="w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
 			{/* Desktop Utility Bar */}
 			<DesktopUtilityBar
 				setRecipient={setRecipient}
@@ -65,7 +65,7 @@ const Root = () => {
 				setShowImagesEditor={setShowImagesEditor}
 			/>
 
-			<div className="w-full h-full md:bg-[#f0f2f4] md:flex md:justify-center">
+			<div className="w-full h-full md:bg-[#f0f2f4] md:flex md:justify-center md:py-2">
 				{renderContent()}
 			</div>
 

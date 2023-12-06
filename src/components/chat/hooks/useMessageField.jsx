@@ -3,11 +3,9 @@ import { socket } from '../../../socket-io/socket';
 import { generateUUID } from '../../../utils/uuid';
 import { useAuth } from '../../../contexts/useAuthContext';
 
-const useMessageField = ({ recipient, chatId, setMessages }) => {
+const useMessageField = ({ recipient, chatId }) => {
 
     const [messageInput, setMessageInput] = useState('');
-    
-    const { user } = useAuth();
 
     const sendMessage = () => {
         if (!messageInput) {
@@ -20,12 +18,6 @@ const useMessageField = ({ recipient, chatId, setMessages }) => {
             message: messageInput,
             chatId: chatId,
         });
-
-        // Add the sent message to the local state
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { senderId: user._id, content: messageInput, createdAt: new Date(), chatId: chatId, _id: generateUUID() },
-        ]); 
 
         // Clear the message input
         setMessageInput('');
