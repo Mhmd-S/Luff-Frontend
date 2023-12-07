@@ -4,6 +4,8 @@ import { useAuth } from '../../../contexts/useAuthContext';
 import { socket } from '../../../socket-io/socket';
 import Contact from '../Contact';
 import LoadingIcon from '../../icons/LoadingIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
 const useContacts = (setChatId, setRecipient) => {
 	const [chats, setChats] = useState([]);
@@ -134,8 +136,12 @@ const useContacts = (setChatId, setRecipient) => {
 
 		if (chats.length === 0) {
 			return (
-				<div className="p-2 text-center h-full flex flex-col justify-center items-center">
-					No chats found
+				<div className="p-2 text-center h-full flex flex-col justify-center items-center font-bold">
+					Start matching and chating with people!
+					<FontAwesomeIcon
+						icon={faUserFriends}
+						className="mt-2 text-4xl"
+					/>
 				</div>
 			);
 		}

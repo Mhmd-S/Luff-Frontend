@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Card from '../../common/Card';
 import CardDekstop from '../../common/CardDesktop';
 import { userAPI } from '../../../api/userAPI';
@@ -13,6 +13,8 @@ const useMatching = () => {
 	const [loading, setLoading] = useState(true);
 	const [viewPortWidth, setViewPortWidth] = useState(window.innerWidth);
 	const [err, setErr] = useState(null);
+	const [animateLike, setAnimateLike] = useState(false);
+	const [animateReject, setAnimateReject] = useState(false);
 
 	const fetchUsers = async () => {
 		setLoading(true);
@@ -42,13 +44,24 @@ const useMatching = () => {
 	}, []);
 
 	const handleLike = async (id) => {
-		setLoading(true);
+		if (animateLike || animateReject) {
+			return;
+		}
+
+		setAnimateLike(true);
+
 		const result = await userAPI.likeUser(id);
-		console.log(result);
-		console.log(id);
+
+		setTimeout(() => {
+			setAnimateLike(false);
+		}, 1000);
+
+		setLoading(true);
+
 		if (result.data?.data) {
 			setMatched(result.data.data);
 		}
+
 		setUsers((prev) => prev.filter((user) => user._id !== id));
 
 		if (users.length < 5) {
@@ -59,8 +72,20 @@ const useMatching = () => {
 	};
 
 	const handleReject = async (id) => {
-		setLoading(true);
+		if (animateLike || animateReject) {
+			return;
+		}
+
+		setAnimateReject(true);
+
 		await userAPI.rejectUser(id);
+
+		setTimeout(() => {
+			setAnimateReject(false);
+		}, 1000);
+
+		setLoading(true);
+
 		setUsers((prev) => prev.filter((user) => user._id !== id));
 		if (users.length < 5) {
 			fetchUsers();
@@ -116,6 +141,9 @@ const useMatching = () => {
 
 	return {
 		renderUser,
+		animateLike,
+		animateReject,
+		loading,
 	};
 };
 

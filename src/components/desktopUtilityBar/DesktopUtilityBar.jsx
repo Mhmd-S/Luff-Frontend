@@ -55,7 +55,7 @@ const DesktopUtilityBar = ({
 				)}
 
 				<button
-					className="rounded-full h-fit w-fit bg-white text-[#014751] px-2 py-1 transition-all duration-500 ease-in-out hover:bg-purple-100"
+					className="rounded-full h-fit w-fit bg-white text-red-500 px-2 py-1 transition-all duration-500 ease-in-out hover:bg-purple-100"
 					onClick={logout}
 				>
 					<FontAwesomeIcon icon={faSignOut} />
