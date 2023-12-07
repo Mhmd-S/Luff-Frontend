@@ -83,6 +83,23 @@ const useContacts = (setChatId, setRecipient) => {
 		});
 	};
 
+	const handleSocketMatch = (data) => {
+		console.log(data)
+		setChats((prevChats) => {
+			const { chatId, sender, recipient } = data;
+
+			const updatedChat = {
+				_id: chatId,
+				participants: [sender, recipient],
+				lastMessage: null,
+			};
+
+			prevChats.unshift(updatedChat);
+
+			return [...prevChats];
+		});
+	}
+
 	// Initail fetch and setting up
 	useEffect(() => {
 		// Fetch chats on mount
@@ -91,11 +108,13 @@ const useContacts = (setChatId, setRecipient) => {
 		// Listen for new messages
 		socket.on('sent-message', handleSocketMessage);
 		socket.on('receive-message', handleSocketMessage);
+		socket.on('match', handleSocketMatch)
 
 		// Cleanup
 		return () => {
 			socket.off('sent-message', handleSocketMessage);
 			socket.off('receive-message', handleSocketMessage);
+			socket.off('match', handleSocketMatch);
 		};
 	}, []);
 

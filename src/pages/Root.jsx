@@ -19,6 +19,7 @@ const Root = () => {
 	const [chatId, setChatId] = useState(null);
 	const [showImagesEditor, setShowImagesEditor] = useState(false);
 	//----------------------------
+	
 	const { notificationMessage } = useNotification();
 	const { user } = useAuth();
 

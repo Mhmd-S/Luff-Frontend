@@ -9,7 +9,7 @@ import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 const useMatching = () => {
 	// Fetch users
 	const [users, setUsers] = useState([]);
-	const [matched, setMatched] = useState(null);
+	const [matched, setMatched] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [viewPortWidth, setViewPortWidth] = useState(window.innerWidth);
 	const [err, setErr] = useState(null);
@@ -44,7 +44,7 @@ const useMatching = () => {
 	}, []);
 
 	const handleLike = async (id) => {
-		if (animateLike || animateReject) {
+		if (animateLike || animateReject || matched || loading) {
 			return;
 		}
 
@@ -54,7 +54,7 @@ const useMatching = () => {
 
 		setTimeout(() => {
 			setAnimateLike(false);
-		}, 1000);
+		}, 750);
 
 		setLoading(true);
 
@@ -72,7 +72,7 @@ const useMatching = () => {
 	};
 
 	const handleReject = async (id) => {
-		if (animateLike || animateReject) {
+		if (animateLike || animateReject || matched || loading) {
 			return;
 		}
 
@@ -82,7 +82,7 @@ const useMatching = () => {
 
 		setTimeout(() => {
 			setAnimateReject(false);
-		}, 1000);
+		}, 750);
 
 		setLoading(true);
 
@@ -140,6 +140,7 @@ const useMatching = () => {
 	};
 
 	return {
+		matched,
 		renderUser,
 		animateLike,
 		animateReject,

@@ -29,7 +29,7 @@ const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
 						{contactInfo.name}
 					</p>
 					<p className="text-[0.85rem] md:text-[0.7rem]">
-						{chat.lastMessage &&
+						{chat?.lastMessage &&
 							convertDateLong(chat.lastMessage.updatedAt)}
 					</p>
 				</div>
@@ -37,11 +37,11 @@ const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
 				{/* Last Message */}
 				<div className="w-full text-[#71768b] flex justify-between overflow-hidden truncate md:text-sm">
 					<p className="overflow-hidden truncate w-[90%]">
-						{chat.lastMessage
+						{chat?.lastMessage
 							? chat.lastMessage.content
 							: `You have been matched with ${contactInfo.name}`}
 					</p>
-					{!chat.lastMessage?.seenBy.includes(user._id) && (
+					{!chat?.lastMessage?.seenBy.includes(user._id) && (
 						<span className="w-4 h-4 rounded-full inline-block bg-sky-500 animate-pulse"></span>
 					)}
 				</div>
