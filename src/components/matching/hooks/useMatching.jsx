@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 
 const useMatching = () => {
-	// Fetch users
 	const [users, setUsers] = useState([]);
 	const [matched, setMatched] = useState(false);
 	const [loading, setLoading] = useState(true);

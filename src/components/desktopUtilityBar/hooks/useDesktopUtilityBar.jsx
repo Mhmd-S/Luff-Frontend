@@ -15,13 +15,17 @@ const useDesktopUtilityBar = () => {
             navigate('/profile');
         }
         setShowProfile(!showProfile);
+    }
 
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
     }
 
 	return {
 		showProfile,
 		user,
-		logout,
+	    handleLogout,
 		handleClickShowProfile,
 	};
 };

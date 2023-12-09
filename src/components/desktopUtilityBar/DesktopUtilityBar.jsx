@@ -9,8 +9,12 @@ const DesktopUtilityBar = ({
 	setChatId,
 	setShowImagesEditor,
 }) => {
-	const { user, showProfile, logout, handleClickShowProfile } =
-		useDesktopUtilityBar();
+	const { 
+			user, 
+			showProfile, 
+			handleLogout, 
+			handleClickShowProfile 
+		} = useDesktopUtilityBar();
 
 	return (
 		<div className="hidden w-full h-full md:grid grid-cols-1 grid-rows-[15%_85%]">
@@ -56,7 +60,7 @@ const DesktopUtilityBar = ({
 
 				<button
 					className="rounded-full h-fit w-fit bg-white text-red-500 px-2 py-1 transition-all duration-500 ease-in-out hover:bg-purple-100"
-					onClick={logout}
+					onClick={handleLogout}
 				>
 					<FontAwesomeIcon icon={faSignOut} />
 				</button>

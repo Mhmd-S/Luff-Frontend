@@ -11,7 +11,7 @@ const Settings = () => {
   const { settingsPage, 
           handleClick, 
           displaySettingsPage, 
-          logout,
+          handleLogout,
         } = useSettings();
 
   return (
@@ -77,7 +77,7 @@ const Settings = () => {
             </div>
             
             <div className='w-full h-fit bg-[#fff0f0] flex justify-end py-2 px-4  border-t-[1px] border-[#fad5d5]'>
-              <button onClick={logout} className='w-fit h-fit text-sm py-2 px-3 bg-red-600 text-white rounded-lg'>
+              <button onClick={handleLogout} className='w-fit h-fit text-sm py-2 px-3 bg-red-600 text-white rounded-lg'>
                 Log Out
               </button>
             </div>

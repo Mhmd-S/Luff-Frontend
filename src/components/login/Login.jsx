@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from './LoginForm';
+import useLogin from './hooks/useLogin';
 
 const Login = () => {
 	return (
@@ -16,7 +17,7 @@ const Login = () => {
 				</p>
 			</div>
 
-			<LoginForm />
+			<LoginForm/>
 		</div>
 	);
 };

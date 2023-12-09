@@ -6,9 +6,8 @@ import InitialForm from '../common/InitialForm';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
-	const { register, handleSubmit, onSubmit, generalError, loading, errors } =
+	const { register, handleSubmit, onSubmit, authError, loading, errors } =
 		useLogin();
-
 	return (
 		<div className="w-full h-3/4 flex flex-col bg-white border-[1.5px] border-[#F76301] p-6 rounded-lg shadow-lg md:w-3/5 md:h-[85%]">
 			<h3 className="w-full text-center text-xl">
@@ -18,37 +17,39 @@ const LoginForm = () => {
 				log in.
 			</h3>
 
-			<InitialForm onSubmit={handleSubmit(onSubmit)}>
-				{generalError && <FormGeneralError message={generalError} />}
 
-				<FormField
-					name="email"
-					type="email"
-					register={register}
-					errors={errors}
-					placeholder="Email"
-					validationRules={{
-						required: 'TP email is required',
-						pattern: {
-							value: /^TP[0-9]{6}@mail.apu.edu.my$/,
-							message: 'Invalid TP email',
-						},
-					}}
-				/>
+				<InitialForm onSubmit={handleSubmit(onSubmit)}>
+					{authError && <FormGeneralError message={authError} />}
 
-				<FormField
-					name="password"
-					type="password"
-					register={register}
-					placeholder={'Password'}
-					errors={errors}
-					validationRules={{
-						required: 'Password is required',
-					}}
-				/>
+					<FormField
+						name="email"
+						type="email"
+						register={register}
+						errors={errors}
+						placeholder="Email"
+						validationRules={{
+							required: 'TP email is required',
+							pattern: {
+								value: /^TP[0-9]{6}@mail.apu.edu.my$/,
+								message: 'Invalid TP email',
+							},
+						}}
+					/>
 
-				<FormButton text="Log In" loading={loading} />
-			</InitialForm>
+					<FormField
+						name="password"
+						type="password"
+						register={register}
+						placeholder={'Password'}
+						errors={errors}
+						validationRules={{
+							required: 'Password is required',
+						}}
+					/>
+
+					<FormButton text="Log In" loading={loading} />
+				</InitialForm>
+
 
 			<div className="w-full text-center pt-2 flex flex-col">
 				<span>Forgot your password? </span>

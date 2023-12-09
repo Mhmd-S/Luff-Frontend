@@ -15,10 +15,11 @@ const useSettings = () => {
     const { user, logout } = useAuth();
 
     useEffect(()=>{
+        console.log(user);
         if (!user) {
-            navigate('login');
+            navigate('/login');
         }
-    },[])
+    },[user])
 
     const handleClick = (settingsName) => { 
         setSettingsPage(settingsName);
@@ -26,6 +27,11 @@ const useSettings = () => {
 
     const goToMenu = () => {
         setSettingsPage('');
+    }
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
     }
 
     const displaySettingsPage = () => {
@@ -42,7 +48,7 @@ const useSettings = () => {
         handleClick,
         displaySettingsPage,
         goToMenu,
-        logout,
+        handleLogout,
     }
 }
 

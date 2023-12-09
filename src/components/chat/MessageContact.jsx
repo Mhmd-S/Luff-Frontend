@@ -10,7 +10,7 @@ const MessageContact = ({ message }) => {
 			<div className="text-[0.7rem] text-[#d3d3d4] ">
 				{convertDateShort(message.createdAt)}
 			</div>
-			<div className="max-w-full text-[1.1rem] break-words bg-white shadow-md font-semibold px-5 py-3 self-start rounded-lg">
+			<div className="max-w-full text-[1rem] break-words bg-white shadow-md font-semibold px-5 py-3 self-start rounded-lg">
 				{message.content}
 			</div>
 		</div>

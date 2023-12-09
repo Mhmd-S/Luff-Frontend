@@ -19,11 +19,11 @@ import { NotificationProvider } from './contexts/useNotificationContext';
 import Matching from './components/matching/Matching';
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Landing />,
-    errorElement: <ErrorPage />,
-  },
+  // {
+  //   path: '/',
+  //   element: <Landing />,
+  //   errorElement: <ErrorPage />,
+  // },
   {
     path: '/',
     element: <Root />,
