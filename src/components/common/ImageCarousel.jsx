@@ -7,13 +7,13 @@ import {
 import CarouselIndicator from './CarouselIndicator';
 import useImageCarousel from './hooks/useImageCarousel';
 
-const ImageCarousel = ({ images, handleLike, handleReject, dummyCard }) => {
+const ImageCarousel = ({ images }) => {
 	const {
 		profileImages,
 		currentImageIndex,
 		handlePrevClick,
 		handleNextClick,
-	} = useImageCarousel(images, handleLike, handleReject, dummyCard);
+	} = useImageCarousel(images);
 
 	return (
 		<div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 after:md:rounded-l-xl">

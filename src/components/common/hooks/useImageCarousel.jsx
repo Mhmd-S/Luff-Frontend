@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const useImageCarousel = (images, handleLike, handleReject, dummyCard) => {
+const useImageCarousel = (images) => {
 	const [profileImages, setProfileImages] = useState([]);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -14,11 +14,11 @@ const useImageCarousel = (images, handleLike, handleReject, dummyCard) => {
 
 		setProfileImages(validImages);
 
-		window.addEventListener('keydown', (e) =>
+		window.addEventListener('keyup', (e) =>
 			handleKeyDown(e, validImages.length)
 		);
 		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
+			window.removeEventListener('keyup', handleKeyDown);
 		};
 	}, []);
 
@@ -35,12 +35,9 @@ const useImageCarousel = (images, handleLike, handleReject, dummyCard) => {
 	};
 
 	const handleKeyDown = (e, imagesLength) => {
-		if (e.isTrusted === false || dummyCard) return;
-		if (e.code === 'ArrowLeft') {
-			handleLike();
-		} else if (e.code === 'ArrowRight') {
-			handleReject();
-		} else if (e.code === 'Space') {
+		if (e.isTrusted === false) return;
+
+		if (e.code === 'Space') {
 			setCurrentImageIndex((prevIndex) =>
 				prevIndex === imagesLength - 1 ? 0 : prevIndex + 1
 			);

@@ -3,15 +3,16 @@ import ImageCarousel from './ImageCarousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faX } from '@fortawesome/free-solid-svg-icons';
 import CardDetailsDesktop from './CardDetailsDesktop';
+import useCardDesktop from './hooks/useCardDesktop';
 
 const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
+
+	useCardDesktop(userInfo, handleLike, handleReject, dummyCard);
+
 	return (
 		<div className="hidden md:grid relative w-2/3 h-full grid-cols-2 grid-rows-1">
 			<ImageCarousel
 				images={userInfo.profilePictures}
-				handleLike={handleLike}
-				handleReject={handleReject}
-				dummyCard={dummyCard}
 			/>
 
 			<CardDetailsDesktop userInfo={userInfo} />

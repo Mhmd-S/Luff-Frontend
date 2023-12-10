@@ -19,7 +19,7 @@ const Matching = () => {
 			{loading ? <LoadingIcon /> : renderUser()}
 			{!matched && <ControlsGuide />}
 			{animateLike && (
-				<div className="absolute w-1/12 aspect-square bg-purple-500 rounded-full animate-ping">
+				<div className="absolute w-1/4 md:w-1/12 aspect-square bg-purple-500 rounded-full animate-ping">
 					<FontAwesomeIcon
 						icon={faHeart}
 						className="text-white text-6xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -27,7 +27,7 @@ const Matching = () => {
 				</div>
 			)}
 			{animateReject && (
-				<div className="absolute w-1/12 aspect-square bg-my-orange rounded-full animate-ping">
+				<div className="absolute w-1/4 md:w-1/12 aspect-square bg-my-orange rounded-full animate-ping">
 					<FontAwesomeIcon
 						icon={faTimes}
 						className="text-white text-6xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"

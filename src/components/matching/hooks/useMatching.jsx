@@ -42,11 +42,15 @@ const useMatching = () => {
 		};
 	}, []);
 
+	const timeout = (ms) =>
+		new Promise((resolve) => {
+			setTimeout(resolve, ms);
+		});
+
 	const animateLikeHandler = async () => {
 		setAnimateLike(true);
-		setTimeout(() => {
-			setAnimateLike(false);
-		}, 750);
+		await timeout(500);
+		setAnimateLike(false);
 	};
 
 	const handleLike = async () => {
@@ -65,7 +69,7 @@ const useMatching = () => {
 				setMatched(result.data.data);
 			}
 
-			setUsers((prev) => prev.slice(1));
+			setUsers((prev) => prev.filter((user) => user._id !== users[0]._id));
 
 			if (users.length < 5) {
 				await fetchUsers();
@@ -80,9 +84,8 @@ const useMatching = () => {
 
 	const animateRejectHandler = async () => {
 		setAnimateReject(true);
-		setTimeout(() => {
-			setAnimateReject(false);
-		}, 750);
+		await timeout(500);
+		setAnimateReject(false);
 	};
 
 	const handleReject = async () => {
@@ -96,7 +99,7 @@ const useMatching = () => {
 
 		try {
 			await userAPI.rejectUser(users[0]._id);
-			setUsers((prev) => prev.slice(1));
+			setUsers((prev) => prev.filter((user) => user._id !== users[0]._id));
 
 			if (users.length < 5) {
 				await fetchUsers();
