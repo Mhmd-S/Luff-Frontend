@@ -2,6 +2,7 @@ import FormButton from '../common/FormButton'
 import SettingsMenu from './SettingsMenu'
 import useSettings from './hooks/useSettings'
 import ChangeProfilePictures from './ChangeProfilePictures';
+import FormButton2 from '../common/FormButton2';
 import ChangeBio from './ChangeBio';
 import ChangeGender from './ChangeGender';
 import ChangeOrientation from './ChangeOrientation';
@@ -43,9 +44,7 @@ const Settings = () => {
             </div>
             
             <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4  border-t-[1px]'>
-              <button onClick={()=>handleClick('ChangeProfilePictures')} className='w-fit h-fit text-sm py-2 px-3 bg-slate-900 text-white rounded-lg'>
-                Modify Profile Pictures
-              </button>
+              <FormButton2 onClick={()=>handleClick('ChangeProfilePictures')} text='Modify Profile Pictures'/>
             </div>
 
           </li>

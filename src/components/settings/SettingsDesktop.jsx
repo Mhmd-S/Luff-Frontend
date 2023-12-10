@@ -13,7 +13,7 @@ const SettingsDesktop = ({ setShowImagesEditor }) => {
 				Profile and Settings
 			</h3>
 			<ul
-				className={` overflow-y-auto w-full h-full grid grid-cols-1 grid-rows-[repeat(4,55%)] place-items-center [&>*]:w-full`}
+				className={` overflow-y-auto w-full h-full grid grid-cols-1 grid-rows-[repeat(4,45%)] place-items-center [&>*]:w-full`}
 			>
 				<li className="w-full border-b-[1px]">
 					<div className="w-full h-full p-4 flex flex-col justify-evenly">

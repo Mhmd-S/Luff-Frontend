@@ -16,7 +16,7 @@ const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 
 			<CardDetails userInfo={userInfo} />
 
-			<div className="absolute bottom-0 w-full flex justify-evenly items-center pb-6 z-10 md:border-b-xl">
+			<div className="absolute bottom-0 w-full flex justify-evenly items-center pb-6 z-40 md:border-b-xl">
 				<span
 					className="p-3 border-purple-500 border-4 rounded-full cursor-pointer"
 					onClick={handleLike}

@@ -42,54 +42,71 @@ const useMatching = () => {
 		};
 	}, []);
 
-	const handleLike = async (id) => {
-		if (animateLike || animateReject || matched || loading) {
-			return;
-		}
-
+	const animateLikeHandler = async () => {
 		setAnimateLike(true);
-
-		const result = await userAPI.likeUser(id);
-
 		setTimeout(() => {
 			setAnimateLike(false);
 		}, 750);
-
-		setLoading(true);
-
-		if (result.data?.data) {
-			setMatched(result.data.data);
-		}
-
-		setUsers((prev) => prev.filter((user) => user._id !== id));
-
-		if (users.length < 5) {
-			fetchUsers();
-		}
-
-		setLoading(false);
 	};
 
-	const handleReject = async (id) => {
+	const handleLike = async () => {
 		if (animateLike || animateReject || matched || loading) {
 			return;
 		}
 
-		setAnimateReject(true);
-
-		await userAPI.rejectUser(id);
-
-		setTimeout(() => {
-			setAnimateReject(false);
-		}, 750);
+		await animateLikeHandler();
 
 		setLoading(true);
 
-		setUsers((prev) => prev.filter((user) => user._id !== id));
-		if (users.length < 5) {
-			fetchUsers();
+		try {
+			const result = await userAPI.likeUser(users[0]._id);
+
+			if (result.data?.data) {
+				setMatched(result.data.data);
+			}
+
+			setUsers((prev) => prev.slice(1));
+
+			if (users.length < 5) {
+				await fetchUsers();
+			}
+		} catch (error) {
+			// Handle error
+			console.error('Error liking user:', error);
+		} finally {
+			setLoading(false);
 		}
-		setLoading(false);
+	};
+
+	const animateRejectHandler = async () => {
+		setAnimateReject(true);
+		setTimeout(() => {
+			setAnimateReject(false);
+		}, 750);
+	};
+
+	const handleReject = async () => {
+		if (animateLike || animateReject || matched || loading) {
+			return;
+		}
+
+		await animateRejectHandler();
+
+		setLoading(true);
+
+		try {
+			await userAPI.rejectUser(users[0]._id);
+			setUsers((prev) => prev.slice(1));
+
+			if (users.length < 5) {
+				await fetchUsers();
+			}
+		} catch (error) {
+			// Handle error
+			console.error('Error rejecting user:', error);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const closeMatched = () => {
@@ -125,15 +142,15 @@ const useMatching = () => {
 			<CardDekstop
 				userInfo={user}
 				key={user._id}
-				handleLike={() => handleLike(user._id)}
-				handleReject={() => handleReject(user._id)}
+				handleLike={handleLike}
+				handleReject={handleReject}
 			/>
 		) : (
 			<Card
 				userInfo={user}
 				key={user._id}
-				handleLike={() => handleLike(user._id)}
-				handleReject={() => handleReject(user._id)}
+				handleLike={handleLike}
+				handleReject={handleReject}
 			/>
 		);
 	};
