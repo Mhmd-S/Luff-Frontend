@@ -6,13 +6,15 @@ import MessageUser from '../MessageUser';
 import { generateUUID } from '../../../utils/uuid';
 import MessageContact from '../MessageContact';
 import { useNotification } from '../../../contexts/useNotificationContext';
+import { userAPI } from '../../../api/userAPI';
 
-const useChatActive = (chatId, recipient) => {
+const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [messages, setMessages] = useState([]);
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [stopFetching, setStopFetching] = useState(false);
-	const [showFlagModal, setShowFlagModal] = useState(false);
+	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: block, 2: flag
+	const [showChatMenu, setShowChatMenu] = useState(false);
 	const [error, setError] = useState(null);
 
 	// Refs
@@ -22,7 +24,7 @@ const useChatActive = (chatId, recipient) => {
 
 	// Contexts
 	const { user } = useAuth();
-	const { removeNotification } = useNotification();
+	const { setNotification, removeNotification } = useNotification();
 
 	// Reset the messages when the chatId changes
 	useEffect(() => {
@@ -181,10 +183,31 @@ const useChatActive = (chatId, recipient) => {
 		return messagesElements;
 	};
 
+	const handleBlockUser = async () => {
+		const res = await userAPI.blockUser(recipient._id);
+
+		if (res.data.status == 'success') {
+			setNotification('User has been blocked');
+		} else {
+			setNotification('Something went wrong. Try again later');
+		}
+
+		setShowSmallModal(0);
+		setShowChatMenu(false);
+		setChatId(null);
+		setRecipient(null);
+	};
+
+	const handleReportUser = async () => {};
+
 	return {
 		populateMessages,
-		showFlagModal,
-		setShowFlagModal,
+		setShowSmallModal,
+		setShowChatMenu,
+		handleBlockUser,
+		handleReportUser,
+		showChatMenu,
+		showSmallModal,
 		topRef,
 		bottomRef,
 		chatWindowRef,

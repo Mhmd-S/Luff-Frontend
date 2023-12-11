@@ -2,21 +2,26 @@ import React from 'react';
 import useActiveChat from './hooks/useActiveChat';
 import LoadingIcon from '../icons/LoadingIcon';
 import MessageField from './MessageField';
-import FlagModal from './FlagModal';
+import SmallModal from '../common/SmallModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import MiniMenu from '../common/MiniMenu';
 
 const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 	const {
 		populateMessages,
-		showFlagModal,
-		setShowFlagModal,
+		showSmallModal,
+		setShowSmallModal,
+		setShowChatMenu,
+		handleBlockUser,
+		handleReportUser,
+		showChatMenu,
 		loading,
 		error,
 		topRef,
 		bottomRef,
 		chatWindowRef,
-	} = useActiveChat(chatId, recipient);
+	} = useActiveChat(chatId, recipient, setChatId, setRecipient);
 
 	return (
 		<div className="relative w-full h-full grid grid-rows-[10%_77%_13%] grid-cols-1  md:shadow-lg md:rounded-md md:w-2/5">
@@ -47,10 +52,19 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 					</p>
 				</div>
 
-				<FontAwesomeIcon
-					icon={faFlag}
-					className="text-sm text-red-500 border-[2px] border-red-500 rounded-full ml-24 p-1 cursor-pointer"
-					onClick={() => setShowFlagModal(true)}
+				<MiniMenu
+					showMiniMenu={showChatMenu}
+					setShowMiniMenu={setShowChatMenu}
+					menuItems={[
+						{
+							text: 'Flag User',
+							onClick: () => setShowSmallModal(1),
+						},
+						{
+							text: 'Block User',
+							onClick: () => setShowSmallModal(2),
+						},
+					]}
 				/>
 			</div>
 
@@ -77,7 +91,22 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 			<MessageField chatId={chatId} recipient={recipient} />
 
 			{/* Flag modal */}
-			{showFlagModal ? <FlagModal setShowFlagModal={setShowFlagModal} recipient={recipient} /> : undefined}
+			{showSmallModal ? (
+				<SmallModal
+					setShowModal={setShowSmallModal}
+					handleConfirmation={
+						showSmallModal === 1
+							? handleReportUser
+							: handleBlockUser
+					}
+					title={showSmallModal == 1 ? 'Flag User' : 'Block User'}
+					subTitle={
+						showSmallModal == 1
+							? 'Reporting this user will remove them from your matches and will be reviewed by our team for further actions. The user will not be able to access the chat or match with you again.'
+							: 'Blocking this user will remove them from your matches. The user will not be able to access the chat or match with you again.'
+					}
+				/>
+			) : undefined}
 		</div>
 	);
 };
