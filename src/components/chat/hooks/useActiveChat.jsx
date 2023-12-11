@@ -12,6 +12,7 @@ const useChatActive = (chatId, recipient) => {
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [stopFetching, setStopFetching] = useState(false);
+	const [showFlagModal, setShowFlagModal] = useState(false);
 	const [error, setError] = useState(null);
 
 	// Refs
@@ -182,6 +183,8 @@ const useChatActive = (chatId, recipient) => {
 
 	return {
 		populateMessages,
+		showFlagModal,
+		setShowFlagModal,
 		topRef,
 		bottomRef,
 		chatWindowRef,

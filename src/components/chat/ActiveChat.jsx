@@ -1,16 +1,16 @@
 import React from 'react';
 import useActiveChat from './hooks/useActiveChat';
 import LoadingIcon from '../icons/LoadingIcon';
-import BackIcon from '../icons/BackIcon';
-import useChatActive from './hooks/useActiveChat';
 import MessageField from './MessageField';
+import FlagModal from './FlagModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faFlag } from '@fortawesome/free-solid-svg-icons';
 
 const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 	const {
 		populateMessages,
-		setMessages,
+		showFlagModal,
+		setShowFlagModal,
 		loading,
 		error,
 		topRef,
@@ -46,6 +46,12 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 						{recipient.name}
 					</p>
 				</div>
+
+				<FontAwesomeIcon
+					icon={faFlag}
+					className="text-sm text-red-500 border-[2px] border-red-500 rounded-full ml-24 p-1 cursor-pointer"
+					onClick={() => setShowFlagModal(true)}
+				/>
 			</div>
 
 			<ul
@@ -69,6 +75,9 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 
 			{/* Text box to write message */}
 			<MessageField chatId={chatId} recipient={recipient} />
+
+			{/* Flag modal */}
+			{showFlagModal ? <FlagModal setShowFlagModal={setShowFlagModal} recipient={recipient} /> : undefined}
 		</div>
 	);
 };

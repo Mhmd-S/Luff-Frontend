@@ -51,6 +51,16 @@ export const userAPI = {
         })
         return response;
     },
+    blockUser: async (userId) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/block-user',
+            params: {
+                userId: userId,
+            }
+        })
+        return response;
+    },
     verifyCode: async (email, code) => {
         const response = await api.request({
             method: 'POST',

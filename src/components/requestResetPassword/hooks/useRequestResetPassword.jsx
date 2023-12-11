@@ -13,7 +13,7 @@ const useRequestResetPassword = () => {
 
     const renderRequestPassword = () => {
             
-            switch(0) {
+            switch(step) {
                 case 0:
                     return <RequestResetPasswordForm nextStep={nextStep} />;
                 case 1:
