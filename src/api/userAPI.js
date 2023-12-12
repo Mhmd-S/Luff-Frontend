@@ -61,6 +61,19 @@ export const userAPI = {
         })
         return response;
     },
+    reportUser: async (userId, reason) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/report-user',
+            params: {
+                userId: userId,
+            },
+            data: {
+                reason: reason,
+            }
+        })
+        return response;
+    },
     verifyCode: async (email, code) => {
         const response = await api.request({
             method: 'POST',

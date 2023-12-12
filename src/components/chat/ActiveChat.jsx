@@ -2,7 +2,6 @@ import React from 'react';
 import useActiveChat from './hooks/useActiveChat';
 import LoadingIcon from '../icons/LoadingIcon';
 import MessageField from './MessageField';
-import SmallModal from '../common/SmallModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import MiniMenu from '../common/MiniMenu';
@@ -10,11 +9,9 @@ import MiniMenu from '../common/MiniMenu';
 const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 	const {
 		populateMessages,
-		showSmallModal,
+		renderSmallModal,
 		setShowSmallModal,
 		setShowChatMenu,
-		handleBlockUser,
-		handleReportUser,
 		showChatMenu,
 		loading,
 		error,
@@ -57,7 +54,7 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 					setShowMiniMenu={setShowChatMenu}
 					menuItems={[
 						{
-							text: 'Flag User',
+							text: 'Report User',
 							onClick: () => setShowSmallModal(1),
 						},
 						{
@@ -91,22 +88,7 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 			<MessageField chatId={chatId} recipient={recipient} />
 
 			{/* Flag modal */}
-			{showSmallModal ? (
-				<SmallModal
-					setShowModal={setShowSmallModal}
-					handleConfirmation={
-						showSmallModal === 1
-							? handleReportUser
-							: handleBlockUser
-					}
-					title={showSmallModal == 1 ? 'Flag User' : 'Block User'}
-					subTitle={
-						showSmallModal == 1
-							? 'Reporting this user will remove them from your matches and will be reviewed by our team for further actions. The user will not be able to access the chat or match with you again.'
-							: 'Blocking this user will remove them from your matches. The user will not be able to access the chat or match with you again.'
-					}
-				/>
-			) : undefined}
+			{renderSmallModal()}
 		</div>
 	);
 };

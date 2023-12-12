@@ -7,6 +7,9 @@ import { generateUUID } from '../../../utils/uuid';
 import MessageContact from '../MessageContact';
 import { useNotification } from '../../../contexts/useNotificationContext';
 import { userAPI } from '../../../api/userAPI';
+import SmallModal from '../../common/SmallModal';
+import ReportUser from '../ReportUser';
+
 
 const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [messages, setMessages] = useState([]);
@@ -23,7 +26,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const chatWindowRef = useRef(null);
 
 	// Contexts
-	const { user } = useAuth();
+	const { user, getUserInfo } = useAuth();
 	const { setNotification, removeNotification } = useNotification();
 
 	// Reset the messages when the chatId changes
@@ -196,22 +199,71 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		setShowChatMenu(false);
 		setChatId(null);
 		setRecipient(null);
+		getUserInfo();
 	};
 
-	const handleReportUser = async () => {};
+	const handleReportUser = async (reason) => {
+		const res = await userAPI.reportUser(recipient._id, reason);
+
+		if (res.data.status == 'success') {
+			setNotification('User has been reported');
+		} else {
+			setNotification('Something went wrong. Try again later');
+		}
+
+		setShowSmallModal(0);
+		setShowChatMenu(false);
+		setChatId(null);
+		setRecipient(null);
+		getUserInfo();
+	};
+
+	const renderSmallModal = () => {
+		if (showSmallModal === 1) {
+			return (
+				<ReportUser setShowSmallModal={setShowSmallModal} handleReportUser={handleReportUser} />	
+			);
+		} else if (showSmallModal === 2) {
+			return (
+				<SmallModal setShowModal={setShowSmallModal}>
+					<h3 className="text-center text-2xl font-semibold text-[#023c64]">
+						Block User
+					</h3>
+					<p className="text-center text-lg font-semibold text-[#023c64]">
+						Are you sure you want to block this user?
+					</p>
+					<div className="flex justify-evenly items-center w-full">
+						<button
+							className="w-1/4 bg-[#023c64] text-white rounded-md p-2"
+							onClick={handleBlockUser}
+						>
+							Yes
+						</button>
+						<button
+							className="w-1/4 border-[#023c64] border-2 text-[#023c64] rounded-md p-2"
+							onClick={() => setShowSmallModal(false)}
+						>
+							No
+						</button>
+					</div>
+				</SmallModal>
+			);
+		} else {
+			return undefined;
+		}
+	};
 
 	return {
 		populateMessages,
+		renderSmallModal,
 		setShowSmallModal,
 		setShowChatMenu,
-		handleBlockUser,
-		handleReportUser,
 		showChatMenu,
-		showSmallModal,
+		loading,
+		error,
 		topRef,
 		bottomRef,
 		chatWindowRef,
-		loading,
 	};
 };
 
