@@ -7,7 +7,12 @@ import useCardDesktop from './hooks/useCardDesktop';
 
 const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 
-	useCardDesktop(userInfo, handleLike, handleReject, dummyCard);
+	const {
+		renderSmallModal,
+		setShowMiniMenu,
+		setShowSmallModal,
+		showMiniMenu,
+	} = useCardDesktop(userInfo, handleLike, handleReject, dummyCard);
 
 	return (
 		<div className="hidden md:grid relative w-2/3 h-full grid-cols-2 grid-rows-1">
@@ -15,7 +20,7 @@ const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 				images={userInfo.profilePictures}
 			/>
 
-			<CardDetailsDesktop userInfo={userInfo} />
+			<CardDetailsDesktop userInfo={userInfo} showMiniMenu={showMiniMenu} setShowSmallModal={setShowSmallModal} setShowMiniMenu={setShowMiniMenu} />
 
 			<div className="absolute bottom-0 w-full flex justify-end items-center pb-6 z-10">
 				<span
@@ -31,6 +36,7 @@ const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 					<FontAwesomeIcon icon={faClose} className=" w-10 h-10" />
 				</span>
 			</div>
+			{renderSmallModal()}
 		</div>
 	);
 };

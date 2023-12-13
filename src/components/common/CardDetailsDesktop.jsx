@@ -1,12 +1,13 @@
-import InfoIcon from '../icons/InfoIcon';
 import useCardDetails from './hooks/useCardDetails';
-import ArrowUp from '../icons/ArrowUp';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV, faFlag } from '@fortawesome/free-solid-svg-icons';
+import MiniMenu from './MiniMenu';
 
-const CardDetailsDesktop = ({ userInfo }) => {
-	const { openCard, handleOpenCard, handleCloseCard, getAge } =
-		useCardDetails();
+const CardDetailsDesktop = ({
+	userInfo,
+	showMiniMenu,
+	setShowMiniMenu,
+	setShowSmallModal,
+}) => {
+	const { getAge } = useCardDetails();
 
 	return (
 		<div
@@ -19,9 +20,19 @@ const CardDetailsDesktop = ({ userInfo }) => {
 				<p className="text-4xl mx-3 font-semibold">
 					{getAge(userInfo.dob)}
 				</p>
-				<FontAwesomeIcon
-					icon={faEllipsisV}
-					className="w-4 h-4 border-slate-900 text-slate-900 rounded-full cursor-pointer"
+				<MiniMenu
+					showMiniMenu={showMiniMenu}
+					setShowMiniMenu={setShowMiniMenu}
+					menuItems={[
+						{
+							text: 'Report User',
+							onClick: () => setShowSmallModal(1),
+						},
+						{
+							text: 'Block User',
+							onClick: () => setShowSmallModal(2),
+						},
+					]}
 				/>
 			</div>
 			<p className={`p-3 mb-10 text-lg py-4 text-slate-900`}>

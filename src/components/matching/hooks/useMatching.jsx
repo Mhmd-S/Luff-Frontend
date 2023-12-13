@@ -17,7 +17,6 @@ const useMatching = () => {
 	const [err, setErr] = useState(null);
 	const [animateLike, setAnimateLike] = useState(false);
 	const [animateReject, setAnimateReject] = useState(false);
-	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: report, 2: block
 
 	const fetchUsers = async () => {
 		setLoading(true);
@@ -166,30 +165,9 @@ const useMatching = () => {
 		);
 	};
 
-	const renderSmallModal = () => {
-		if (showSmallModal === 1) {
-			return (
-				<ReportUser
-					setShowReportUser={setShowSmallModal}
-					reportUserId={users[0]._id}
-				/>
-			);
-		} else if (showSmallModal === 2) {
-			return (
-				<BlockUser
-					setShowBlockUser={setShowSmallModal}
-					reportUserId={users[0]._id}
-				/>
-			);
-		} else {
-			return undefined;
-		}
-	};
-
 	return {
 		matched,
 		renderUser,
-		renderSmallModal,
 		animateLike,
 		animateReject,
 		loading,

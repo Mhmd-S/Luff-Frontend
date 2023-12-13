@@ -37,7 +37,7 @@ const ImageCarousel = ({ images }) => {
 				onClick={handlePrevClick}
 				className={`${
 					currentImageIndex === 0 && 'hidden'
-				} absolute pl-3 w-1/2 h-3/4 left-0 top-0 flex items-center z-30 justify-start md:h-full md:transition-all md:opacity-0 md:hover:opacity-100`}
+				} absolute pl-3 w-1/2 h-3/4 left-0 top-0 flex items-center z-20 justify-start md:h-full md:transition-all md:opacity-0 md:hover:opacity-100`}
 			>
 				<FontAwesomeIcon
 					icon={faChevronLeft}
@@ -51,7 +51,7 @@ const ImageCarousel = ({ images }) => {
 				className={`${
 					currentImageIndex ==
 						Object.keys(profileImages).length - 1 && 'hidden'
-				} absolute outline-none pr-3 w-1/2 h-3/4 top-0 right-0 z-30 flex items-center justify-end md:transition-all md:h-full md:opacity-0 md:hover:opacity-100`}
+				} absolute outline-none pr-3 w-1/2 h-3/4 top-0 right-0 z-20 flex items-center justify-end md:transition-all md:h-full md:opacity-0 md:hover:opacity-100`}
 			>
 				<FontAwesomeIcon
 					icon={faChevronRight}

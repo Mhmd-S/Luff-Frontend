@@ -3,8 +3,15 @@ import ImageCarousel from './ImageCarousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faClose } from '@fortawesome/free-solid-svg-icons';
 import CardDetails from './CardDetails';
+import useCard from './hooks/useCard';
 
 const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
+
+	const {
+		renderSmallModal,
+		setShowSmallModal,
+	} = useCard(userInfo);
+
 	return (
 		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:hidden">
 			<ImageCarousel
@@ -14,7 +21,7 @@ const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 				dummyCard={dummyCard}
 			/>
 
-			<CardDetails userInfo={userInfo} />
+			<CardDetails userInfo={userInfo} setShowSmallModal={setShowSmallModal} />
 
 			<div className="absolute bottom-0 w-full flex justify-evenly items-center pb-6 z-40 md:border-b-xl">
 			<span
@@ -31,6 +38,7 @@ const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 					<FontAwesomeIcon icon={faClose} className=" w-14 h-14" />
 				</span>
 			</div>
+			{renderSmallModal()}
 		</div>
 	);
 };
