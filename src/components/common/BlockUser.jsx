@@ -3,12 +3,12 @@ import useBlockUser from './hooks/useBlockUser';
 import SmallModal from './SmallModal';
 
 
-const BlockUser = ({ setShowBlockUser, blockUserId }) => {
+const BlockUser = ({ showBlockUser, setShowBlockUser, blockUserId }) => {
 
     const { handleBlockUser, loading } = useBlockUser(blockUserId);
 
 	return (
-		<SmallModal setShowModal={setShowBlockUser}>
+		<SmallModal showModal={showBlockUser} setShowModal={setShowBlockUser}>
 			<h3 className="text-center text-2xl font-semibold text-[#023c64]">
 				Block User
 			</h3>

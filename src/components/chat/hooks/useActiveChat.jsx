@@ -196,11 +196,11 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const renderSmallModal = () => {
 		if (showSmallModal === 1) {
 			return (
-				<ReportUser setShowReportUser={setShowSmallModal} reportUserId={recipient._id} />	
+				<ReportUser showReportUser={showSmallModal} setShowReportUser={setShowSmallModal} reportUserId={recipient._id} resetChatState={resetChatState} />	
 			);
 		} else if (showSmallModal === 2) {
 			return (
-				<BlockUser setShowBlockUser={setShowSmallModal}  blockUserId={recipient._id}/>
+				<BlockUser showBlockUser={showSmallModal} setShowBlockUser={setShowSmallModal}  blockUserId={recipient._id} resetChatState={resetChatState} />
 			);
 		} else {
 			return undefined;

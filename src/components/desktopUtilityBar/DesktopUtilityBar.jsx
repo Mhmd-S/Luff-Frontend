@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faShieldAlt, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import Contacts from '../chat/Contacts';
 import useDesktopUtilityBar from './hooks/useDesktopUtilityBar';
 import SettingsDesktop from '../settings/SettingsDesktop';
@@ -8,17 +8,14 @@ const DesktopUtilityBar = ({
 	setRecipient,
 	setChatId,
 	setShowImagesEditor,
+	setShowGuidelines,
 }) => {
-	const { 
-			user, 
-			showProfile, 
-			handleLogout, 
-			handleClickShowProfile 
-		} = useDesktopUtilityBar();
+	const { user, showProfile, handleLogout, handleClickShowProfile } =
+		useDesktopUtilityBar();
 
 	return (
 		<div className="hidden w-full h-full md:grid grid-cols-1 grid-rows-[15%_85%]">
-			<div className="w-full h-full bg-purple-500 grid grid-cols-[70%_30%] grid-rows-1 place-items-center">
+			<div className="w-full h-full bg-purple-500 grid grid-cols-[70%_15%_15%] grid-rows-1 place-items-center px-3">
 				{!showProfile ? (
 					<span
 						className="max-w-10/12 w-4/5 h-fit bg-white text-slate-900 py-1 px-2 rounded-3xl flex items-center justify-center cursor-pointer transition-all duration-500 ease-in-out hover:bg-purple-100"
@@ -28,7 +25,7 @@ const DesktopUtilityBar = ({
 							setRecipient(null);
 						}}
 					>
-						<div className="w-11 h-11 rounded-full overflow-hidden border-2">
+						<div className="w-12 h-10 rounded-full overflow-hidden border-2">
 							<img
 								src={user.profilePictures[0]}
 								alt="logo"
@@ -58,12 +55,17 @@ const DesktopUtilityBar = ({
 					</button>
 				)}
 
-				<button
-					className="rounded-full h-fit w-fit bg-white text-red-500 px-2 py-1 transition-all duration-500 ease-in-out hover:bg-purple-100"
+				<FontAwesomeIcon
+					icon={faShieldAlt}
+					className="rounded-full h-4 w-4 bg-white text-red-500 p-2 transition-all duration-500 ease-in-out hover:bg-purple-100 cursor-pointer"
+					onClick={() => setShowGuidelines(true)}
+				/>
+
+				<FontAwesomeIcon
+					icon={faSignOut}
+					className="rounded-full h-4 w-4 bg-white text-red-500 p-2 transition-all duration-500 ease-in-out hover:bg-purple-100 cursor-pointer"
 					onClick={handleLogout}
-				>
-					<FontAwesomeIcon icon={faSignOut} />
-				</button>
+				/>
 			</div>
 
 			{showProfile ? (

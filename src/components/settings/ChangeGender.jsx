@@ -27,7 +27,7 @@ const ChangeBio = () => {
 
       <div className='w-full h-full p-4 flex flex-col justify-evenly'>
 
-        <h1 className='text-2xl w-full mb-2 font-bold text-grey-900'>
+        <h1 className='text-xl w-full mb-2 font-bold text-grey-900'>
           Change Your Gender
         </h1>  
 

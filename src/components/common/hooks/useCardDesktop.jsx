@@ -3,6 +3,10 @@ import ReportUser from '../ReportUser'
 import BlockUser from '../BlockUser'
 
 
+// Fix the modal animation
+// Clear the chat when blocking and also when blocking a card in the matching area
+
+
 const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 
     const [showMiniMenu, setShowMiniMenu] = useState(false);
@@ -28,6 +32,7 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 		if (showSmallModal === 1) {
 			return (
 				<ReportUser
+					showReportUser={showSmallModal}
 					setShowReportUser={setShowSmallModal}
 					reportUserId={userInfo._id}
 				/>
@@ -35,6 +40,7 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 		} else if (showSmallModal === 2) {
 			return (
 				<BlockUser
+					showBlockUser={showSmallModal}
 					setShowBlockUser={setShowSmallModal}
 					reportUserId={userInfo._id}
 				/>

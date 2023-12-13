@@ -5,16 +5,16 @@ import FormFieldTextArea from './FormFieldTextArea';
 import InitialForm from './InitialForm';
 import FormButton from './FormButton';
 
-const ReportUser = ({ setShowReportUser, reportedUserId }) => {
+const ReportUser = ({ showReportUser, setShowReportUser, reportedUserId }) => {
 	const { register, handleSubmit, errors, loading, handleSubmitReport } =
 		useReportUser(setShowReportUser);
 
 	return (
-		<SmallModal setShowModal={setShowReportUser}>
-			<h3 className="text-center text-xl font-semibold text-[#023c64]">
+		<SmallModal showModal={showReportUser} setShowModal={setShowReportUser}>
+			<h3 className="text-center text-lg font-semibold text-[#023c64] pt-2">
 				Report User
 			</h3>
-			<p className="text-center text-sm font-semibold text-[#023c64] mt-2">
+			<p className="text-center text-sm font-semibold text-[#023c64] mt-1 px-2">
 				Reporting this user will block them from contacting you and will alert the admin to review this user.
 				The admin may view your chat history with this user.
 			</p>
@@ -41,15 +41,15 @@ const ReportUser = ({ setShowReportUser, reportedUserId }) => {
 						},
 					}}
 				/>
-				<div className="flex justify-evenly items-center w-full">
+				<div className="flex justify-evenly items-center w-full pb-2">
 					<button
-						className="w-1/4 bg-[#023c64] text-white rounded-md p-2"
+						className="w-1/5 bg-[#023c64] text-white rounded-md p-1"
 						type="submit"
 					>
 						Yes
 					</button>
 					<button
-						className="w-1/4 border-[#023c64] border-2 text-[#023c64] rounded-md p-2"
+						className="w-1/5 border-[#023c64] border-2 text-[#023c64] rounded-md p-1"
 						onClick={() => setShowReportUser(false)}
 					>
 						No

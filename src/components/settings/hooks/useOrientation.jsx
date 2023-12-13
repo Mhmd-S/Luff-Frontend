@@ -27,9 +27,6 @@ const useChangeOrientation = () => {
     }
   
     const submitChange = async(data) => {
-
-      setLoading(true);
-
       const response = await userAPI.updateOrientation(data.orientation);
       
       if (response.data.status === 'fail') {
@@ -38,8 +35,6 @@ const useChangeOrientation = () => {
         getUserInfo();
         setNotification('Change Successful');
       }
-
-      setLoading(false);
     }
 
   return {

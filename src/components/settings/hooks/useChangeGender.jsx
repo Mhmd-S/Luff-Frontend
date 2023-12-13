@@ -8,7 +8,7 @@ import { useAuth } from '../../../contexts/useAuthContext';
 const useChangeGender = () => {
 
     const [ generalError, setGeneralError ] = useState('');
-    const [ loading, setLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(false); // Not using it for now, too fast to see the loading state
 
     const { user, getUserInfo } = useAuth();
     const { setNotification } = useNotification();
@@ -21,15 +21,12 @@ const useChangeGender = () => {
 
     const onSubmit = (data) => {
 
-      if (!isDirty) return; // If the bio is untouched do nothing
+      if (!isDirty) return; // If the gender input is untouched do nothing
 
       submitChange(data);
     }
   
     const submitChange = async(data) => {
-
-      setLoading(true);
-
       const response = await userAPI.updateGender(data.gender);
 
       if (response.data.status === 'fail') {
@@ -38,8 +35,6 @@ const useChangeGender = () => {
         setNotification('Change Successful');
         getUserInfo();
       }
-
-      setLoading(false);
     }
 
   return {

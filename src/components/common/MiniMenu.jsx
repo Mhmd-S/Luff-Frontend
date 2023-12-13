@@ -12,11 +12,11 @@ const MiniMenu = ({ showMiniMenu, setShowMiniMenu, menuItems }) => {
 				icon={faEllipsisVertical}
 				className={`text-2xl text-slate-900 ${
 					showMiniMenu && 'bg-[rgba(0,0,0,0.07)]'
-				} px-3 py-1 ml-24 rounded-full -1 cursor-pointer`}
+				} px-3 py-1 rounded-full -1 cursor-pointer`}
 				onClick={() => setShowMiniMenu(!showMiniMenu)}
 			/>
 			<ul
-				className={`absolute flex flex-col bg-white border-[2px] rounded-md py-3 [&>*]:p-3 transition-all duration-300 cursor-pointer ${
+				className={`absolute w-max flex flex-col bg-white border-[2px] rounded-md py-3 [&>*]:p-3 transition-all duration-300 cursor-pointer ${
 					showMiniMenu
 						? 'opacity-100 scale-y-100 top-10 right-0'
 						: 'opacity-0 scale-y-0 top-[-20%] right-[-20%]'

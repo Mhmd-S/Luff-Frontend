@@ -14,12 +14,16 @@ const CardDetailsDesktop = ({
 			className={`w-full h-full flex flex-col text-[#3b93a1] bg-white rounded-r-xl`}
 		>
 			<div
-				className={`w-full flex justify-between items-center p-4 border-b-2 border-[#3b93a1]`}
+				className={`w-full flex items-center justify-evenly p-4 border-b-2 border-[#3b93a1]`}
 			>
-				<p className={`text-4xl font-bold truncate`}>{userInfo.name}</p>
-				<p className="text-4xl mx-3 font-semibold">
-					{getAge(userInfo.dob)}
-				</p>
+				<div className="w-3/4 h-full flex justify-between items-center">
+					<p className={`text-2xl w-4/5 font-bold truncate`}>
+						{userInfo.name}
+					</p>
+					<p className="text-2xl mx-3 font-semibold">
+						{getAge(userInfo.dob)}
+					</p>
+				</div>
 				<MiniMenu
 					showMiniMenu={showMiniMenu}
 					setShowMiniMenu={setShowMiniMenu}
@@ -35,7 +39,7 @@ const CardDetailsDesktop = ({
 					]}
 				/>
 			</div>
-			<p className={`p-3 mb-10 text-lg py-4 text-slate-900`}>
+			<p className={`mb-10 text-md py-4 px-3  text-slate-900`}>
 				{userInfo.bio}
 			</p>
 		</div>

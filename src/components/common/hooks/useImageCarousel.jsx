@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const useImageCarousel = (images) => {
+const useImageCarousel = (images, dummyCard) => {
 	const [profileImages, setProfileImages] = useState([]);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -35,7 +35,7 @@ const useImageCarousel = (images) => {
 	};
 
 	const handleKeyDown = (e, imagesLength) => {
-		if (e.isTrusted === false) return;
+		if (e.isTrusted === false || dummyCard) return;
 
 		if (e.code === 'Space') {
 			setCurrentImageIndex((prevIndex) =>

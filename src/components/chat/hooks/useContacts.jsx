@@ -155,7 +155,7 @@ const useContacts = (setChatId, setRecipient) => {
 
 		if (chats.length === 0) {
 			return (
-				<div className="p-2 text-center h-full flex flex-col justify-center items-center font-bold">
+				<div className="p-2 text-center h-full flex flex-col justify-center items-center text-purple-300 font-bold">
 					Start matching and chating with people!
 					<FontAwesomeIcon
 						icon={faUserFriends}

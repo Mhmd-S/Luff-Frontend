@@ -21,7 +21,7 @@ const ChangeBio = ({ handleGoBack }) => {
  
       <div className='w-full h-full p-4'>
 
-        <h1 className='text-2xl p-2 mb-2 w-full font-bold text-grey-900'>
+        <h1 className='text-xl p-2 mb-2 w-full font-bold text-grey-900'>
           Edit Your Bio
         </h1>  
 

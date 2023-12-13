@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
 	const getUserInfo = async () => {
 		// If the user is authenticated gets his info
 		try {
-			setIsLoading(true);
 			const isAuth = await userAPI.checkAuthStatus();
 			if (isAuth.data.status == 'success') {
 				const user = await userAPI.getSelf();
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }) => {
 		} catch (err) {
 			console.log(err);
 		}
-		setIsLoading(false);
 	};
 
 	useEffect(() => {
