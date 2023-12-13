@@ -5,6 +5,9 @@ import { userAPI } from '../../../api/userAPI';
 import Matched from '../../common/Matched';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
+import ReportUser from '../../common/ReportUser';
+import SmallModal from '../../common/SmallModal';
+import BlockUser from '../../common/BlockUser';
 
 const useMatching = () => {
 	const [users, setUsers] = useState([]);
@@ -14,6 +17,7 @@ const useMatching = () => {
 	const [err, setErr] = useState(null);
 	const [animateLike, setAnimateLike] = useState(false);
 	const [animateReject, setAnimateReject] = useState(false);
+	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: report, 2: block
 
 	const fetchUsers = async () => {
 		setLoading(true);
@@ -69,7 +73,9 @@ const useMatching = () => {
 				setMatched(result.data.data);
 			}
 
-			setUsers((prev) => prev.filter((user) => user._id !== users[0]._id));
+			setUsers((prev) =>
+				prev.filter((user) => user._id !== users[0]._id)
+			);
 
 			if (users.length < 5) {
 				await fetchUsers();
@@ -99,7 +105,9 @@ const useMatching = () => {
 
 		try {
 			await userAPI.rejectUser(users[0]._id);
-			setUsers((prev) => prev.filter((user) => user._id !== users[0]._id));
+			setUsers((prev) =>
+				prev.filter((user) => user._id !== users[0]._id)
+			);
 
 			if (users.length < 5) {
 				await fetchUsers();
@@ -158,9 +166,30 @@ const useMatching = () => {
 		);
 	};
 
+	const renderSmallModal = () => {
+		if (showSmallModal === 1) {
+			return (
+				<ReportUser
+					setShowReportUser={setShowSmallModal}
+					reportUserId={users[0]._id}
+				/>
+			);
+		} else if (showSmallModal === 2) {
+			return (
+				<BlockUser
+					setShowBlockUser={setShowSmallModal}
+					reportUserId={users[0]._id}
+				/>
+			);
+		} else {
+			return undefined;
+		}
+	};
+
 	return {
 		matched,
 		renderUser,
+		renderSmallModal,
 		animateLike,
 		animateReject,
 		loading,

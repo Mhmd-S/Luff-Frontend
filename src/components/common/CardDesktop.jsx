@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageCarousel from './ImageCarousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faX } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faClose } from '@fortawesome/free-solid-svg-icons';
 import CardDetailsDesktop from './CardDetailsDesktop';
 import useCardDesktop from './hooks/useCardDesktop';
 
@@ -28,7 +28,7 @@ const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 					className="mr-16 p-3 border-my-orange text-my-orange border-4 rounded-full cursor-pointer flex items-center justify-center transition-all hover:bg-my-orange hover:text-white"
 					onClick={handleReject}
 				>
-					<FontAwesomeIcon icon={faX} className=" w-10 h-10" />
+					<FontAwesomeIcon icon={faClose} className=" w-10 h-10" />
 				</span>
 			</div>
 		</div>

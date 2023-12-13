@@ -1,16 +1,16 @@
 import React from 'react';
-import SmallModal from '../common/SmallModal';
+import SmallModal from './SmallModal';
 import useReportUser from './hooks/useReportUser';
-import FormFieldTextArea from '../common/FormFieldTextArea';
-import InitialForm from '../common/InitialForm';
-import FormButton from '../common/FormButton';
+import FormFieldTextArea from './FormFieldTextArea';
+import InitialForm from './InitialForm';
+import FormButton from './FormButton';
 
-const ReportUser = ({ setShowSmallModal, handleReportUser }) => {
+const ReportUser = ({ setShowReportUser, reportedUserId }) => {
 	const { register, handleSubmit, errors, loading, handleSubmitReport } =
-		useReportUser(handleReportUser);
+		useReportUser(setShowReportUser);
 
 	return (
-		<SmallModal setShowModal={setShowSmallModal}>
+		<SmallModal setShowModal={setShowReportUser}>
 			<h3 className="text-center text-xl font-semibold text-[#023c64]">
 				Report User
 			</h3>
@@ -50,7 +50,7 @@ const ReportUser = ({ setShowSmallModal, handleReportUser }) => {
 					</button>
 					<button
 						className="w-1/4 border-[#023c64] border-2 text-[#023c64] rounded-md p-2"
-						onClick={() => setShowSmallModal(false)}
+						onClick={() => setShowReportUser(false)}
 					>
 						No
 					</button>

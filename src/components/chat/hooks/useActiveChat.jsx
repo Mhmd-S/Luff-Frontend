@@ -6,9 +6,8 @@ import MessageUser from '../MessageUser';
 import { generateUUID } from '../../../utils/uuid';
 import MessageContact from '../MessageContact';
 import { useNotification } from '../../../contexts/useNotificationContext';
-import { userAPI } from '../../../api/userAPI';
-import SmallModal from '../../common/SmallModal';
-import ReportUser from '../ReportUser';
+import ReportUser from '../../common/ReportUser';
+import BlockUser from '../../common/BlockUser';
 
 
 const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
@@ -27,7 +26,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 
 	// Contexts
 	const { user, getUserInfo } = useAuth();
-	const { setNotification, removeNotification } = useNotification();
+	const { removeNotification } = useNotification();
 
 	// Reset the messages when the chatId changes
 	useEffect(() => {
@@ -186,31 +185,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		return messagesElements;
 	};
 
-	const handleBlockUser = async () => {
-		const res = await userAPI.blockUser(recipient._id);
-
-		if (res.data.status == 'success') {
-			setNotification('User has been blocked');
-		} else {
-			setNotification('Something went wrong. Try again later');
-		}
-
-		setShowSmallModal(0);
-		setShowChatMenu(false);
-		setChatId(null);
-		setRecipient(null);
-		getUserInfo();
-	};
-
-	const handleReportUser = async (reason) => {
-		const res = await userAPI.reportUser(recipient._id, reason);
-
-		if (res.data.status == 'success') {
-			setNotification('User has been reported');
-		} else {
-			setNotification('Something went wrong. Try again later');
-		}
-
+	const resetChatState = () => {
 		setShowSmallModal(0);
 		setShowChatMenu(false);
 		setChatId(null);
@@ -221,32 +196,11 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const renderSmallModal = () => {
 		if (showSmallModal === 1) {
 			return (
-				<ReportUser setShowSmallModal={setShowSmallModal} handleReportUser={handleReportUser} />	
+				<ReportUser setShowReportUser={setShowSmallModal} reportUserId={recipient._id} />	
 			);
 		} else if (showSmallModal === 2) {
 			return (
-				<SmallModal setShowModal={setShowSmallModal}>
-					<h3 className="text-center text-2xl font-semibold text-[#023c64]">
-						Block User
-					</h3>
-					<p className="text-center text-lg font-semibold text-[#023c64]">
-						Are you sure you want to block this user?
-					</p>
-					<div className="flex justify-evenly items-center w-full">
-						<button
-							className="w-1/4 bg-[#023c64] text-white rounded-md p-2"
-							onClick={handleBlockUser}
-						>
-							Yes
-						</button>
-						<button
-							className="w-1/4 border-[#023c64] border-2 text-[#023c64] rounded-md p-2"
-							onClick={() => setShowSmallModal(false)}
-						>
-							No
-						</button>
-					</div>
-				</SmallModal>
+				<BlockUser setShowBlockUser={setShowSmallModal}  blockUserId={recipient._id}/>
 			);
 		} else {
 			return undefined;

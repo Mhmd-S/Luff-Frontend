@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Matching = () => {
-	const { renderUser, matched, animateLike, animateReject, loading } = useMatching();
+	const { renderUser, renderSmallModal, matched, animateLike, animateReject, loading } = useMatching();
 
 	return (
 		<div className="relative w-full h-full flex justify-center items-center md:grid md:grid-cols-1 md:grid-rows-[10%_80%_10%] md:place-items-center md:py-2">
