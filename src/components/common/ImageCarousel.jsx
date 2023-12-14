@@ -16,7 +16,7 @@ const ImageCarousel = ({ images, dummyCard }) => {
 	} = useImageCarousel(images, dummyCard);
 
 	return (
-		<div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 after:md:rounded-l-xl">
+		<div className="w-full h-full relative flex items-center justify-center md:after:hidden after:absolute after:w-full after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 after:md:rounded-l-xl">
 			{/* Images indicator */}
 			<div className="w-full top-0 absolute h-fit z-10">
 				<CarouselIndicator
@@ -41,7 +41,7 @@ const ImageCarousel = ({ images, dummyCard }) => {
 			>
 				<FontAwesomeIcon
 					icon={faChevronLeft}
-					className="w-fit bg-[#55555534] text-white rounded-full p-4 absolute top-[65%] md:relative md:top-0"
+					className="w-fit text-3xl text-white rounded-full p-4 absolute top-[65%] md:font-bold md:relative md:top-0"
 				/>
 			</button>
 
@@ -55,7 +55,7 @@ const ImageCarousel = ({ images, dummyCard }) => {
 			>
 				<FontAwesomeIcon
 					icon={faChevronRight}
-					className="w-fit bg-[#55555534] text-white rounded-full p-4 absolute top-[65%] md:relative md:top-0"
+					className="w-fit text-3xl text-white rounded-full p-4 absolute top-[65%] md:relative md:top-0"
 				/>
 			</button>
 		</div>

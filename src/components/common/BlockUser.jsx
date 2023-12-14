@@ -3,9 +3,9 @@ import useBlockUser from './hooks/useBlockUser';
 import SmallModal from './SmallModal';
 
 
-const BlockUser = ({ showBlockUser, setShowBlockUser, blockUserId }) => {
+const BlockUser = ({ showBlockUser, setShowBlockUser, blockUserId, reset }) => {
 
-    const { handleBlockUser, loading } = useBlockUser(blockUserId);
+    const { handleBlockUser, loading } = useBlockUser(blockUserId, reset);
 
 	return (
 		<SmallModal showModal={showBlockUser} setShowModal={setShowBlockUser}>

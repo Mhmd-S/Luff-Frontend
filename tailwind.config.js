@@ -11,10 +11,20 @@ export default {
 				Inter: ['Inter', 'sans-serif'],
 				'8bit': ['"Press Start 2P"', 'cursive'],
 			},
-      colors:{
-        'my-orange': '#F76301',
-      },
+			colors: {
+				'my-orange': '#F76301',
+			},
 			keyframes: {
+				wave: {
+					'0%': { transform: 'rotate(0.0deg)' },
+					'10%': { transform: 'rotate(14.0deg)' },
+					'20%': { transform: 'rotate(-8.0deg)' },
+					'30%': { transform: 'rotate(14.0deg)' },
+					'40%': { transform: 'rotate(-4.0deg)' },
+					'50%': { transform: 'rotate(10.0deg)' },
+					'60%': { transform: 'rotate(0.0deg)' },
+					'100%': { transform: 'rotate(0.0deg)' },
+				},
 				wiggle: {
 					'0%': {
 						boxShadow: '0px 0px 30px 5px rgba(239, 68, 68)',

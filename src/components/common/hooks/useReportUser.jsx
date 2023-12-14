@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import {userAPI} from '../../../api/userAPI';
 import { useNotification } from '../../../contexts/useNotificationContext';
 
-const useReportUser = (reportUserId) => {
+const useReportUser = (reportUserId, reset) => {
 	const [loading, isLoading] = useState(false);
 
 	const{ setNotification } = useNotification();
@@ -20,6 +20,7 @@ const useReportUser = (reportUserId) => {
 
 		if (res.data.status == 'success') {
 			setNotification('User has been reported');
+			reset();
 		} else {
 			setNotification('Something went wrong. Try again later');
 		}

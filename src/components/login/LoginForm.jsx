@@ -9,7 +9,7 @@ const LoginForm = () => {
 	const { register, handleSubmit, onSubmit, authError, loading, errors } =
 		useLogin();
 	return (
-		<div className="w-full h-3/4 flex flex-col bg-white border-[1.5px] border-[#F76301] p-6 rounded-lg shadow-lg md:w-3/5 md:h-[85%]">
+		<div className="w-full h-3/4 flex flex-col bg-white border-[1.5px] border-[#F76301] p-6 rounded-lg shadow-lg md:w-3/5 md:h-[95%]">
 			<h3 className="w-full text-center text-xl">
 				Please enter your{' '}
 				<span className="text-purple-900 font-bold">TP Email</span> and{' '}

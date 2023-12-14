@@ -35,6 +35,7 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 					showReportUser={showSmallModal}
 					setShowReportUser={setShowSmallModal}
 					reportUserId={userInfo._id}
+					reset={handleReject}
 				/>
 			);
 		} else if (showSmallModal === 2) {
@@ -43,6 +44,7 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 					showBlockUser={showSmallModal}
 					setShowBlockUser={setShowSmallModal}
 					reportUserId={userInfo._id}
+					reset={handleReject}
 				/>
 			);
 		} else {

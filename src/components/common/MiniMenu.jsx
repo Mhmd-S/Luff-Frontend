@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import useMiniMenu from './hooks/useMiniMenu';
 
-const MiniMenu = ({ showMiniMenu, setShowMiniMenu, menuItems }) => {
-	const { miniMenuRef } = useMiniMenu(setShowMiniMenu);
+const MiniMenu = ({ showMiniMenu, setShowMiniMenu, menuItems, disabled }) => {
+	const { miniMenuRef } = useMiniMenu(setShowMiniMenu, disabled);
 
 	return (
 		<div className="relative" ref={miniMenuRef}>
@@ -13,7 +13,7 @@ const MiniMenu = ({ showMiniMenu, setShowMiniMenu, menuItems }) => {
 				className={`text-2xl text-slate-900 ${
 					showMiniMenu && 'bg-[rgba(0,0,0,0.07)]'
 				} px-3 py-1 rounded-full -1 cursor-pointer`}
-				onClick={() => setShowMiniMenu(!showMiniMenu)}
+				onClick={() => !disabled && setShowMiniMenu(!showMiniMenu)}
 			/>
 			<ul
 				className={`absolute w-max flex flex-col bg-white border-[2px] rounded-md py-3 [&>*]:p-3 transition-all duration-300 cursor-pointer ${

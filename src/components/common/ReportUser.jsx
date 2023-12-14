@@ -5,9 +5,9 @@ import FormFieldTextArea from './FormFieldTextArea';
 import InitialForm from './InitialForm';
 import FormButton from './FormButton';
 
-const ReportUser = ({ showReportUser, setShowReportUser, reportedUserId }) => {
+const ReportUser = ({ showReportUser, setShowReportUser, reportedUserId, reset }) => {
 	const { register, handleSubmit, errors, loading, handleSubmitReport } =
-		useReportUser(setShowReportUser);
+		useReportUser(reportedUserId, reset);
 
 	return (
 		<SmallModal showModal={showReportUser} setShowModal={setShowReportUser}>

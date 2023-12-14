@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { socket } from '../../../socket-io/socket';
-import { generateUUID } from '../../../utils/uuid';
-import { useAuth } from '../../../contexts/useAuthContext';
 
 const useMessageField = ({ recipient, chatId }) => {
 

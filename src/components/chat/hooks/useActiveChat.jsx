@@ -8,7 +8,8 @@ import MessageContact from '../MessageContact';
 import { useNotification } from '../../../contexts/useNotificationContext';
 import ReportUser from '../../common/ReportUser';
 import BlockUser from '../../common/BlockUser';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHand } from '@fortawesome/free-solid-svg-icons';
 
 const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [messages, setMessages] = useState([]);
@@ -18,6 +19,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: block, 2: flag
 	const [showChatMenu, setShowChatMenu] = useState(false);
 	const [error, setError] = useState(null);
+	const [disabled, setDisabled] = useState(false);
 
 	// Refs
 	const topRef = useRef(null);
@@ -31,6 +33,13 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	// Reset the messages when the chatId changes
 	useEffect(() => {
 		// Setup sockets
+		if (user.blockedUsers.includes(recipient._id)) {
+			setDisabled(true);
+			return;
+		} else {
+			setDisabled(false);
+		}
+
 		socket.on('receive-message', handleRecieveMessage);
 		socket.on('sent-message', handleSentMessage);
 
@@ -178,6 +187,19 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 					);
 				}
 			});
+		} else {
+			// Todo: this shows when the user sends messages through the chat for the first time
+			messagesElements.push(
+				<li className="w-full h-full p-2 flex flex-col items-center justify-center text-lg font-semibold text-purple-500">
+					Be the first to send a message!
+					<div className="animate-[wave_10s_linear_infinite]">
+						<FontAwesomeIcon
+							icon={faHand}
+							className="text-3xl"
+						/>
+					</div>
+				</li>
+			);
 		}
 
 		messagesElements.push(<div key={generateUUID()} ref={bottomRef} />);
@@ -196,11 +218,21 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const renderSmallModal = () => {
 		if (showSmallModal === 1) {
 			return (
-				<ReportUser showReportUser={showSmallModal} setShowReportUser={setShowSmallModal} reportUserId={recipient._id} resetChatState={resetChatState} />	
+				<ReportUser
+					showReportUser={showSmallModal}
+					setShowReportUser={setShowSmallModal}
+					reportUserId={recipient._id}
+					reset={resetChatState}
+				/>
 			);
 		} else if (showSmallModal === 2) {
 			return (
-				<BlockUser showBlockUser={showSmallModal} setShowBlockUser={setShowSmallModal}  blockUserId={recipient._id} resetChatState={resetChatState} />
+				<BlockUser
+					showBlockUser={showSmallModal}
+					setShowBlockUser={setShowSmallModal}
+					blockUserId={recipient._id}
+					reset={resetChatState}
+				/>
 			);
 		} else {
 			return undefined;
@@ -218,9 +250,8 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		topRef,
 		bottomRef,
 		chatWindowRef,
+		disabled,
 	};
 };
 
 export default useChatActive;
-
-// Find the suitable ratio of messages and scroll root margin
