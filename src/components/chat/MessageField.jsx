@@ -4,7 +4,7 @@ import useMessageField from './hooks/useMessageField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-const MessageField = ({ chatId, recipient }) => {
+const MessageField = ({ chatId, recipient, disabled }) => {
 
     const { 
             messageInput, 
@@ -21,10 +21,12 @@ const MessageField = ({ chatId, recipient }) => {
             value={messageInput} 
             onChange={(e) => setMessageInput(e.target.value)} 
             onKeyDown={enterPressed} 
+            disabled={disabled}
             className='rounded-xl resize-none w-[85%] outline-none border-[1px] border-purple-600 p-3 text-sm overflow-y-auto'/>
           
           <button onClick={sendMessage} className='w-[10%]'>
             <FontAwesomeIcon
+              disabled={disabled}
               icon={faPaperPlane}
               className='text-2xl text-purple-600'
               />

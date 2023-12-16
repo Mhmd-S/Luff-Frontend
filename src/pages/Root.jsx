@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-
 import { useNotification } from '../contexts/useNotificationContext';
-
 import MobileNavBar from '../components/common/MobileNavBar';
 import DesktopUtilityBar from '../components/desktopUtilityBar/DesktopUtilityBar';
 import ActiveChat from '../components/chat/ActiveChat';
 import ChangeProfilePictures from '../components/settings/ChangeProfilePictures';
-import SmallModal from '../components/common/SmallModal';
+import Guidelines from '../components/common/Guidelines';
 
 const Root = () => {
-	// Utilized only during on desktop view
 	const [recipient, setRecipient] = useState(null);
 	const [chatId, setChatId] = useState(null);
 	const [showImagesEditor, setShowImagesEditor] = useState(false);
 	const [showGuidelines, setShowGuidelines] = useState(false);
-	//----------------------------
 	const { notificationMessage } = useNotification();
 
 	const renderContent = () => {
@@ -41,6 +37,27 @@ const Root = () => {
 		return <Outlet />;
 	};
 
+	const renderNotificationMessage = () => {
+		if (notificationMessage) {
+			return (
+				<div className="absolute min-w-[40%] z-30 top-[7.5%] right-[5%] bg-purple-100 border-purple-700 border-2 p-4 rounded-lg text-purple-700 md:min-w-[25%] text-center">
+					{notificationMessage}
+				</div>
+			);
+		}
+	};
+
+	const renderGuidelines = () => {
+		if (showGuidelines) {
+			return (
+				<Guidelines
+					showGuidelines={showGuidelines}
+					setShowGuidelines={setShowGuidelines}
+				/>
+			);
+		}
+	};
+
 	return (
 		<div className="w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
 			<DesktopUtilityBar
@@ -56,46 +73,9 @@ const Root = () => {
 
 			<MobileNavBar />
 
-			{/* Notification Message */}
-			{notificationMessage && (
-				<div className="absolute min-w-[40%] z-30 top-[7.5%] right-[5%] bg-purple-100 border-purple-700 border-2 p-4 rounded-lg text-purple-700 md:min-w-[25%] text-center">
-					{notificationMessage}
-				</div>
-			)}
+			{renderNotificationMessage()}
 
-			{showGuidelines && (
-				<SmallModal
-					showModal={showGuidelines}
-					setShowModal={setShowGuidelines}
-				>
-					<div className="w-full h-full flex flex-col justify-center items-center">
-						<h1 className="text-2xl font-semibold mb-4">
-							Community Guidelines
-						</h1>
-						<p className="text-lg text-gray-600">
-							These are the guidelines that all users must follow.
-							Failure to do so will result in a ban.
-						</p>
-						<p className="text-lg text-gray-600">1. No spamming</p>
-						<p className="text-lg text-gray-600">
-							3. No NSFW content
-						</p>
-						<p className="text-lg text-gray-600">
-							4. No illegal content
-						</p>
-						<p className="text-lg text-gray-600">
-							5. No harassment
-						</p>
-						<p className="text-lg text-gray-600">
-							6. No impersonation
-						</p>
-						<p>
-							Remember we have your TP number and we will hunt you
-							if you break these rules.
-						</p>
-					</div>
-				</SmallModal>
-			)}
+			{renderGuidelines()}
 		</div>
 	);
 };

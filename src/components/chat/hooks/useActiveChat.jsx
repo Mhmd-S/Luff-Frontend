@@ -10,6 +10,9 @@ import ReportUser from '../../common/ReportUser';
 import BlockUser from '../../common/BlockUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHand } from '@fortawesome/free-solid-svg-icons';
+import LoadingIcon from '../../icons/LoadingIcon';
+
+// Thinking about making the fetch chat directly populat the chat and removing the message state.
 
 const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [messages, setMessages] = useState([]);
@@ -22,13 +25,20 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [disabled, setDisabled] = useState(false);
 
 	// Refs
-	const topRef = useRef(null);
-	const bottomRef = useRef(null);
-	const chatWindowRef = useRef(null);
+	const topRef = useRef(null); // Use for infinite scrolling
+	const bottomRef = useRef(null); // Use for scrolling to the bottom
+	const chatWindowRef = useRef(null); // Use for scrolling to the bottom
 
 	// Contexts
 	const { user, getUserInfo } = useAuth();
 	const { removeNotification } = useNotification();
+
+	useEffect(() => {
+		setMessages([]);
+		setPage(1);
+		setStopFetching(false);
+		fetchChat();
+	}, [recipient]);
 
 	// Reset the messages when the chatId changes
 	useEffect(() => {
@@ -65,11 +75,11 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		}
 
 		return () => {
-			observer.disconnect(),
-				socket.off('receive-message', handleRecieveMessage);
+			observer.disconnect();
+			socket.off('receive-message', handleRecieveMessage);
 			socket.off('sent-message', handleSentMessage);
 		};
-	}, [chatId, recipient, page, stopFetching]);
+	}, [chatId, recipient, stopFetching, page]);
 
 	useLayoutEffect(() => {
 		if (
@@ -96,9 +106,13 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 				chatWindow.scrollTop = currentScrollTop;
 			}
 		}
-	}, [page, messages]);
+	}, [page]);
 
 	const handleRecieveMessage = (data) => {
+		if (data.chatId !== chatId) {
+			return;
+		}
+
 		handleReadMessage(data._id);
 
 		// To help with rendering the message
@@ -143,32 +157,31 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 			setError(null);
 		}
 
+		const { messages } = res.data.data || {};
+
 		// If there are no messages, stop future fetching
-		if (!res.data.data?.messages) {
+		if (!messages) {
 			setLoading(false);
 			setStopFetching(true);
 			return;
 		}
 
 		// If the number of messages is less than 20, stop future fetching
-		if (res.data.data.messages.length < 30) {
+		if (messages.length < 30) {
 			setLoading(false);
 			setStopFetching(true);
 		}
 
 		// Update message to seen if the last message is not seen by the user
-		for (const mesg in res.data.data.messages) {
-			if (!res.data.data.messages[mesg].seenBy.includes(user._id)) {
-				handleReadMessage(res.data.data.messages[mesg]._id);
+		for (const mesg in messages) {
+			if (!messages[mesg].seenBy.includes(user._id)) {
+				handleReadMessage(messages[mesg]._id);
 				removeNotification();
 			}
 		}
 
 		setPage((prevPage) => prevPage + 1);
-		setMessages((prevMessages) => [
-			...res.data.data.messages,
-			...prevMessages,
-		]);
+		setMessages((prevMessages) => [...messages, ...prevMessages]);
 		setLoading(false);
 	};
 
@@ -178,7 +191,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		let messagesReversed = [...messages];
 
 		if (messages.length > 0) {
-			messagesElements = messagesReversed.map((message, index) => {
+			messagesElements = messagesReversed.map((message) => {
 				if (message.senderId === user._id) {
 					return <MessageUser key={message._id} message={message} />;
 				} else {
@@ -193,18 +206,37 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 				<li className="w-full h-full p-2 flex flex-col items-center justify-center text-lg font-semibold text-purple-500">
 					Be the first to send a message!
 					<div className="animate-[wave_10s_linear_infinite]">
-						<FontAwesomeIcon
-							icon={faHand}
-							className="text-3xl"
-						/>
+						<FontAwesomeIcon icon={faHand} className="text-3xl" />
 					</div>
 				</li>
 			);
 		}
 
 		messagesElements.push(<div key={generateUUID()} ref={bottomRef} />);
-
 		return messagesElements;
+	};
+
+	const renderMessagesBody = () => {
+		return (
+			<ul
+				className="w-full h-full bg-[#fafafc] p-2 text-sm overflow-y-scroll scrollbar:bg-blue-500 scrollbar scrollbar-thumb-blue-500 scrollbar-track-gray-200"
+				ref={chatWindowRef}
+			>
+				<li ref={topRef}></li>
+				{error && (
+					<li className="w-full p-2 flex items-center justify-center">
+						{error}
+					</li>
+				)}
+				{(!loading && page!==1) && populateMessages()}
+				{loading && (
+					<li className="w-full p-2 flex items-center justify-center">
+						<LoadingIcon />
+					</li>
+				)}
+				<li ref={bottomRef}></li>
+			</ul>
+		);
 	};
 
 	const resetChatState = () => {
@@ -212,6 +244,11 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		setShowChatMenu(false);
 		setChatId(null);
 		setRecipient(null);
+		setMessages([]);
+		setLoading(false);
+		setError(null);
+		setStopFetching(false);
+		setDisabled(false);
 		getUserInfo();
 	};
 
@@ -240,7 +277,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	};
 
 	return {
-		populateMessages,
+		renderMessagesBody,
 		renderSmallModal,
 		setShowSmallModal,
 		setShowChatMenu,

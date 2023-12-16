@@ -1,23 +1,17 @@
 import React from 'react';
 import useActiveChat from './hooks/useActiveChat';
-import LoadingIcon from '../icons/LoadingIcon';
 import MessageField from './MessageField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import MiniMenu from '../common/MiniMenu';
 
-const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
+const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 	const {
-		populateMessages,
+		renderMessagesBody,
 		renderSmallModal,
 		setShowSmallModal,
 		setShowChatMenu,
 		showChatMenu,
-		loading,
-		error,
-		topRef,
-		bottomRef,
-		chatWindowRef,
 		disabled,
 	} = useActiveChat(chatId, recipient, setChatId, setRecipient);
 
@@ -74,28 +68,11 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 					</p>
 				</div>
 			) : (
-				<ul
-					className="w-full h-full bg-[#fafafc] p-2 text-sm overflow-y-scroll scrollbar:bg-blue-500 scrollbar scrollbar-thumb-blue-500 scrollbar-track-gray-200"
-					ref={chatWindowRef}
-				>
-					<li ref={topRef}></li>
-					{error && (
-						<li className="w-full p-2 flex items-center justify-center">
-							{error}
-						</li>
-					)}
-					{populateMessages()}
-					{loading && (
-						<li className="w-full p-2 flex items-center justify-center">
-							<LoadingIcon />
-						</li>
-					)}
-					<li ref={bottomRef}></li>
-				</ul>
+				renderMessagesBody()
 			)}
 
 			{/* Text box to write message */}
-			<MessageField chatId={chatId} recipient={recipient} />
+			<MessageField chatId={chatId} recipient={recipient} disabled={disabled} />
 
 			{/* Flag modal */}
 			{renderSmallModal()}
@@ -103,4 +80,4 @@ const ChatWindow = ({ setRecipient, setChatId, chatId, recipient }) => {
 	);
 };
 
-export default ChatWindow;
+export default ActiveChat;
