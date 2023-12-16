@@ -11,6 +11,7 @@ import BlockUser from '../../common/BlockUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHand } from '@fortawesome/free-solid-svg-icons';
 import LoadingIcon from '../../icons/LoadingIcon';
+import { set } from 'react-hook-form';
 
 // Thinking about making the fetch chat directly populat the chat and removing the message state.
 
@@ -23,6 +24,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [showChatMenu, setShowChatMenu] = useState(false);
 	const [error, setError] = useState(null);
 	const [disabled, setDisabled] = useState(false);
+	const [chatHeight, setChatHeight] = useState(0); // Will be used to keep the scroll in the same position
 
 	// Refs
 	const topRef = useRef(null); // Use for infinite scrolling
@@ -33,11 +35,13 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const { user, getUserInfo } = useAuth();
 	const { removeNotification } = useNotification();
 
+	// Reset the messages when the recipient changes
 	useEffect(() => {
-		setMessages([]);
-		setPage(1);
-		setStopFetching(false);
-		fetchChat();
+		if (messages.length > 0) {
+			setMessages([]);
+			setPage(1);
+			setStopFetching(false);
+		}
 	}, [recipient]);
 
 	// Reset the messages when the chatId changes
@@ -51,16 +55,18 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		}
 
 		socket.on('receive-message', handleRecieveMessage);
-		socket.on('sent-message', handleSentMessage);
+		socket.on('sent-message', handleSentMessage);	
 
+		// The code below for requesting older messages and integrating with the scroll
 		const topOfChat = topRef.current;
 
 		const options = {
 			root: chatWindowRef.current,
-			rootMargin: '300px',
-			threshold: 0.5,
+			rootMargin: '400px',
+			threshold: 1.0,
 		};
 
+		// Whenever the view of the top of the chat is intersecting with the user's view, fetch more messages
 		const observer = new IntersectionObserver(async ([entry]) => {
 			if (entry.isIntersecting) {
 				if (stopFetching) {
@@ -79,34 +85,35 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 			socket.off('receive-message', handleRecieveMessage);
 			socket.off('sent-message', handleSentMessage);
 		};
-	}, [chatId, recipient, stopFetching, page]);
+	}, [stopFetching, page, messages]);
 
+	// Used to adapt the scroll position when messages are added
 	useLayoutEffect(() => {
-		if (
-			page === 2 ||
-			messages[messages.length - 1]?.senderId === user._id
-		) {
-			// Scroll to the bottom instantly when page is 2
+		socket.on('sent-message', () => {
 			bottomRef.current?.scrollIntoView({ behavior: 'instant' });
-		} else {
-			// Keep scroll in the same position
-			const chatWindow = chatWindowRef.current;
+		});
 
-			if (chatWindow) {
-				const currentScrollTop = chatWindow.scrollTop;
-
-				// Calculate the new scroll position based on the current scroll top
-				const newScrollTop =
-					topRef.current?.offsetTop + bottomRef.current?.offsetHeight;
-
-				// Set the scroll position
-				chatWindow.scrollTo({ top: newScrollTop, behavior: 'smooth' });
-
-				// Restore the original scroll position if needed
-				chatWindow.scrollTop = currentScrollTop;
-			}
+		if (page == 2 && messages.length > 0) {
+			bottomRef.current?.scrollIntoView({ behavior: 'instant' });
 		}
-	}, [page]);
+
+		// Keep scroll in the same position
+		const chatWindow = chatWindowRef.current;
+
+		if (page > 2 && chatWindow) {
+			// Get the new height of the chat
+			const newChatHeight = chatWindow.scrollHeight;
+			// Scroll to the same position by subtracting the new height from the old height
+			chatWindow.scrollTop = newChatHeight - chatHeight + 400;
+		}
+
+		// Update the chat height to be used by the next render
+		setChatHeight(chatWindow.scrollHeight);
+
+		return () => {
+			socket.off('sent-message');
+		};
+	}, [messages]);
 
 	const handleRecieveMessage = (data) => {
 		if (data.chatId !== chatId) {
@@ -228,12 +235,12 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 						{error}
 					</li>
 				)}
-				{(!loading && page!==1) && populateMessages()}
 				{loading && (
 					<li className="w-full p-2 flex items-center justify-center">
 						<LoadingIcon />
 					</li>
 				)}
+				{page !== 1 && populateMessages()}
 				<li ref={bottomRef}></li>
 			</ul>
 		);

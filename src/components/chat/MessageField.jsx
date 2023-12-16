@@ -22,7 +22,7 @@ const MessageField = ({ chatId, recipient, disabled }) => {
             onChange={(e) => setMessageInput(e.target.value)} 
             onKeyDown={enterPressed} 
             disabled={disabled}
-            className='rounded-xl resize-none w-[85%] outline-none border-[1px] border-purple-600 p-3 text-sm overflow-y-auto'/>
+            className='rounded-xl resize-none w-[85%] h-[90%] outline-none border-[1px] border-purple-600 p-3 text-sm overflow-y-auto'/>
           
           <button onClick={sendMessage} className='w-[10%]'>
             <FontAwesomeIcon

@@ -5,7 +5,7 @@ const MessageContact = ({ message }) => {
 	return (
 		<div
 			key={message._id}
-			className="max-w-full text-[#023c64] flex flex-col  items-start p-2"
+			className="max-w-[90%] text-[#023c64] flex flex-col  items-start p-2"
 		>
 			<div className="text-[0.7rem] text-[#d3d3d4] ">
 				{convertDateShort(message.createdAt)}
