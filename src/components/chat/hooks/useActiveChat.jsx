@@ -1,17 +1,21 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import chatAPI from '../../../api/chatAPI';
-import { useAuth } from '../../../contexts/useAuthContext';
+
 import { socket } from '../../../socket-io/socket';
-import MessageUser from '../MessageUser';
-import { generateUUID } from '../../../utils/uuid';
-import MessageContact from '../MessageContact';
+import chatAPI from '../../../api/chatAPI';
+
+import { useAuth } from '../../../contexts/useAuthContext';
 import { useNotification } from '../../../contexts/useNotificationContext';
+
+import MessageUser from '../MessageUser';
+import MessageContact from '../MessageContact';
+import LoadingIcon from '../../icons/LoadingIcon';
 import ReportUser from '../../common/ReportUser';
 import BlockUser from '../../common/BlockUser';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHand } from '@fortawesome/free-solid-svg-icons';
-import LoadingIcon from '../../icons/LoadingIcon';
-import { set } from 'react-hook-form';
+
+import { generateUUID } from '../../../utils/uuid';
 
 // Thinking about making the fetch chat directly populat the chat and removing the message state.
 
@@ -25,7 +29,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [error, setError] = useState(null);
 	const [disabled, setDisabled] = useState(false);
 	const [chatHeight, setChatHeight] = useState(0); // Will be used to keep the scroll in the same position
-	const [showUserInfo, setShowUserInfo] = useState(true);
+	const [showUserInfo, setShowUserInfo] = useState(false);
 
 	// Refs
 	const topRef = useRef(null); // Use for infinite scrolling
@@ -42,8 +46,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 			setMessages([]);
 			setPage(1);
 			setStopFetching(false);
-		}
-	}, [recipient]);
+		}	}, [recipient, chatId]);
 
 	// Reset the messages when the chatId changes
 	useEffect(() => {
@@ -56,7 +59,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		}
 
 		socket.on('receive-message', handleRecieveMessage);
-		socket.on('sent-message', handleSentMessage);	
+		socket.on('sent-message', handleSentMessage);
 
 		// The code below for requesting older messages and integrating with the scroll
 		const topOfChat = topRef.current;
@@ -101,7 +104,11 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		// Keep scroll in the same position
 		const chatWindow = chatWindowRef.current;
 
-		if (page > 2 && chatWindow) {
+		if (!chatWindow) {
+			return;
+		}
+
+		if (page > 2) {
 			// Get the new height of the chat
 			const newChatHeight = chatWindow.scrollHeight;
 			// Scroll to the same position by subtracting the new height from the old height
@@ -241,7 +248,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 						<LoadingIcon />
 					</li>
 				)}
-				{page !== 1 && populateMessages()}
+				{page > 1 && !loading && populateMessages()}
 				<li ref={bottomRef}></li>
 			</ul>
 		);

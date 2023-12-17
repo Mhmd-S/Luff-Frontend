@@ -4,6 +4,7 @@ import MessageField from './MessageField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import UserInfo from './UserInfo';
+import LoadingIcon from '../icons/LoadingIcon';
 
 const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 	const {
@@ -14,8 +15,6 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 		showUserInfo,
 		disabled,
 	} = useActiveChat(chatId, recipient, setChatId, setRecipient);
-
-	// Todo: Make the userinfo open default on desktop and aslo added to mobile, do some clean up
 
 	return (
 		<div className="w-full h-full flex items-center justify-center relative">
@@ -28,18 +27,14 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 			>
 				{/* Chat header */}
 				<div className="w-full h-full flex bg-white items-center justify-between py-6 px-2 border-b-2 md:rounded-tl-md">
-					<button
-						className="w-fit h-full p-3 flex flex-row items-center"
+					<FontAwesomeIcon
+						icon={faChevronLeft}
+						className="text-2xl text-[#a168ff] cursor-pointer"
 						onClick={() => {
 							setRecipient(null);
 							setChatId(null);
 						}}
-					>
-						<FontAwesomeIcon
-							icon={faChevronLeft}
-							className="text-2xl text-[#a168ff]"
-						/>
-					</button>
+					/>
 
 					<div className="w-full flex items-center pl-4">
 						<div className="w-12 h-12 rounded-full overflow-hidden border-2">
@@ -54,21 +49,6 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 						</p>
 					</div>
 
-					{/* <MiniMenu
-						showMiniMenu={showChatMenu}
-						setShowMiniMenu={setShowChatMenu}
-						disabled={disabled}
-						menuItems={[
-							{
-								text: 'Report User',
-								onClick: () => setShowSmallModal(1),
-							},
-							{
-								text: 'Block User',
-								onClick: () => setShowSmallModal(2),
-							},
-						]}
-					/> */}
 					<FontAwesomeIcon
 						icon={faInfoCircle}
 						className={`text-2xl text-[#a168ff] cursor-pointer ${
