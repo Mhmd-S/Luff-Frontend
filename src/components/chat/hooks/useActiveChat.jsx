@@ -25,6 +25,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const [error, setError] = useState(null);
 	const [disabled, setDisabled] = useState(false);
 	const [chatHeight, setChatHeight] = useState(0); // Will be used to keep the scroll in the same position
+	const [showUserInfo, setShowUserInfo] = useState(true);
 
 	// Refs
 	const topRef = useRef(null); // Use for infinite scrolling
@@ -288,6 +289,8 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		renderSmallModal,
 		setShowSmallModal,
 		setShowChatMenu,
+		setShowUserInfo,
+		showUserInfo,
 		showChatMenu,
 		loading,
 		error,

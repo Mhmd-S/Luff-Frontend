@@ -14,7 +14,7 @@ const MessageField = ({ chatId, recipient, disabled }) => {
     } = useMessageField({ chatId, recipient });
 
     return (
-      <div className='w-full h-full bg-[#fafafc] z-20 flex justify-evenly items-center px-3 self md:rounded-b-md'>
+      <div className='w-full h-full bg-[#fafafc] z-20 flex justify-evenly items-center px-3 pb-3 self md:rounded-bl-md'>
         
           <textarea  
             placeholder='Type your message' 

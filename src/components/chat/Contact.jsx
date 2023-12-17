@@ -25,10 +25,10 @@ const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
 			<div className="w-full h-full flex flex-col justify-center">
 				{/* Name and Date */}
 				<div className="w-full flex justify-between">
-					<p className="text-lg font-bold overflow-hidden truncate">
+					<p className="text-md font-bold overflow-hidden truncate">
 						{contactInfo.name}
 					</p>
-					<p className="text-[0.85rem] md:text-[0.7rem]">
+					<p className="text-[0.85rem] md:text-[0.7rem] p-1">
 						{chat?.lastMessage &&
 							convertDateLong(chat.lastMessage.updatedAt)}
 					</p>
