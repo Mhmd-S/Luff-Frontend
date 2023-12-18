@@ -19,14 +19,14 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 	return (
 		<div className="w-full h-full flex items-center justify-center relative">
 			<div
-				className={`w-full h-full grid grid-rows-[10%_77%_13%] grid-cols-1 md:w-2/5 md:h-[95%] md:shadow-lg md:rounded-l-lg md:rounded-r-none transition-all ease-in-out ${
+				className={`w-full h-full grid grid-rows-[10%_77%_13%] grid-cols-1 md:w-6/12 md:h-[85%] md:shadow-lg md:rounded-lg transition-all ease-in-out ${
 					showUserInfo
-						? 'md:absolute md:translate-x-[-45%]'
+						? 'md:absolute md:translate-x-[-30%] md:rounded-r-none'
 						: 'md:absolute md:translate-x-[5%]'
 				}`}
 			>
 				{/* Chat header */}
-				<div className="w-full h-full flex bg-white items-center justify-between py-6 px-2 border-b-2 md:rounded-tl-md">
+				<div className="w-full h-full flex bg-white items-center justify-between py-6 px-2 border-b-2 md:rounded-t-md">
 					<FontAwesomeIcon
 						icon={faChevronLeft}
 						className="text-2xl text-[#a168ff] cursor-pointer"
@@ -37,7 +37,7 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 					/>
 
 					<div className="w-full flex items-center pl-4">
-						<div className="w-12 h-12 rounded-full overflow-hidden border-2">
+						<div className="w-12 h-12 rounded-full overflow-hidden border-2 md:w-10 md:h-10">
 							<img
 								src={recipient.profilePictures[0]}
 								alt="logo"
@@ -74,9 +74,6 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 					recipient={recipient}
 					disabled={disabled}
 				/>
-
-				{/* Flag modal */}
-				{renderSmallModal()}
 			</div>
 			<UserInfo
 				userInfo={recipient}
@@ -84,6 +81,8 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 				showUserInfo={showUserInfo}
 				setShowUserInfo={setShowUserInfo}
 			/>
+			{/* Flag modal */}
+			{renderSmallModal()}
 		</div>
 	);
 };

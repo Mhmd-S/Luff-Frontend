@@ -17,9 +17,9 @@ const UserInfo = ({
 		<div
 			className={`absolute w-full h-full bg-white z-30 border-l-[1px] flex flex-col items-center py-4 transition-all ease-in-out ${
 				showUserInfo
-					? 'w-full opacity-100 scale-x-1 translate-x-0 md:translate-x-[55%]'
+					? 'w-full opacity-100 scale-x-1 translate-x-0 md:translate-x-[80%]'
 					: 'w-0 opacity-0 scale-x-0 md:translate-x-[75%]'
-			} md:w-1/3 md:h-[95%] md:rounded-r-lg md:shadow-md  md:border-l-2 md:border-purple-500`}
+			} md:w-1/3 md:h-[85%] md:rounded-r-lg md:shadow-md  md:border-l-2 md:border-purple-500`}
 		>
 			<FontAwesomeIcon
 				icon={faTimes}

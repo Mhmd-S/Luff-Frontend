@@ -42,11 +42,10 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 
 	// Reset the messages when the recipient changes
 	useEffect(() => {
-		if (messages.length > 0) {
-			setMessages([]);
-			setPage(1);
-			setStopFetching(false);
-		}	}, [recipient, chatId]);
+		setMessages([]);
+		setPage(1);
+		setStopFetching(false);
+	}, [recipient, chatId]);
 
 	// Reset the messages when the chatId changes
 	useEffect(() => {

@@ -5,7 +5,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 const SmallModal = ({ showModal, setShowModal, children }) => {
 	return (
 		<div
-			className={`absolute w-full h-full flex items-center justify-center bg-[rgba(0,0,0,0.13)] overflow-hidden z-20`}
+			className={`absolute w-full h-full flex items-center justify-center bg-[rgba(0,0,0,0.13)] overflow-hidden z-30`}
 		>
 			<FontAwesomeIcon
 				icon={faClose}

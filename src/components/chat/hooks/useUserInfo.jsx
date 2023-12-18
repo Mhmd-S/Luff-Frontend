@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const useUserInfo = (userInfo) => {
 	const [showImage, setShowImage] = useState(null);
+
+	useEffect(() => {
+		setShowImage(null);
+	}, [userInfo]);
 
 	const renderImages = () => {
 		if (!userInfo || !userInfo.profilePictures) return null;

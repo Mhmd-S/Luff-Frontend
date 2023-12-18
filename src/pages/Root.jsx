@@ -67,7 +67,7 @@ const Root = () => {
 				setShowGuidelines={setShowGuidelines}
 			/>
 
-			<div className="w-full h-full md:bg-[#f0f2f4] md:flex md:justify-center md:py-2">
+			<div className="w-full h-full md:bg-[#f0f2f4] md:flex md:justify-center">
 				{renderContent()}
 			</div>
 

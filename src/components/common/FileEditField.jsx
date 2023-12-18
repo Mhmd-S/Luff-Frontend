@@ -35,11 +35,7 @@ const FileEditField = ({
 				<>
 					<div className="absolute right-[-7%] top-[-5%] z-10">
 						<div className="relative w-full h-full">
-							<FontAwesomeIcon
-								icon={faPen}
-								className="w-3 h-3 aboslute text-lg text-white bg-purple-500 rounded-full p-1 cursor-pointer"
-								onClick={handleEditImage}
-							/>
+							<EditIcon onClick={handleEditImage} />
 							<input
 								type="file"
 								name={name}
