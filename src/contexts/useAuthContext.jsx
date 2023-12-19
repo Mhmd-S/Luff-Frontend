@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 		getUserInfo().finally(() => setIsLoading(false)); // Set loading to false when the request is done
 	}, []);
 
+	console.log(user);
 	const logout = () => {
 		setIsLoading(true);
 		userAPI.logoutUser().then(() => setUser(null)).finally(() => setIsLoading(false));

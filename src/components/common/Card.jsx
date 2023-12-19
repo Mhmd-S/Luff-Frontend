@@ -10,7 +10,7 @@ const Card = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 	const {
 		renderSmallModal,
 		setShowSmallModal,
-	} = useCard(userInfo);
+	} = useCard(userInfo, dummyCard);
 
 	return (
 		<div className="relative w-full h-full flex flex-col items-center md:w-2/5 md:hidden">

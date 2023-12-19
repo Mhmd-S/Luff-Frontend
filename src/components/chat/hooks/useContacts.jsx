@@ -7,7 +7,7 @@ import LoadingIcon from '../../icons/LoadingIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
-const useContacts = (setChatId, setRecipient) => {
+const useContacts = (setChatId, setRecipient, currentChatId) => {
 	const [chats, setChats] = useState([]);
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(false);
@@ -17,6 +17,49 @@ const useContacts = (setChatId, setRecipient) => {
 	const { user } = useAuth();
 
 	const containerRef = useRef(null);
+
+	// Initail fetch and setting up
+	useEffect(() => {
+		// Fetch chats on mount
+		fetchChats();
+
+		// Listen for new messages
+		socket.on('receive-message', handleSocketMessage);
+		socket.on('sent-message-contacts', handleSocketMessage);
+		socket.on('match', handleSocketMatch);
+
+		// Cleanup
+		return () => {
+			socket.off('sent-message', handleSocketMessage);
+			socket.off('receive-message', handleSocketMessage);
+			socket.off('match', handleSocketMatch);
+		};
+	}, []);
+
+	// Setting up the intersection observer
+	useEffect(() => {
+		const container = containerRef.current;
+
+		const options = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.1,
+		};
+
+		const observer = new IntersectionObserver(([entry]) => {
+			if (entry.isIntersecting && !stopFetching) {
+				fetchChats();
+			}
+		}, options);
+
+		if (container) {
+			observer.observe(container);
+		}
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [chats, stopFetching]);
 
 	// Handle the response from the fetch request
 	const handleFetchResponse = (res) => {
@@ -51,12 +94,17 @@ const useContacts = (setChatId, setRecipient) => {
 	// Handle socket messages
 	const handleSocketMessage = (data) => {
 		const { chatId, sender, recipient, content, createdAt } = data;
-		console.log(data);
+
 		// Search if the chat is in the chats array
 		setChats((prevChats) => {
 			const chatIndex = prevChats.findIndex(
 				(chat) => chat._id === chatId
 			);
+
+			const chatIsOpen = currentChatId === chatId;
+			console.log(chatIsOpen);
+			// If the chat is open, the message is seen by both users
+			const newSeenBy = chatIsOpen ? [sender._id, recipient._id] : [sender._id];
 			
 			// Creates a new objects with the updated last message
 			const updatedChat = {
@@ -64,12 +112,10 @@ const useContacts = (setChatId, setRecipient) => {
 				participants: [sender, recipient],
 				lastMessage: {
 					content: content,
-					seenBy: [sender._id],
+					seenBy: newSeenBy,
 					updatedAt: createdAt,
 				},
 			};
-
-			// The problem is when I recieve a message that i send, I get my own data but only the user's Id. bcz the object is integrated to be sent one way only
 
 			// Deletes the old chats position in the contacts array
 			if (chatIndex !== -1) {
@@ -84,7 +130,6 @@ const useContacts = (setChatId, setRecipient) => {
 	};
 
 	const handleSocketMatch = (data) => {
-		console.log(data)
 		setChats((prevChats) => {
 			const { chatId, sender, recipient } = data;
 
@@ -98,50 +143,7 @@ const useContacts = (setChatId, setRecipient) => {
 
 			return [...prevChats];
 		});
-	}
-
-	// Initail fetch and setting up
-	useEffect(() => {
-		// Fetch chats on mount
-		fetchChats();
-
-		// Listen for new messages
-		socket.on('sent-message', handleSocketMessage);
-		socket.on('receive-message', handleSocketMessage);
-		socket.on('match', handleSocketMatch)
-
-		// Cleanup
-		return () => {
-			socket.off('sent-message', handleSocketMessage);
-			socket.off('receive-message', handleSocketMessage);
-			socket.off('match', handleSocketMatch);
-		};
-	}, []);
-
-	// Setting up the intersection observer
-	useEffect(() => {
-		const container = containerRef.current;
-
-		const options = {
-			root: null,
-			rootMargin: '0px',
-			threshold: 0.1,
-		};
-
-		const observer = new IntersectionObserver(([entry]) => {
-			if (entry.isIntersecting && !stopFetching) {
-				fetchChats();
-			}
-		}, options);
-
-		if (container) {
-			observer.observe(container);
-		}
-
-		return () => {
-			observer.disconnect();
-		};
-	}, [chats, stopFetching]);
+	};
 
 	// Populate chats
 	const populateChats = () => {

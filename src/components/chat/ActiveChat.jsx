@@ -4,7 +4,7 @@ import MessageField from './MessageField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import UserInfo from './UserInfo';
-import LoadingIcon from '../icons/LoadingIcon';
+
 
 const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 	const {

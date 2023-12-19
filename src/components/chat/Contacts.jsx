@@ -1,7 +1,8 @@
 import useContacts from './hooks/useContacts';
 
-const Contacts = ({ setChatId, setRecipient, recipient }) => {
-	const { populateChats } = useContacts(setChatId, setRecipient);
+const Contacts = ({ setChatId, setRecipient, chatId }) => {
+
+	const { populateChats } = useContacts(setChatId, setRecipient, chatId);
 
 	return (
 		<div className="w-full h-full flex flex-col">

@@ -61,6 +61,7 @@ const Root = () => {
 	return (
 		<div className="w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
 			<DesktopUtilityBar
+				chatId={chatId}
 				setRecipient={setRecipient}
 				setChatId={setChatId}
 				setShowImagesEditor={setShowImagesEditor}

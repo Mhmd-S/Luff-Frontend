@@ -40,6 +40,16 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	const { user, getUserInfo } = useAuth();
 	const { removeNotification } = useNotification();
 
+	useEffect(() => {
+		socket.on('receive-message', handleRecieveMessage);
+		socket.on('sent-message-chat', handleSentMessage);
+
+		return () => {
+			socket.off('receive-message', handleRecieveMessage);
+			socket.off('sent-message', handleSentMessage);
+		};
+	}, []);
+
 	// Reset the messages when the recipient changes
 	useEffect(() => {
 		setMessages([]);
@@ -56,9 +66,6 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 		} else {
 			setDisabled(false);
 		}
-
-		socket.on('receive-message', handleRecieveMessage);
-		socket.on('sent-message', handleSentMessage);
 
 		// The code below for requesting older messages and integrating with the scroll
 		const topOfChat = topRef.current;
@@ -85,8 +92,6 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 
 		return () => {
 			observer.disconnect();
-			socket.off('receive-message', handleRecieveMessage);
-			socket.off('sent-message', handleSentMessage);
 		};
 	}, [stopFetching, page, messages]);
 
@@ -123,6 +128,7 @@ const useChatActive = (chatId, recipient, setChatId, setRecipient) => {
 	}, [messages]);
 
 	const handleRecieveMessage = (data) => {
+		console.log('active', data);
 		if (data.chatId !== chatId) {
 			return;
 		}

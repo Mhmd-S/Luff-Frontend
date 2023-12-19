@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import ReportUser from '../ReportUser';
 import BlockUser from '../BlockUser';
 
-const useCard = (userInfo) => {
+const useCard = (userInfo, dummyCard) => {
 	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: report, 2: bloc
 	const renderSmallModal = () => {
+		if (dummyCard) {
+			return;
+		}
+
 		if (showSmallModal === 1) {
 			return (
 				<ReportUser

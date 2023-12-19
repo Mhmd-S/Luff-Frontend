@@ -5,6 +5,7 @@ import useDesktopUtilityBar from './hooks/useDesktopUtilityBar';
 import SettingsDesktop from '../settings/SettingsDesktop';
 
 const DesktopUtilityBar = ({
+	chatId,
 	setRecipient,
 	setChatId,
 	setShowImagesEditor,
@@ -71,7 +72,7 @@ const DesktopUtilityBar = ({
 			{showProfile ? (
 				<SettingsDesktop setShowImagesEditor={setShowImagesEditor} />
 			) : (
-				<Contacts setRecipient={setRecipient} setChatId={setChatId} />
+				<Contacts setRecipient={setRecipient} setChatId={setChatId} chatId={chatId} />
 			)}
 		</div>
 	);
