@@ -41,7 +41,7 @@ const useMobileNavBar = () => {
 				key={index}
 				className={
 					location.pathname === item.path
-						? `flex items-center bg-purple-600 rounded-3xl px-3 py-3`
+						? `flex items-center bg-purple-600 text-sm rounded-3xl px-3 py-2 transition-all ease-in-out`
 						: undefined
 				}
 			>

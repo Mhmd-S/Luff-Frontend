@@ -12,13 +12,13 @@ const Settings = () => {
 		useSettings();
 
 	return (
-		<div className="w-full h-full flex flex-col py-4 ">
+		<div className="w-full h-full flex flex-col py-4 relative">
 			<h3 className=" w-fit ml-3 border-b-2 border-purple-500 font-bold text-3xl">
 				Profile and Settings
 			</h3>
 
 			<ul
-				className={`overflow-y-auto w-full h-full grid grid-cols-1 grid-rows-[repeat(4,30%)] place-items-center [&>*]:w-full ${
+				className={`overflow-y-auto w-full h-full grid grid-cols-1 grid-rows-[repeat(4,40%)] place-items-center [&>*]:w-full ${
 					settingsPage && 'hidden'
 				}`}
 			>
@@ -33,7 +33,7 @@ const Settings = () => {
 						</p>
 					</div>
 
-					<div className="w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4  border-t-[1px]">
+					<div className="w-full h-fit flex justify-end py-2 px-4 ">
 						<FormButton2
 							onClick={() => handleClick('ChangeProfilePictures')}
 							text="Modify Profile Pictures"

@@ -8,7 +8,7 @@ const LoginPage = () => {
 			
       <div className='w-full flex justify-center items-center'>
         <img src='./logo1.png' alt='logo' className='h-3/4'/>
-        <h1 className=' text-5xl font-8bit font-bold text-purple-500'>
+        <h1 className=' text-3xl font-8bit font-bold text-purple-500 md:text-5xl'>
           LUFF
         </h1>
       </div>

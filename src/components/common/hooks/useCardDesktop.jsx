@@ -19,8 +19,6 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 		};
 	}, [userInfo, majorModalOpen, showSmallModal]);
 
-	console.log('majorModalOpen', majorModalOpen);
-
 	const handleKeyDown = (e) => {
 		if (e.isTrusted === false || dummyCard || showSmallModal|| majorModalOpen) return;
 		if (e.code === 'ArrowLeft') {

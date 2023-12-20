@@ -15,7 +15,7 @@ const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
 	} = useCardDesktop(userInfo, handleLike, handleReject, dummyCard);
 
 	return (
-		<div className="hidden md:grid relative w-2/3 h-full grid-cols-2 grid-rows-1">
+		<div className="hidden md:grid relative w-2/3 h-full grid-cols-2 grid-rows-1 animate-fadeIn">
 			<ImageCarousel
 				images={userInfo.profilePictures}
 				dummyCard={dummyCard || majorModalOpen}

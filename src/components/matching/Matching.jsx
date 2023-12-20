@@ -5,7 +5,6 @@ import ControlsGuide from './ControlsGuide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-
 const Matching = () => {
 	const { renderUser, matched, animateLike, animateReject, loading } =
 		useMatching();
@@ -18,21 +17,25 @@ const Matching = () => {
 					LUFF
 				</h1>
 			</div>
+
 			{loading ? <LoadingIcon /> : renderUser()}
+
 			{!matched && <ControlsGuide />}
+
 			{animateLike && (
-				<div className="absolute w-1/4 md:w-1/12 aspect-square bg-purple-500 rounded-full animate-ping">
+				<div className="absolute w-full h-full flex items-center justify-center animate-whiteWash">
 					<FontAwesomeIcon
 						icon={faHeart}
-						className="text-white text-6xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+						className="text-white bg-purple-500 p-4 rounded-full text-5xl animate-likeAndDislike"
 					/>
 				</div>
 			)}
+
 			{animateReject && (
-				<div className="absolute w-1/4 md:w-1/12 aspect-square bg-my-orange rounded-full animate-ping">
+				<div className="absolute w-full h-full flex items-center justify-center animate-whiteWash">
 					<FontAwesomeIcon
 						icon={faTimes}
-						className="text-white text-6xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+						className="text-white bg-my-orange p-3 px-5 rounded-full text-5xl animate-likeAndDislike"
 					/>
 				</div>
 			)}

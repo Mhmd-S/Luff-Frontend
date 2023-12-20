@@ -49,7 +49,7 @@ const useMatching = () => {
 
 	const animateLikeHandler = async () => {
 		setAnimateLike(true);
-		await timeout(500);
+		await timeout(600);
 		setAnimateLike(false);
 	};
 

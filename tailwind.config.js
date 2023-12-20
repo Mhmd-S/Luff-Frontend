@@ -25,6 +25,22 @@ export default {
 					'60%': { transform: 'rotate(0.0deg)' },
 					'100%': { transform: 'rotate(0.0deg)' },
 				},
+				fadeIn: {
+					'0%': { transform: 'scale(0.9)' },
+					'100%': { transform: 'scale(1)' },
+				},
+				likeAndDislike:{
+					'0%': { transform: 'translateY(200%)', opacity: '0' },
+					'20%': { transform: 'translateY(0%)', opacity: '1' },
+					'40%': { transform: 'translateY(0%)', opacity: '1' },
+					'60%': { transform: 'translateY(0%)', opacity: '1' },
+					'80%': { transform: 'translateY(0%)', opacity: '1' },
+					'100%': { transform: 'translateY(200%)', opacity: '0' },
+				},
+				whiteWash: {
+					'0%': { backgroundColor: 'rgba(255, 255, 255, 0)' },
+					'100%': { backgroundColor: 'rgba(255, 255, 255, 0.5)' },
+				},
 				wiggle: {
 					'0%': {
 						boxShadow: '0px 0px 30px 5px rgba(239, 68, 68)',
@@ -49,6 +65,10 @@ export default {
 			},
 			animation: {
 				gradient: 'animatedgradient 6s ease infinite alternate',
+				fadeIn: 'fadeIn 200ms ease-in forwards', 
+				fadeOut: 'fadeOut 200ms ease-out forwards',
+				whiteWash: 'whiteWash 100ms ease-in forwards',
+				likeAndDislike: 'likeAndDislike 600ms ease-in forwards',
 			},
 		},
 	},
