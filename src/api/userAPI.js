@@ -232,4 +232,14 @@ export const userAPI = {
         })
         return response;
     },
+    sendFeedback: async (feedback) => {
+        const response = await api.request({
+            method: 'POST',
+            url: '/user/send-feedback',
+            data: {
+                feedback: feedback,
+            }
+        })
+        return response;
+    },
 }

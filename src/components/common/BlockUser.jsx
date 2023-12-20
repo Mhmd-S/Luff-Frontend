@@ -1,11 +1,9 @@
 import React from 'react';
 import useBlockUser from './hooks/useBlockUser';
-import SmallModal from './SmallModal';
-
+import SmallModal from './Modal';
 
 const BlockUser = ({ showBlockUser, setShowBlockUser, blockUserId, reset }) => {
-
-    const { handleBlockUser, loading } = useBlockUser(blockUserId, reset);
+	const { handleBlockUser, loading } = useBlockUser(blockUserId, reset);
 
 	return (
 		<SmallModal showModal={showBlockUser} setShowModal={setShowBlockUser}>

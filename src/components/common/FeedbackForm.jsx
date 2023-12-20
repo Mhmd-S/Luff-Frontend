@@ -1,44 +1,43 @@
 import React from 'react';
 import Modal from './Modal';
-import useReportUser from './hooks/useReportUser';
-import FormFieldTextArea from './FormFieldTextArea';
 import InitialForm from './InitialForm';
-import FormButton from './FormButton';
+import FormFieldTextArea from './FormFieldTextArea';
+import useFeedbackForm from './hooks/useFeedbackForm';
 
-const ReportUser = ({
-	showReportUser,
-	setShowReportUser,
-	reportedUserId,
-	reset,
-}) => {
+const FeedbackForm = ({ showModal, setShowModal }) => {
+	
 	const { register, handleSubmit, errors, loading, handleSubmitReport } =
-		useReportUser(reportedUserId, reset);
+		useFeedbackForm();
 
 	return (
-		<Modal showModal={showReportUser} setShowModal={setShowReportUser}>
+		<Modal showModal={showModal} setShowModal={setShowModal}>
 			<h3 className="text-center text-lg font-semibold text-[#023c64] pt-2">
-				Report User
+				We are really excited to hear from you!
 			</h3>
+			<p className="text-center text-sm font-semibold text-[#023c64] mt-1 px-2">
+				Please let us know how we can improve our app. We are always
+				looking for ways to make your experience better.
+			</p>
 			<InitialForm
 				onSubmit={handleSubmit(handleSubmitReport)}
 				loading={loading}
 			>
 				<FormFieldTextArea
-					label="Reason"
-					name="reason"
-					id="reason"
-					placeholder="Enter a reason for reporting this user"
+					label="feedback"
+					name="feedback"
+					id="feedback"
+					placeholder="Enter your feedback here"
 					register={register}
 					errors={errors}
 					validationRules={{
-						required: 'Please enter a reason',
+						required: 'Please enter your feedback',
 						minLength: {
 							value: 25,
-							message: 'Reason must be at least 25 characters',
+							message: 'Feedback must be at least 25 characters',
 						},
 						maxLength: {
 							value: 250,
-							message: 'Reason must be less than 250 characters',
+							message: 'Feedback must be less than 259 characters',
 						},
 					}}
 				/>
@@ -51,7 +50,7 @@ const ReportUser = ({
 					</button>
 					<button
 						className="w-1/5 border-[#023c64] border-2 text-[#023c64] rounded-md p-1"
-						onClick={() => setShowReportUser(false)}
+						onClick={() => setShowModal(false)}
 					>
 						No
 					</button>
@@ -61,4 +60,4 @@ const ReportUser = ({
 	);
 };
 
-export default ReportUser;
+export default FeedbackForm;

@@ -7,7 +7,7 @@ const Contact = ({ chat, contactInfo, setChatId, setRecipient }) => {
 
 	return (
 		<div
-			className="w-full h-20 px-2 grid grid-cols-[20%_80%] items-center border-b border-[#e4e6e8] cursor-pointer hover:bg-[#f5f5f5]"
+			className="w-full h-24 px-2 grid grid-cols-[20%_80%] items-center border-b border-[#e4e6e8] cursor-pointer hover:bg-[#f5f5f5] md:h-20"
 			onClick={() => {
 				setRecipient(contactInfo);
 				setChatId(chat._id);

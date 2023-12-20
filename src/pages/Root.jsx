@@ -6,12 +6,14 @@ import DesktopUtilityBar from '../components/desktopUtilityBar/DesktopUtilityBar
 import ActiveChat from '../components/chat/ActiveChat';
 import ChangeProfilePictures from '../components/settings/ChangeProfilePictures';
 import Guidelines from '../components/common/Guidelines';
+import FeedBackForm from '../components/common/FeedbackForm';
 
 const Root = () => {
 	const [recipient, setRecipient] = useState(null);
 	const [chatId, setChatId] = useState(null);
 	const [showImagesEditor, setShowImagesEditor] = useState(false);
 	const [showGuidelines, setShowGuidelines] = useState(false);
+	const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 	const { notificationMessage } = useNotification();
 
 	const renderContent = () => {
@@ -59,7 +61,7 @@ const Root = () => {
 	};
 
 	return (
-		<div className="w-screen h-screen grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
+		<div className="w-screen h-screen overflow-hidden grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
 			<DesktopUtilityBar
 				chatId={chatId}
 				setRecipient={setRecipient}
@@ -74,8 +76,16 @@ const Root = () => {
 
 			<MobileNavBar />
 
-			{renderNotificationMessage()}
+			<button className="hidden absolute translate-x-[25%] translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
+				onClick={()=>setShowFeedbackForm(true)}
+			>
+				Feedback
+			</button>
 
+			{renderNotificationMessage()}
+			{showFeedbackForm && (
+				<FeedBackForm setShowModal={setShowFeedbackForm} />
+			)}
 			{renderGuidelines()}
 		</div>
 	);

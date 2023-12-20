@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallModal from './SmallModal';
+import SmallModal from './Modal';
 
 const Guidelines = ({ showGuidelines, setShowGuidelines }) => {
 	return (

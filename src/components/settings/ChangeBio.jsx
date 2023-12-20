@@ -50,7 +50,7 @@ const ChangeBio = ({ handleGoBack }) => {
             />
       </div>
 
-      <div className='w-full h-fit bg-[#fafafa] flex justify-end py-2 px-4 border-t-[1px] md:bg-transparent md:border-t-0 md:border-b-2'>
+      <div className='w-full h-fit  flex justify-end py-2 px-4 bg-transparent border-t-0 border-b-2'>
         <FormButton2 text='Save' />
       </div>
 

@@ -1,8 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import useModal from './hooks/useModal';
 
-const SmallModal = ({ showModal, setShowModal, children }) => {
+const Modal = ({ showModal, setShowModal, children }) => {
+	const { modalRef } = useModal(setShowModal);
+
 	return (
 		<div
 			className={`absolute w-full h-full flex items-center justify-center bg-[rgba(0,0,0,0.13)] overflow-hidden z-30`}
@@ -13,7 +16,8 @@ const SmallModal = ({ showModal, setShowModal, children }) => {
 				onClick={() => setShowModal(false)}
 			/>
 			<div
-				className={`bg-white rounded-lg w-3/4 h-3/5 p-2 flex flex-col items-center justify-evenly transition-all duration-300 `}
+				ref={modalRef}
+				className={`bg-white rounded-lg w-2/5 h-3/5 py-2 px-5 flex flex-col items-center justify-evenly transition-all duration-300`}
 			>
 				{children}
 			</div>
@@ -21,4 +25,4 @@ const SmallModal = ({ showModal, setShowModal, children }) => {
 	);
 };
 
-export default SmallModal;
+export default Modal;
