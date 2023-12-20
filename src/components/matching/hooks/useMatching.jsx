@@ -4,7 +4,7 @@ import CardDekstop from '../../common/CardDesktop';
 import { userAPI } from '../../../api/userAPI';
 import Matched from '../../common/Matched';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';;
+import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 
 const useMatching = () => {
 	const [users, setUsers] = useState([]);

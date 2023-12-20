@@ -6,22 +6,27 @@ import CardDetailsDesktop from './CardDetailsDesktop';
 import useCardDesktop from './hooks/useCardDesktop';
 
 const CardDesktop = ({ userInfo, handleReject, handleLike, dummyCard }) => {
-
 	const {
 		renderSmallModal,
 		setShowMiniMenu,
 		setShowSmallModal,
 		showMiniMenu,
+		majorModalOpen,
 	} = useCardDesktop(userInfo, handleLike, handleReject, dummyCard);
 
 	return (
 		<div className="hidden md:grid relative w-2/3 h-full grid-cols-2 grid-rows-1">
 			<ImageCarousel
 				images={userInfo.profilePictures}
-				dummyCard={dummyCard}
+				dummyCard={dummyCard || majorModalOpen}
 			/>
 
-			<CardDetailsDesktop userInfo={userInfo} showMiniMenu={showMiniMenu} setShowSmallModal={setShowSmallModal} setShowMiniMenu={setShowMiniMenu} />
+			<CardDetailsDesktop
+				userInfo={userInfo}
+				showMiniMenu={showMiniMenu}
+				setShowSmallModal={setShowSmallModal}
+				setShowMiniMenu={setShowMiniMenu}
+			/>
 
 			<div className="absolute bottom-0 w-1/2 flex justify-evenly items-center pb-6 z-10 right-0">
 				<span

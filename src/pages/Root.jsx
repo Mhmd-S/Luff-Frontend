@@ -36,7 +36,11 @@ const Root = () => {
 			);
 		}
 
-		return <Outlet />;
+		return (
+			<Outlet
+				context={{ majorModalOpen: showGuidelines || showFeedbackForm }}
+			/>
+		);
 	};
 
 	const renderNotificationMessage = () => {
@@ -76,8 +80,9 @@ const Root = () => {
 
 			<MobileNavBar />
 
-			<button className="hidden absolute translate-x-[25%] translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
-				onClick={()=>setShowFeedbackForm(true)}
+			<button
+				className="hidden absolute translate-x-[25%] translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
+				onClick={() => setShowFeedbackForm(true)}
 			>
 				Feedback
 			</button>
