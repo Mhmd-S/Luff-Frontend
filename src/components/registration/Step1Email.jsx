@@ -18,7 +18,7 @@ const Step1Email = () => {
 	} = useEmailForm();
 
 	return (
-		<div className="w-full h-4/5 flex flex-col bg-white border-[1.5px] border-[#F76301] p-4 rounded-lg shadow-lg md:w-2/6 md:h-full">
+		<div className="w-full h-full flex flex-col bg-white border-[1.5px] border-[#F76301] p-4 rounded-lg shadow-lg md:w-2/6 md:h-full">
 			<div className="w-full text-center text-xl border-b-[1.5px] pb-4 border-my-orange">
 				<p>
 					Create a new{' '}
@@ -35,17 +35,17 @@ const Step1Email = () => {
 				{generalError && <FormGeneralError message={generalError} />}
 
 				<FormField
-					label="TP email"
+					label="University email"
 					name="email"
 					type="email"
 					register={register}
 					errors={errors}
 					placeholder="ex. TP012345@mail.apu.edu.my"
 					validationRules={{
-						required: 'TP email is required',
+						required: 'University email is required',
 						pattern: {
-							value: /^TP[0-9]{6}@mail.apu.edu.my$/,
-							message: 'Invalid TP email',
+							value: /^(TP\d{6}@mail\.apu\.edu\.my|\d{7}@sd\.taylors\.edu\.my|d{8}@imail\.sunway\.apu\.edu\.my)$/,
+							message: 'Invalid student email',
 						},
 					}}
 				/>

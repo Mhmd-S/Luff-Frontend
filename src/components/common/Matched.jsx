@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 const Matched = ({ userInfo, handleClick }) => {
   return (
-    <div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-3/4 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 md:w-1/3 md:rounded-lg md:after:rounded-lg">
+    <div className="w-full h-full relative flex items-center justify-center after:absolute after:w-full after:h-3/4 after:content-[''] after:bg-gradient-to-t after:from-black after:to-transparent after:bottom-0 after:z-10 after:block after:left-0 md:h-full md:w-2/5 md:rounded-lg md:after:rounded-lg">
         
         {/* User's Picutre */}
-        <img className="w-full h-full object-cover rounded-lg" src='./joh.jpg' alt={`Image`} />  
+        <img className="w-full h-full object-cover rounded-lg" src={userInfo.profilePictures[0]} alt={`Image`} />  
         
 
         <div className='w-full h-full absolute flex flex-col items-center pt-8 z-20 text-white md:rounded-b-lg'>
@@ -17,7 +17,7 @@ const Matched = ({ userInfo, handleClick }) => {
                 </span>
             </h1>
 
-            <h3 className='text-xl mt-[20rem] text-center md:mt-[14.2rem]'>
+            <h3 className='text-xl mt-[50%] text-center'>
                 Start chatting with <p className='font-bold underline'>{userInfo.name}</p> now!
             </h3>
             

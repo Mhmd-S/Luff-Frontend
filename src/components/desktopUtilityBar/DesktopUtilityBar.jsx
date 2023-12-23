@@ -15,8 +15,8 @@ const DesktopUtilityBar = ({
 		useDesktopUtilityBar();
 
 	return (
-		<div className="hidden w-full h-full md:grid grid-cols-1 grid-rows-[15%_85%]">
-			<div className="w-full h-full bg-purple-500 grid grid-cols-[70%_15%_15%] grid-rows-1 place-items-center px-3">
+		<div className="hidden w-full h-full md:grid grid-cols-1 grid-rows-[15%_85%] border-r-[1px] border-r-gray-200">
+			<div className="w-full h-full bg-purple-500  grid grid-cols-[70%_15%_15%] grid-rows-1 place-items-center px-3">
 				{!showProfile ? (
 					<span
 						className="max-w-10/12 w-4/5 h-fit bg-white text-slate-900 py-1 px-2 rounded-3xl flex items-center justify-center cursor-pointer transition-all duration-500 ease-in-out hover:bg-purple-100"

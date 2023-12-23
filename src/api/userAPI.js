@@ -235,7 +235,7 @@ export const userAPI = {
     sendFeedback: async (feedback) => {
         const response = await api.request({
             method: 'POST',
-            url: '/user/send-feedback',
+            url: '/user/feedback',
             data: {
                 feedback: feedback,
             }

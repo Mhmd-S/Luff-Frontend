@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { userAPI } from '../../../api/userAPI';
 import { useNotification } from '../../../contexts/useNotificationContext';
 
-const useFeedbackForm = () => {
+const useFeedbackForm = (setShowModal) => {
 	const [loading, isLoading] = useState(false);
 
 	const { setNotification } = useNotification();
@@ -19,6 +19,7 @@ const useFeedbackForm = () => {
 		const res = await userAPI.sendFeedback(data.feedback);
 
 		if (res.data.status == 'success') {
+			setShowModal(false);
 			setNotification('Feedback Recieved. Thank you!');
 		} else {
 			setNotification('Something went wrong. Try again later');

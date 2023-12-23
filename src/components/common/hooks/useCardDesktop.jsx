@@ -3,9 +3,6 @@ import ReportUser from '../ReportUser';
 import BlockUser from '../BlockUser';
 import { useOutletContext } from 'react-router-dom';
 
-// Fix the modal animation
-// Clear the chat when blocking and also when blocking a card in the matching area
-
 const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 	const [showMiniMenu, setShowMiniMenu] = useState(false);
 	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: report, 2: bloc
@@ -58,7 +55,6 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 		setShowMiniMenu,
 		setShowSmallModal,
 		renderSmallModal,
-		majorModalOpen,
 	};
 };
 

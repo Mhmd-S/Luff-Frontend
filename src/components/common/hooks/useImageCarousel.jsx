@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 const useImageCarousel = (images, dummyCard) => {
 	const [profileImages, setProfileImages] = useState([]);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+	const { majorModalOpen } = useOutletContext();
 
 	useEffect(() => {
 		const imagesValues = Object.values(images);
@@ -14,13 +16,12 @@ const useImageCarousel = (images, dummyCard) => {
 
 		setProfileImages(validImages);
 
-		window.addEventListener('keyup', (e) =>
-			handleKeyDown(e, validImages.length)
-		);
+		window.addEventListener('keyup', handleKeyDownImage);
+
 		return () => {
-			window.removeEventListener('keyup', handleKeyDown);
+			window.removeEventListener('keyup', handleKeyDownImage);
 		};
-	}, []);
+	}, [majorModalOpen]);
 
 	const handlePrevClick = () => {
 		setCurrentImageIndex((prevIndex) =>
@@ -34,12 +35,14 @@ const useImageCarousel = (images, dummyCard) => {
 		);
 	};
 
-	const handleKeyDown = (e, imagesLength) => {
-		if (e.isTrusted === false || dummyCard) return;
+	const handleKeyDownImage = (e) => {
+		console.log(window);
+
+		if (majorModalOpen || dummyCard || e.isTrusted === false) return;
 
 		if (e.code === 'Space') {
 			setCurrentImageIndex((prevIndex) =>
-				prevIndex === imagesLength - 1 ? 0 : prevIndex + 1
+				prevIndex === profileImages.length - 1 ? 0 : prevIndex + 1
 			);
 		}
 	};
@@ -49,7 +52,6 @@ const useImageCarousel = (images, dummyCard) => {
 		currentImageIndex,
 		handlePrevClick,
 		handleNextClick,
-		handleKeyDown,
 	};
 };
 

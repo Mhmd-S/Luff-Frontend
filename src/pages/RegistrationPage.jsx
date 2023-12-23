@@ -8,8 +8,8 @@ const RegistrationPage = () => {
 		<div className="w-screen h-screen overflow-x-hidden  relative bg-[#fafafa] flex flex-col justify-center items-center">
 			<div className="w-full h-24 flex justify-center items-center">
 				<img src="./logo1.png" alt="logo" className="h-3/4" />
-				<h1 className=" text-5xl font-8bit font-bold text-purple-500">
-					LUFF
+				<h1 className=" text-3xl font-8bit font-bold text-purple-500">
+					UniLuff
 				</h1>
 			</div>
 			<RegistrationProvider>

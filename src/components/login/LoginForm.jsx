@@ -17,39 +17,37 @@ const LoginForm = () => {
 				log in.
 			</h3>
 
+			<InitialForm onSubmit={handleSubmit(onSubmit)}>
+				{authError && <FormGeneralError message={authError} />}
 
-				<InitialForm onSubmit={handleSubmit(onSubmit)}>
-					{authError && <FormGeneralError message={authError} />}
+				<FormField
+					name="email"
+					type="email"
+					register={register}
+					errors={errors}
+					placeholder="Email"
+					validationRules={{
+						required: 'TP email is required',
+						pattern: {
+							value: /^(TP\d{6}@mail\.apu\.edu\.my|\d{7}@sd\.taylors\.edu\.my|d{8}@imail\.sunway\.apu\.edu\.my)$/,
+							message: 'Invalid student email',
+						},
+					}}
+				/>
 
-					<FormField
-						name="email"
-						type="email"
-						register={register}
-						errors={errors}
-						placeholder="Email"
-						validationRules={{
-							required: 'TP email is required',
-							pattern: {
-								value: /^TP[0-9]{6}@mail.apu.edu.my$/,
-								message: 'Invalid TP email',
-							},
-						}}
-					/>
+				<FormField
+					name="password"
+					type="password"
+					register={register}
+					placeholder={'Password'}
+					errors={errors}
+					validationRules={{
+						required: 'Password is required',
+					}}
+				/>
 
-					<FormField
-						name="password"
-						type="password"
-						register={register}
-						placeholder={'Password'}
-						errors={errors}
-						validationRules={{
-							required: 'Password is required',
-						}}
-					/>
-
-					<FormButton text="Log In" loading={loading} />
-				</InitialForm>
-
+				<FormButton text="Log In" loading={loading} />
+			</InitialForm>
 
 			<div className="w-full text-center pt-2 flex flex-col">
 				<span>Forgot your password? </span>

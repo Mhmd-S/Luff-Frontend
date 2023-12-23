@@ -7,7 +7,7 @@ import useFeedbackForm from './hooks/useFeedbackForm';
 const FeedbackForm = ({ showModal, setShowModal }) => {
 	
 	const { register, handleSubmit, errors, loading, handleSubmitReport } =
-		useFeedbackForm();
+		useFeedbackForm(setShowModal);
 
 	return (
 		<Modal showModal={showModal} setShowModal={setShowModal}>
