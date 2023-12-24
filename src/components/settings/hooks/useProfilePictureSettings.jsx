@@ -33,17 +33,18 @@ const useProfilePicutreSettings = () => {
     }
 
     const onSubmit = async(data) => {
+        console.log(data)
         const pics = Object.values(data);
 
         // Upload pics through API
         try {
-            setLoading(true);
 
+            // Create an array of promises for each picture
             let picsPromises = pics.map(async(pic, index) => {
-                
+
                 if ( pic.length === 0) 
                 {
-                    
+                    // If the picutre is from the first three, delete it
                     if (index < 3) return;
                     
                     // Check if the user has a picture at that index
@@ -53,11 +54,13 @@ const useProfilePicutreSettings = () => {
                         return;
                     }
                 }
-
                 return await userAPI.uploadProfilePicture(pic[0], index);
                 
             });
             
+            setLoading(true);
+
+            // Wait for all the promises to resolve
             const uploadResults = await Promise.allSettled(picsPromises);
 
             // Check if any of the promises failedcons

@@ -18,11 +18,11 @@ const RequestResetPassword = ({ nextStep }) => {
     } = useRequestResetPasswordForm({ nextStep });
 
     return (
-      <div className='w-full h-1/2 flex flex-col justify-evenly bg-white border-[1.5px] border-my-orange p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
+      <div className='w-full h-3/4 flex flex-col justify-evenly bg-white border-[1.5px] border-my-orange p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
 
       <InitialForm onSubmit={handleSubmit(onSubmit)}>  
 
-        <h1 className='text-3xl font-bold text-purple-500'>
+        <h1 className='text-2xl font-bold text-purple-500 text-center md:text-xl'>
             Change Your Password
         </h1>
 

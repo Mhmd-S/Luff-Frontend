@@ -44,6 +44,7 @@ const Step2 = ({ nextStep }) => {
                 validationRules={{
                     required: 'Profile Picture is required',
                 }}
+                
                 />
 
             <FileUploadField 

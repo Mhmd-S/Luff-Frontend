@@ -15,10 +15,10 @@ const UserInfo = ({
 
 	return (
 		<div
-			className={`absolute w-full h-full bg-white z-30 border-l-[1px] flex flex-col items-center py-4 transition-all ease-in-out ${
+			className={`absolute w-full h-full bg-white z-30 border-l-[1px] flex flex-col justify-between items-center py-4 transition-all ease-in-out ${
 				showUserInfo
-					? 'w-full opacity-100 scale-x-1 translate-x-0 md:translate-x-[80%]'
-					: 'w-0 opacity-0 scale-x-0 md:translate-x-[75%]'
+					? 'w-full opacity-100 translate-x-0 md:translate-x-[80%] md:scale-x-1'
+					: 'w-0 opacity-0 translate-x-[200%] md:scale-x-0 md:translate-x-[75%]'
 			} md:w-1/3 md:h-[85%] md:rounded-r-lg md:shadow-md  md:border-l-2 md:border-purple-500`}
 		>
 			<FontAwesomeIcon
@@ -35,7 +35,7 @@ const UserInfo = ({
 			<p className="text-sm text-gray-400">
 				{getAge(userInfo.dob)} years old
 			</p>
-			<p className="h-1/4 w-full text-sm font-semibold px-6 py-2">
+			<p className="h-1/4 w-full text-md text-center font-semibold px-6 py-2 flex items-center justify-center md:text-xs">
 				{userInfo.bio}
 			</p>
 			<div className="h-1/3 w-full grid grid-cols-3 grid-rows-2 gap-2 px-4">

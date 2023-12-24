@@ -38,15 +38,19 @@ const Step1 = ({ nextStep }) => {
 					label="Name"
 					name="name"
 					type="text"
-					placeholder="ex. John Doe"
+					placeholder="ex. John"
 					register={register}
 					errors={errors}
 					validationRules={{
 						required: 'Name is required',
 						pattern: {
-							value: /^[a-zA-Z]{1,15} [a-zA-Z]{1,15}$/,
+							value: /^[a-zA-Z]{1,24} [a-zA-Z]{0,15}$/,
 							message:
-								'Name must only contain letters, a space, and must be less than 30 characters long',
+								'Name must only contain letters, a space, and must be less than 24 characters long',
+						},
+						maxLength: {
+							value: 24,
+							message: 'Name must be less than 40 characters long',
 						},
 					}}
 				/>

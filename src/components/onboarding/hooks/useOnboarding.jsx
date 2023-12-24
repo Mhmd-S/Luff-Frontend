@@ -36,7 +36,7 @@ const useOnboarding = () => {
     }
 
     const renderStep = () => {
-        switch(2) {
+        switch(1) {
             case 0:
                 return <Step1 nextStep={nextStep} />
             case 1:

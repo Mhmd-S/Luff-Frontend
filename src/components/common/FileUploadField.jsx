@@ -1,6 +1,4 @@
 import FormFieldError from './FormFieldError';
-import AddIcon from '../icons/AddIcon';
-import RemoveIcon from '../icons/RemoveIcon';
 import LoadingIcon from '../icons/LoadingIcon';
 import useFileUploadField from './hooks/useFileUploadField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,7 +32,10 @@ const FileUploadField = ({
 					imageFile && 'hidden'
 				} `}
 			>
-				<FontAwesomeIcon icon={faPlus} className="w-5 h-5 text-purple-500" />
+				<FontAwesomeIcon
+					icon={faPlus}
+					className="w-5 h-5 text-purple-500"
+				/>
 
 				<FormFieldError name={name} errors={errors} />
 			</label>
@@ -52,14 +53,14 @@ const FileUploadField = ({
 									inputProps?.handleDeleteImage();
 								}}
 							/>
-							<input
+							{/* <input
 								type="file"
 								name={name}
 								accept="image/png, image/jpeg"
 								{...register(name, validationRules)}
 								onInput={handleFileChange}
 								className={`opacity-0 w-full h-full absolute top-0 r-0`}
-							/>
+							/> */}
 						</div>
 					</div>
 
@@ -81,9 +82,7 @@ const FileUploadField = ({
 				accept="image/png, image/gif, image/jpeg"
 				{...register(name, validationRules)}
 				onInput={handleFileChange}
-				className={`opacity-0 absolute w-full h-full cursor-pointer ${
-					imageFile && 'hidden'
-				}`}
+				className={`opacity-0 absolute w-full h-full cursor-pointer `}
 			/>
 		</div>
 	);

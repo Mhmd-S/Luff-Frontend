@@ -4,7 +4,7 @@ import React from 'react';
 
 const UserInfoShowImage = ({ imageUrl, setShowImage }) => {
 	return (
-		<div className="absolute top-0 rounded-lg w-full h-full flex flex-col items-center justify-center bg-[rgba(0,0,0,0.75)] md:rounded-l-none">
+		<div className="absolute left-0 top-0 w-full h-full flex flex-col items-center justify-center bg-[rgba(0,0,0,0.75)] md:rounded-l-none">
 			<FontAwesomeIcon
 				icon={faTimes}
 				className="absolute top-4 right-4 text-2xl text-white cursor-pointer"
@@ -13,7 +13,7 @@ const UserInfoShowImage = ({ imageUrl, setShowImage }) => {
 			<img
 				src={imageUrl}
 				alt="User Profile Picture"
-				className="relative object-cover object-center rounded-lg h-3/4 aspect-video"
+				className="relative object-cover object-center h-3/4 aspect-video"
 			/>
 		</div>
 	);

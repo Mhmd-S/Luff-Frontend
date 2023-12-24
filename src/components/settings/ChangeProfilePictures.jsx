@@ -34,7 +34,9 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 							className="w-7 h-7"
 						/>
 					</span>
-					<h1 className='font-bold text-2xl w-fit'>Edit Profile Pictures</h1>
+					<h1 className="font-bold text-2xl w-fit">
+						Edit Profile Pictures
+					</h1>
 				</div>
 
 				<FormGeneralError error={generalError} />
@@ -43,7 +45,6 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 					className={`w-full p-2 grid grid-cols-[25%_25%] grid-rows-3 justify-center items-center place-items-center gap-6 md:w-4/6 md:h-[70%] md:grid-cols-[20%_20%_20%] md:grid-rows-2`}
 				>
 					<FileEditField
-						type="file"
 						name="profilePicture1"
 						register={register}
 						errors={errors}
@@ -53,7 +54,6 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 					/>
 
 					<FileEditField
-						type="file"
 						name="profilePicture2"
 						register={register}
 						errors={errors}
@@ -63,7 +63,6 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 					/>
 
 					<FileEditField
-						type="file"
 						name="profilePicture3"
 						register={register}
 						errors={errors}
@@ -73,7 +72,6 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 					/>
 
 					<FileUploadField
-						type="file"
 						name="profilePicture4"
 						register={register}
 						resetField={resetField}
@@ -84,7 +82,6 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 					/>
 
 					<FileUploadField
-						type="file"
 						name="profilePicture5"
 						register={register}
 						resetField={resetField}
@@ -95,7 +92,6 @@ const ChangeProfilePictures = ({ handleGoBack }) => {
 					/>
 
 					<FileUploadField
-						type="file"
 						name="profilePicture6"
 						register={register}
 						errors={errors}
