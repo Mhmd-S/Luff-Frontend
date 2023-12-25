@@ -14,22 +14,22 @@ const useMobileNavBar = () => {
 
 	const navItems = [
 		{
-			path: '/home',
+			path: 'home',
 			icon: faHome,
 			text: 'Home',
 		},
 		{
-			path: '/chat',
+			path: 'chat',
 			icon: faMessage,
 			text: 'Chat',
 		},
 		{
-			path: '/settings',
+			path: 'settings',
 			icon: faGear,
 			text: 'Settings',
 		},
 		{
-			path: '/profile',
+			path: 'profile',
 			icon: faUser,
 			text: 'Profile',
 		},

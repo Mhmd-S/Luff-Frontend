@@ -5,25 +5,31 @@ import { useOutletContext } from 'react-router-dom';
 
 const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 	const [showMiniMenu, setShowMiniMenu] = useState(false);
-	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: report, 2: bloc
+	const [showSmallModal, setShowSmallModal] = useState(0); // 0: none, 1: report, 2: block
 
 	const { majorModalOpen } = useOutletContext();
 
 	useEffect(() => {
+		const handleKeyDown = debounce((e) => {
+			if (
+				e.isTrusted === false ||
+				dummyCard ||
+				showSmallModal ||
+				majorModalOpen
+			)
+				return;
+			if (e.code === 'ArrowLeft') {
+				handleLike();
+			} else if (e.code === 'ArrowRight') {
+				handleReject();
+			}
+		}, 300); // Adjust the debounce delay (in milliseconds) as per your requirement
+
 		window.addEventListener('keyup', handleKeyDown);
 		return () => {
 			window.removeEventListener('keyup', handleKeyDown);
 		};
 	}, [userInfo, majorModalOpen, showSmallModal]);
-
-	const handleKeyDown = (e) => {
-		if (e.isTrusted === false || dummyCard || showSmallModal|| majorModalOpen) return;
-		if (e.code === 'ArrowLeft') {
-			handleLike();
-		} else if (e.code === 'ArrowRight') {
-			handleReject();
-		}
-	};
 
 	const renderSmallModal = () => {
 		if (showSmallModal === 1) {
@@ -59,3 +65,13 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 };
 
 export default useCardDesktop;
+
+const debounce = (func, delay) => {
+	let timeoutId;
+	return (...args) => {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => {
+			func.apply(null, args);
+		}, delay);
+	};
+};

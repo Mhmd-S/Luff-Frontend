@@ -20,7 +20,7 @@ const Step2EmailVerification = () => {
     <div className='w-full h-3/4 flex flex-col justify-evenly bg-white border-[1.5px] border-my-orange p-4 rounded-lg shadow-lg md:w-2/6 md:h-5/6'>
       
       <h3 className='w-full text-center text-xl pt-12'>
-        Insert the <span className='text-purple-700 font-bold'>6 digit code</span> sent your email.  
+        Insert the <span className='text-purple-700 font-bold'>5 digit code</span> sent your email.  
       </h3>
       
       <InitialForm onSubmit={handleSubmit(onSubmit)} >
@@ -36,15 +36,13 @@ const Step2EmailVerification = () => {
           validationRules={{
             required: 'Code is required',
             pattern: {
-              value: /^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$/,
+              value: /^[a-zA-Z0-9]{5}$/,
               message: 'Invalid code format',
             },
           }}
         />
 
         <FormButton text='Verify Code' loading={loading} />
-
-        <FormButton2 text="Didn't recieve code? Send Again" loading={loading} />
 
       </InitialForm>
     

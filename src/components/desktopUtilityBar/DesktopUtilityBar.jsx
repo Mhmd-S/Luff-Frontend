@@ -19,14 +19,14 @@ const DesktopUtilityBar = ({
 			<div className="w-full h-full bg-purple-500  grid grid-cols-[70%_15%_15%] grid-rows-1 place-items-center px-3">
 				{!showProfile ? (
 					<span
-						className="max-w-10/12 w-4/5 h-fit bg-white text-slate-900 py-1 px-2 rounded-3xl flex items-center justify-center cursor-pointer transition-all duration-500 ease-in-out hover:bg-purple-100"
+						className="max-w-10/12 min-w-fit h-1/2 bg-white text-slate-900 py-1 px-4 rounded-3xl grid grid-rows-1 grid-cols-[25%_75%] place-items-center cursor-pointer transition-all duration-500 ease-in-out hover:bg-purple-100"
 						onClick={() => {
 							handleClickShowProfile();
 							setChatId(null);
 							setRecipient(null);
 						}}
 					>
-						<div className="w-12 h-10 rounded-full overflow-hidden border-2">
+						<div className="w-11 h-11 rounded-full overflow-hidden border-2">
 							<img
 								src={user.profilePictures[0]}
 								alt="logo"
@@ -34,19 +34,20 @@ const DesktopUtilityBar = ({
 							/>
 						</div>
 						<span className="pl-2 truncate text-[#014751] font-semibold">
-							{user.name}
+							{/* {user.name} */}
+							asd
 						</span>
 					</span>
 				) : (
 					<button
-						className="w-fit h-fit bg-white py-1 px-3 rounded-3xl flex items-center cursor-pointer transition-all duration-500 ease-in-out hover:bg-purple-100"
+						className="w-fit h-1/2 bg-white py-1 px-3 rounded-3xl flex items-center cursor-pointer transition-all duration-500 ease-in-out hover:bg-purple-100"
 						onClick={() => {
 							handleClickShowProfile();
 							setShowImagesEditor(false);
 						}}
 					>
 						<img
-							src="./logo1.png"
+							src="/logo1.png"
 							alt="logo"
 							className="h-10 rounded-full"
 						/>

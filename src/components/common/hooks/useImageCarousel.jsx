@@ -21,7 +21,7 @@ const useImageCarousel = (images, dummyCard) => {
 		return () => {
 			window.removeEventListener('keyup', handleKeyDownImage);
 		};
-	}, [majorModalOpen]);
+	}, [majorModalOpen, currentImageIndex, images]);
 
 	const handlePrevClick = () => {
 		setCurrentImageIndex((prevIndex) =>
@@ -36,13 +36,11 @@ const useImageCarousel = (images, dummyCard) => {
 	};
 
 	const handleKeyDownImage = (e) => {
-		console.log(window);
-
 		if (majorModalOpen || dummyCard || e.isTrusted === false) return;
 
 		if (e.code === 'Space') {
 			setCurrentImageIndex((prevIndex) =>
-				prevIndex === profileImages.length - 1 ? 0 : prevIndex + 1
+				(prevIndex === profileImages.length - 1) ? 0 : prevIndex + 1
 			);
 		}
 	};

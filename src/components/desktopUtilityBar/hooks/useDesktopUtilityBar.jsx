@@ -10,9 +10,9 @@ const useDesktopUtilityBar = () => {
 
     const handleClickShowProfile = () => {
         if (showProfile) {
-            navigate('/home');
+            navigate('home');
         } else {
-            navigate('/profile');
+            navigate('profile');
         }
         setShowProfile(!showProfile);
     }

@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useNotification } from '../contexts/useNotificationContext';
+import { useAuth } from '../contexts/useAuthContext';
 import MobileNavBar from '../components/common/MobileNavBar';
 import DesktopUtilityBar from '../components/desktopUtilityBar/DesktopUtilityBar';
 import ActiveChat from '../components/chat/ActiveChat';
@@ -9,12 +10,25 @@ import Guidelines from '../components/common/Guidelines';
 import FeedBackForm from '../components/common/FeedbackForm';
 
 const Root = () => {
+	const naviagte = useNavigate();
+
 	const [recipient, setRecipient] = useState(null);
 	const [chatId, setChatId] = useState(null);
 	const [showImagesEditor, setShowImagesEditor] = useState(false);
 	const [showGuidelines, setShowGuidelines] = useState(false);
 	const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 	const { notificationMessage } = useNotification();
+
+	const { user, loading } = useAuth();
+
+	useEffect(() => {
+		if (!loading && !user) {
+			naviagte('/login');
+		}
+		if (!loading && user && user.onboardingStep == 0) {
+			naviagte('/onboarding');
+		}
+	}, [user, loading]);
 
 	const renderContent = () => {
 		if (showImagesEditor) {
@@ -66,32 +80,40 @@ const Root = () => {
 
 	return (
 		<div className="w-screen h-screen overflow-hidden grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
-			<DesktopUtilityBar
-				chatId={chatId}
-				setRecipient={setRecipient}
-				setChatId={setChatId}
-				setShowImagesEditor={setShowImagesEditor}
-				setShowGuidelines={setShowGuidelines}
-			/>
+			{loading ? (
+				<div className="w-full h-full flex justify-center items-center">
+					<div className="w-20 h-20 border-4 border-gray-300 rounded-full animate-spin"></div>
+				</div>
+			) : (
+				<>
+					<DesktopUtilityBar
+						chatId={chatId}
+						setRecipient={setRecipient}
+						setChatId={setChatId}
+						setShowImagesEditor={setShowImagesEditor}
+						setShowGuidelines={setShowGuidelines}
+					/>
 
-			<div className="w-full h-full md:bg-[rgb(248,246,246)] md:flex md:justify-center">
-				{renderContent()}
-			</div>
+					<div className="w-full h-full md:bg-[rgb(248,246,246)] md:flex md:justify-center">
+						{renderContent()}
+					</div>
 
-			<MobileNavBar />
+					<MobileNavBar />
 
-			<button
-				className="hidden absolute translate-x-[25%] translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
-				onClick={() => setShowFeedbackForm(true)}
-			>
-				Feedback
-			</button>
+					<button
+						className="hidden absolute translate-x-[25%] translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
+						onClick={() => setShowFeedbackForm(true)}
+					>
+						Feedback
+					</button>
 
-			{renderNotificationMessage()}
-			{showFeedbackForm && (
-				<FeedBackForm setShowModal={setShowFeedbackForm} />
+					{renderNotificationMessage()}
+					{showFeedbackForm && (
+						<FeedBackForm setShowModal={setShowFeedbackForm} />
+					)}
+					{renderGuidelines()}
+				</>
 			)}
-			{renderGuidelines()}
 		</div>
 	);
 };

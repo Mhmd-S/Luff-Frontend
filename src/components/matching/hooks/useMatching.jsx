@@ -51,7 +51,6 @@ const useMatching = () => {
 		setAnimateLike(true);
 		await timeout(600);
 		setAnimateLike(false);
-		setMatched(users[0])
 	};
 
 	const handleLike = async () => {

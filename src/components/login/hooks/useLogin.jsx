@@ -11,7 +11,7 @@ const useLogin = () => {
 
 	useEffect(() => {
 		if (user) {
-			navigate('/home');
+			navigate('/app/home');
 		}
 	}, [user]);
 
