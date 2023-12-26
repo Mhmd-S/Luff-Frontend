@@ -4,7 +4,6 @@ import CardDekstop from '../../common/CardDesktop';
 import { userAPI } from '../../../api/userAPI';
 import Matched from '../../common/Matched';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 
 const useMatching = () => {
 	const [users, setUsers] = useState([]);
@@ -69,13 +68,13 @@ const useMatching = () => {
 				setMatched(result.data.data);
 			}
 
-			setUsers((prev) =>
-				prev.filter((user) => user._id !== users[0]._id)
-			);
-
 			if (users.length < 5) {
 				await fetchUsers();
 			}
+
+			setUsers((prev) =>
+				prev.filter((user) => user._id !== users[0]._id)
+			);
 		} catch (error) {
 			// Handle error
 			console.error('Error liking user:', error);
@@ -133,13 +132,14 @@ const useMatching = () => {
 
 		if (!user?._id) {
 			return (
-				<div className="relative w-full h-full flex flex-col items-center justify-center bg-white md:w-2/5 md:rounded-lg md:border-2">
-					<FontAwesomeIcon
-						icon={faSkullCrossbones}
-						className="text-8xl text-purple-300"
+				<div className="relative w-full h-full flex flex-col items-center justify-center bg-gray-100 md:w-2/5 md:rounded-xl md:border-2">
+					<img 
+						src='/logo1.png'
+						alt='logo'
+						className='h-32 animate-pulse'
 					/>
-					<h3 className="text-3xl text-purple-300 text-center mt-4 px-3">
-						No more users to show!
+					<h3 className="text-xl text-gray-500 font-semibold text-center mt-4 px-4">
+						Looks like you've reached the end of the line.
 					</h3>
 				</div>
 			);

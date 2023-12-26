@@ -16,7 +16,7 @@ const useOnboarding = () => {
 	useEffect(() => {
 		if (user.onboardStep == 2) {
 			// User is already on step 2, onboarding completed, redirect to dashboard
-			navigate('/app/home');
+			navigate('/app/home');	
 		} else {
 			// Set the step to user's onboardStep, 0 is default.
 			setStep(user.onboardStep);

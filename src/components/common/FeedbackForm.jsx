@@ -23,7 +23,7 @@ const FeedbackForm = ({ showModal, setShowModal }) => {
 				loading={loading}
 			>
 				<FormFieldTextArea
-					label="feedback"
+					label="Feedback:"
 					name="feedback"
 					id="feedback"
 					placeholder="Enter your feedback here"

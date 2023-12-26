@@ -17,6 +17,7 @@ const Root = () => {
 	const [showImagesEditor, setShowImagesEditor] = useState(false);
 	const [showGuidelines, setShowGuidelines] = useState(false);
 	const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+	const [ isLoading, setIsLoading ] = useState(true);
 	const { notificationMessage } = useNotification();
 
 	const { user, loading } = useAuth();
@@ -25,9 +26,10 @@ const Root = () => {
 		if (!loading && !user) {
 			naviagte('/login');
 		}
-		if (!loading && user && user.onboardingStep == 0) {
+		if (!loading && user && user.onboardStep == 0) {
 			naviagte('/onboarding');
 		}
+		setIsLoading(false);
 	}, [user, loading]);
 
 	const renderContent = () => {
@@ -80,7 +82,7 @@ const Root = () => {
 
 	return (
 		<div className="w-screen h-screen overflow-hidden grid relative grid-cols-1 grid-rows-[92.5%_7.5%] md:grid-cols-[25%_75%] md:grid-rows-1">
-			{loading ? (
+			{loading || isLoading ? (
 				<div className="w-full h-full flex justify-center items-center">
 					<div className="w-20 h-20 border-4 border-gray-300 rounded-full animate-spin"></div>
 				</div>
@@ -94,14 +96,14 @@ const Root = () => {
 						setShowGuidelines={setShowGuidelines}
 					/>
 
-					<div className="w-full h-full md:bg-[rgb(248,246,246)] md:flex md:justify-center">
+					<div className="w-full h-full md:bg-[#FEFEFE] md:flex md:justify-center">
 						{renderContent()}
 					</div>
 
 					<MobileNavBar />
 
 					<button
-						className="hidden absolute translate-x-[25%] translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
+						className="hidden absolute translate-x-[25%] select-none translate-y-[25%] rotate-90 text-sm top-1/2 right-0 bg-gray-200 p-2 rounded-b-lg md:block transition-all ease-in-out hover:bg-gray-300 hover:px-3"
 						onClick={() => setShowFeedbackForm(true)}
 					>
 						Feedback

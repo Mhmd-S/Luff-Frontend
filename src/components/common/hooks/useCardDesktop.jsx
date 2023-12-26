@@ -12,18 +12,20 @@ const useCardDesktop = (userInfo, handleLike, handleReject, dummyCard) => {
 	useEffect(() => {
 		const handleKeyDown = debounce((e) => {
 			if (
-				e.isTrusted === false ||
-				dummyCard ||
 				showSmallModal ||
-				majorModalOpen
-			)
+				majorModalOpen ||
+				e.isTrusted === false ||
+				dummyCard
+			) {
 				return;
+			}
+
 			if (e.code === 'ArrowLeft') {
 				handleLike();
 			} else if (e.code === 'ArrowRight') {
 				handleReject();
 			}
-		}, 300); // Adjust the debounce delay (in milliseconds) as per your requirement
+		}, 400);
 
 		window.addEventListener('keyup', handleKeyDown);
 		return () => {

@@ -79,11 +79,11 @@ const router = createBrowserRouter([
 		element: <RequestResetPasswordPage />,
 		errorElement: <ErrorPage />,
 	},
-	// {
-	//   path: '*',
-	//   element: <ErrorPage />,
-	//   errorElement: <ErrorPage />,
-	// },
+	{
+		path: '*',
+		element: <ErrorPage />,
+		errorElement: <ErrorPage />,
+	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

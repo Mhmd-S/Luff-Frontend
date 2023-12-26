@@ -5,7 +5,7 @@ import { socket } from '../../../socket-io/socket';
 import Contact from '../Contact';
 import LoadingIcon from '../../icons/LoadingIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 
 const useContacts = (setChatId, setRecipient, currentChatId) => {
 	const [chats, setChats] = useState([]);
@@ -20,6 +20,9 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 
 	// Initail fetch and setting up
 	useEffect(() => {
+		if (!user) {
+			return;
+		}
 		// Fetch chats on mount
 		fetchChats();
 
@@ -34,7 +37,7 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 			socket.off('receive-message', handleSocketMessage);
 			socket.off('match', handleSocketMatch);
 		};
-	}, []);
+	}, [user]);
 
 	// Setting up the intersection observer
 	useEffect(() => {
@@ -104,8 +107,10 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 			const chatIsOpen = currentChatId === chatId;
 			console.log(chatIsOpen);
 			// If the chat is open, the message is seen by both users
-			const newSeenBy = chatIsOpen ? [sender._id, recipient._id] : [sender._id];
-			
+			const newSeenBy = chatIsOpen
+				? [sender._id, recipient._id]
+				: [sender._id];
+
 			// Creates a new objects with the updated last message
 			const updatedChat = {
 				_id: chatId,
@@ -155,14 +160,28 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 			);
 		}
 
+		// Add animation here
 		if (chats.length === 0) {
 			return (
-				<div className="p-2 text-center h-full flex flex-col justify-center items-center text-purple-300 font-bold">
-					Start matching and chating with people!
-					<FontAwesomeIcon
-						icon={faUserFriends}
-						className="mt-2 text-4xl"
-					/>
+				<div className="p-4 text-center h-full flex flex-col justify-evenly items-center text-gray-500">
+					<div className='relative w-full'>
+						<FontAwesomeIcon
+							icon={faComment}
+							className="text-7xl absolute translate-x-[-25%] translate-y-[-25%] left-[35%] top-5"
+						/>
+						<FontAwesomeIcon
+							icon={faComment}
+							className="text-7xl scale-x-[-1] absolute translate-x-[-25%] translate-y-[-25%] left-1/2 text-purple-500"
+						/>
+					</div>
+					<div>
+						<p className='font-bold'>Swipe. Match. Chat.</p>
+						<p>It is that easy!</p>
+						<p>
+							You will see your matches and chats here once you
+							get a match.
+						</p>
+					</div>
 				</div>
 			);
 		}

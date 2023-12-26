@@ -21,8 +21,8 @@ const Step1 = ({ nextStep }) => {
 	];
 
 	return (
-		<div className="w-full h-fit flex flex-col bg-white border-[1.5px] border-[#F76301] p-4 rounded-lg shadow-lg md:w-2/6 ">
-			<div className="w-full mb-2 text-center text-xl border-b-[1.5px] pb-4 border-my-orange">
+		<div className="w-full h-fit grid grid-cols-1 grid-rows-[12.5%_87.5%] bg-white border-[1.5px] border-[#F76301] p-4 rounded-lg shadow-lg md:w-2/6 ">
+			<div className="w-full mb-2 text-center text-xl border-b-[1.5px] border-my-orange">
 				<p>
 					Complete your <span className="text-purple-700 font-bold">profile.</span>
 				</p>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Registration from '../components/registration/Registration';
 import { RegistrationProvider } from '../components/registration/context/useRegistrationContext';
-import { Link } from 'react-router-dom';
 
 const RegistrationPage = () => {
 	return (
