@@ -15,7 +15,7 @@ const UserInfo = ({
 
 	return (
 		<div
-			className={`absolute w-full h-full bg-white z-30 border-l-[1px] flex flex-col justify-between items-center py-4 transition-all ease-in-out ${
+			className={`absolute w-full h-full bg-white z-30 border-l-[1px] flex flex-col justify-between items-center py-4 transition-all select-none ease-in-out ${
 				showUserInfo
 					? 'w-full opacity-100 translate-x-0 md:translate-x-[80%] md:scale-x-1'
 					: 'w-0 opacity-0 translate-x-[200%] md:scale-x-0 md:translate-x-[75%]'
@@ -29,7 +29,7 @@ const UserInfo = ({
 			<img
 				src={userInfo.profilePictures[0]}
 				alt="User Profile Picture"
-				className="h-1/5 aspect-square object-cover object-center rounded-full"
+				className="h-1/5 aspect-square object-cover object-center rounded-full "
 			/>
 			<p className="text-lg font-bold mt-4">{userInfo.name}</p>
 			<p className="text-sm text-gray-400">

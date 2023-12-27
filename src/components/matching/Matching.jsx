@@ -14,7 +14,7 @@ const Matching = () => {
 			<div className="hidden md:flex justify-evenly items-center w-1/12">
 				<img src="/logo1.png" alt="logo" className="w-12" />
 				<h1 className="text-3xl font-semibold text-purple-600 text-center">
-					LUFF
+					UniLuff
 				</h1>
 			</div>
 

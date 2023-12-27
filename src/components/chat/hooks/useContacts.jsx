@@ -7,7 +7,7 @@ import LoadingIcon from '../../icons/LoadingIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 
-const useContacts = (setChatId, setRecipient, currentChatId) => {
+const useContacts = ({ setChatId, setRecipient, chatId: currentChatId }) => {
 	const [chats, setChats] = useState([]);
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(false);
@@ -104,20 +104,13 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 				(chat) => chat._id === chatId
 			);
 
-			const chatIsOpen = currentChatId === chatId;
-			console.log(chatIsOpen);
-			// If the chat is open, the message is seen by both users
-			const newSeenBy = chatIsOpen
-				? [sender._id, recipient._id]
-				: [sender._id];
-
 			// Creates a new objects with the updated last message
 			const updatedChat = {
 				_id: chatId,
 				participants: [sender, recipient],
 				lastMessage: {
 					content: content,
-					seenBy: newSeenBy,
+					seenBy: [sender._id],
 					updatedAt: createdAt,
 				},
 			};
@@ -135,6 +128,7 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 	};
 
 	const handleSocketMatch = (data) => {
+		console.log(data);
 		setChats((prevChats) => {
 			const { chatId, sender, recipient } = data;
 
@@ -164,7 +158,7 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 		if (chats.length === 0) {
 			return (
 				<div className="p-4 text-center h-full flex flex-col justify-evenly items-center text-gray-500">
-					<div className='relative w-full'>
+					<div className="relative w-full">
 						<FontAwesomeIcon
 							icon={faComment}
 							className="text-7xl absolute translate-x-[-25%] translate-y-[-25%] left-[35%] top-5"
@@ -175,7 +169,7 @@ const useContacts = (setChatId, setRecipient, currentChatId) => {
 						/>
 					</div>
 					<div>
-						<p className='font-bold'>Swipe. Match. Chat.</p>
+						<p className="font-bold">Swipe. Match. Chat.</p>
 						<p>It is that easy!</p>
 						<p>
 							You will see your matches and chats here once you

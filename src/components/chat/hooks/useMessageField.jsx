@@ -1,13 +1,28 @@
 import React, { useState } from 'react'
 import { socket } from '../../../socket-io/socket';
+import { useNotification } from '../../../contexts/useNotificationContext';
 
 const useMessageField = ({ recipient, chatId }) => {
 
     const [messageInput, setMessageInput] = useState('');
 
+    const { setNotification } = useNotification();
+
     const sendMessage = () => {
         if (!messageInput) {
           return;
+        }
+        
+
+        // Validate the message
+        if (messageInput.trim() === '') {
+            setNotification('Message cannot be empty');
+            return;
+        }
+
+        if (messageInput.length > 1000) {
+            setNotification('Message cannot be longer than 1000 characters');
+            return;
         }
 
         // Send the message to the server
