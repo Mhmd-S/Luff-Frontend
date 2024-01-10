@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import {
 	createBrowserRouter,
 	RouterProvider,
-	redirect,
 } from 'react-router-dom';
 import { AuthProvider } from './contexts/useAuthContext';
 
@@ -20,14 +19,14 @@ import Profile from './components/profile/Profile';
 import Chat from './components/chat/Chat';
 import { NotificationProvider } from './contexts/useNotificationContext';
 import Matching from './components/matching/Matching';
-import { userAPI } from './api/userAPI';
+import Landing from './pages/Landing';
 
 const router = createBrowserRouter([
-	// {
-	//   path: '/',
-	//   element: <Landing />,
-	//   errorElement: <ErrorPage />,
-	// },
+	{
+	  path: '/',
+	  element: <Landing />,
+	  errorElement: <ErrorPage />,
+	},
 	{
 		path: '/app',
 		element: <Root />,

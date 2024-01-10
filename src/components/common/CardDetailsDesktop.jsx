@@ -39,7 +39,9 @@ const CardDetailsDesktop = ({
 					]}
 				/>
 			</div>
-			<p className={`mb-10 text-md py-4 px-6 font-semibold text-slate-900`}>
+			<p
+				className={`mb-10 text-md my-4 mx-6 font-semibold text-slate-900 break-words`}
+			>
 				{userInfo.bio}
 			</p>
 		</div>

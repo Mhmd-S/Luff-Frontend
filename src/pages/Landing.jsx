@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 
 const Landing = () => {
 	return (
-		// add background image
-		<div className="w-screen h-screen relative grid grid-cols-2 grid-rows-1 items-center">
-
-			<div className='w-full h-full p-1 flex items-center justify-center'>
-				<h1 className="p-5 text-my-orange text-5xl md:text-8xl font-bold flex flex-col  bg-[url(./polka-dots.svg)] rounded-md ">
-					<span className="relative">Discover</span>
-					<span className="relative ">Match</span>
-					<span className="relative">Chat</span>
-				</h1>
-			</div>
+		// add background image	
+		<div className="w-screen h-screen relative flex flex-col justify-center items-center">
+			<h1 className=" text-slate-800 text-5xl md:text-4xl  flex flex-col items-center justify-center">
+				<span>Looking to make friends at university?</span>
+				<span className="text-4xl md:text-6xl text-purple-600">UniLuff</span>
+				<span>is here to help!</span>
+			</h1>
 
 			<div>
 				<h3 className="w-2/3 py-10 md:text-center text-xl md:text-2xl text-gray-500">

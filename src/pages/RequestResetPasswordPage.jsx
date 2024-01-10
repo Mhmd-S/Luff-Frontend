@@ -7,7 +7,7 @@ const RequestResetPasswordPage = () => {
        <div className='w-full flex justify-center items-center'>
           <img src='./logo1.png' alt='logo' className='h-3/4 '/>
           <h1 className=' text-5xl font-8bit font-bold text-purple-500'>
-            LUFF
+            UniLuff
           </h1>
       </div>
       <RequestResetPassword />

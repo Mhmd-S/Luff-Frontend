@@ -3,11 +3,10 @@ import Card from '../../common/Card';
 import CardDekstop from '../../common/CardDesktop';
 import { userAPI } from '../../../api/userAPI';
 import Matched from '../../common/Matched';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const useMatching = () => {
 	const [users, setUsers] = useState([]);
-	const [matched, setMatched] = useState(false);
+	const [matched, setMatched] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [viewPortWidth, setViewPortWidth] = useState(window.innerWidth);
 	const [err, setErr] = useState(null);

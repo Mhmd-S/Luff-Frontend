@@ -9,7 +9,7 @@ const useOnboarding = () => {
 	const navigate = useNavigate();
 
 	const [step, setStep] = useState(0);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
 	const { user } = useAuth();
 

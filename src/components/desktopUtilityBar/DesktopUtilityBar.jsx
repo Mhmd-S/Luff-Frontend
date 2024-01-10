@@ -51,7 +51,7 @@ const DesktopUtilityBar = ({
 							className="h-8 p-1 rounded-full"
 						/>
 						<h1 className="text-xl font-bold text-purple-500">
-							LUFF
+							UniLuff
 						</h1>
 					</button>
 				)}
