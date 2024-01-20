@@ -8,7 +8,7 @@ const Modal = ({ showModal, setShowModal, children }) => {
 
 	return (
 		<div
-			className={`absolute w-full h-full flex items-center justify-center bg-[rgba(0,0,0,0.13)] overflow-hidden z-30`}
+			className="absolute w-screen h-screen top-0 right-0 flex items-center justify-center bg-[rgba(0,0,0,0.13)] overflow-hidden z-30"
 		>
 			<FontAwesomeIcon
 				icon={faClose}
@@ -17,7 +17,7 @@ const Modal = ({ showModal, setShowModal, children }) => {
 			/>
 			<div
 				ref={modalRef}
-				className={`bg-white rounded-lg w-4/5 h-2/5 md:w-80 md:h-3/5 py-2 px-5 flex flex-col items-center justify-evenly transition-all duration-300`}
+				className={`bg-white rounded-lg w-4/5 h-2/5 md:w-4/12 md:h-3/5 py-2 px-5 flex flex-col items-center justify-evenly transition-all duration-300`}
 			>
 				{children}
 			</div>

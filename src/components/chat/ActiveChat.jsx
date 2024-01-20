@@ -81,7 +81,7 @@ const ActiveChat = ({ setRecipient, setChatId, chatId, recipient }) => {
 				showUserInfo={showUserInfo}
 				setShowUserInfo={setShowUserInfo}
 			/>
-			{/* Flag modal */}
+			{/* Block or Report modal */}
 			{renderSmallModal()}
 		</div>
 	);
