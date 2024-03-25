@@ -11,8 +11,7 @@ const Matching = () => {
 
 	return (
 		<div className="relative w-full h-full flex justify-center items-center md:select-none md:grid md:grid-cols-1 md:grid-rows-[10%_84%_6%] md:place-items-center md:py-2">
-			
-			<div className="hidden md:flex justify-evenly items-center w-1/12">
+			<div className="hidden md:flex justify-center items-center w-full">
 				<img src="/logo1.png" alt="logo" className="w-12" />
 				<h1 className="text-3xl font-semibold text-purple-600 text-center">
 					UniLuff
